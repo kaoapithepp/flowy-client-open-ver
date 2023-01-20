@@ -1,0 +1,32 @@
+import React from 'react';
+import styled from 'styled-components';
+import { Link, useNavigate } from 'react-router-dom';
+
+// Global Components
+import { ButtonAuth } from '../../components/button/ButtonAuth';
+
+const Auth: React.FC = () => {
+    return(
+        <Container>
+            <ButtonAuth><img src='https://cdn-icons-png.flaticon.com/512/300/300221.png' alt="" /><h4>เข้าสู่ระบบด้วย Google</h4></ButtonAuth>
+            <ButtonAuth><img src='https://cdn-icons-png.flaticon.com/512/5968/5968764.png' alt="" /><h4>เข้าสู่ระบบด้วย Facebook</h4></ButtonAuth>
+            <ButtonAuth><img src='https://cdn-icons-png.flaticon.com/512/731/731985.png' alt="" /><h4>เข้าสู่ระบบด้วย Apple</h4></ButtonAuth>
+        </Container>
+    );
+}
+
+const Container = styled.div`
+    justify-content: center;
+    align-items: center;
+    
+    h4{
+        flex: 1 1 0%;
+    }
+
+    img{
+        width: 24px;
+        margin-left: 32px;
+    }
+`;
+
+export default Auth;
