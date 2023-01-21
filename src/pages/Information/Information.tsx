@@ -40,7 +40,7 @@ const Information: React.FC = () => {
 const Section = styled.div`
     padding: 0px;
     max-height: 120vh;
-    max-width: 800px;
+    max-width: 1024px;
     min-width: 300px;
     margin: 0 auto;
     

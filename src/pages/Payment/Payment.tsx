@@ -26,9 +26,9 @@ const Payment: React.FC = () => {
 
     return(
         <Gradient>
-            <ButtonBack onClick={buttonBackClick}><ArrowBackRoundedIcon /></ButtonBack>
             {/* <TimeoutCard /> */}
             <Section>
+                <ButtonBack onClick={buttonBackClick}><ArrowBackRoundedIcon /></ButtonBack>
                 <div className='content-display'>
                     <div className='timeout'>
                         <h4 className='h4'>กรุณาชำระค่าบริการภายใน 5:00</h4>
@@ -51,7 +51,7 @@ const Payment: React.FC = () => {
 const Section = styled.div`
     padding: 0px;
     max-height: 120vh;
-    max-width: 800px;
+    max-width: 1024px;
     min-width: 300px;
     margin: 0 auto;
     
