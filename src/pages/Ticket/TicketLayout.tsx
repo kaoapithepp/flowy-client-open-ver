@@ -18,7 +18,7 @@ const TicketLayout: React.FC = () => {
 const Section = styled.div`
     justify-content: center;
     align-items: center;
-    padding: 0px 16px 16px 16px;
+    padding: 0px 16px;
     max-width: 800px;
     margin: 0 auto;
 
