@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 export const ButtonPayment = styled.button`
     background-color: var(--white);
-    color: #757575;
-    border: 1px solid #E0E0E0;
+    color: var(--grey-600);
+    border: 1px solid var(--grey-300);
     border-radius: 8px;
     padding: 5px 16px;
     margin: 16px 0px;
@@ -19,6 +19,6 @@ export const ButtonPayment = styled.button`
     font-weight: 500;
 
     :hover {
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        box-shadow: var(--shadow);
     }
 `;

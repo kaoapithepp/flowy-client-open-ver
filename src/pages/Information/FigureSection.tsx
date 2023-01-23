@@ -37,7 +37,7 @@ const ImgSection1 = styled.div`
     margin-bottom: 8px;
 
     img{
-        border-radius: 8px;
+        border-radius: 4px;
         justify-content: center;
         aspect-ratio: 1 / 1;
         object-fit: cover;
@@ -50,6 +50,7 @@ const ImgSection1 = styled.div`
         margin-right: 8px;
 
         img{
+            border-radius: 8px;
             aspect-ratio: 1 / 1;
         }
     }
@@ -59,6 +60,7 @@ const ImgSection1 = styled.div`
         margin-bottom: 8px;
         
         img{
+            border-radius: 8px;
             aspect-ratio: 16 / 9;
         }
     }
@@ -68,6 +70,7 @@ const ImgSection1 = styled.div`
         margin-right: 8px;
 
         img{
+            border-radius: 12px;
             aspect-ratio: 1 / 1;
         }
     }
@@ -79,8 +82,8 @@ const ImgSection2 = styled.div`
     gap: 8px;
 
     img{
-        border-radius: 8px;
-        overflow-x: hidden;
+        border-radius: 4px;
+        overflow: hidden;
         justify-content: center;
         aspect-ratio: 1 / 1;
         object-fit: cover;
@@ -93,6 +96,8 @@ const ImgSection2 = styled.div`
         grid-template-columns: 1fr 1fr;
 
         img{
+            border-radius: 8px;
+            height: fit-content;
             aspect-ratio: 1 / 1;
         }
     }
@@ -102,6 +107,7 @@ const ImgSection2 = styled.div`
         margin-bottom: 8px;
 
         img{
+            border-radius: 8px;
             aspect-ratio: 1 / 1;
         }
     }
@@ -111,6 +117,7 @@ const ImgSection2 = styled.div`
         grid-template-columns: 1fr 1fr;
 
         img{
+            border-radius: 12px;
             aspect-ratio: 1 / 1;
         }
     }

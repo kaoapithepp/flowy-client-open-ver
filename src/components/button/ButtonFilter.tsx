@@ -7,15 +7,15 @@ import FilterListRoundedIcon from '@mui/icons-material/FilterListRounded';
 export const ButtonFilter: React.FC = () => {
     return(
         <BG>
-            <Icon><FilterListRoundedIcon className="large-icon" /></Icon>          
+            <Icon><FilterListRoundedIcon /></Icon>          
         </BG>
     );
 }
 
 const BG = styled.button`
     display: flex;
-    background: #FFFFFF;
-    border: 1px solid #EEEEEE;
+    background: var(--white);
+    border: 1px solid var(--grey-200);
     padding: 6px;
     border-radius: 50%;
     justify-content: center;

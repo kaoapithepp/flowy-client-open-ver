@@ -51,8 +51,8 @@ const CreditCardPayment: React.FC = () => {
 
 const Container = styled.div`
     padding: 16px;
-    background: #FFFFFF;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    background: var(--white);
+    box-shadow: var(--shadow);
     border-radius: 8px;
     margin: -8px auto 0px auto;
 
@@ -62,9 +62,9 @@ const Container = styled.div`
         margin: 2px 0px;
         display: inline-block;
         border-radius: 4px;
-        border: 1px solid #E0E0E0;
+        border: 1px solid var(--grey-300);
         box-sizing: border-box;
-        font-family: "IBM Plex Sans Thai";
+        font-family: var(--brand-font);
         font-size: 16px;
     }
 
@@ -75,10 +75,10 @@ const Container = styled.div`
         margin: 2px 0px;
         display: inline-block;
         border-radius: 4px;
-        background-color: #FFFFFF;
-        border: 1px solid #E0E0E0;
+        background-color: var(--white);
+        border: 1px solid var(--grey-300);
         box-sizing: border-box;
-        font-family: "IBM Plex Sans Thai";
+        font-family: var(--brand-font);
         font-size: 16px;
         color: var(--black);
     }

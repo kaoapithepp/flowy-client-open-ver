@@ -5,9 +5,9 @@ export const ButtonBack = styled.button`
     position: fixed;
     z-index: 2;
     margin: 16px;
-    background: #FFFFFF;
-    border: 1px solid #EEEEEE;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    background: var(--white);
+    border: none;
+    box-shadow: var(--shadow);
     color: var(--black);
     width: 50px;
     height: 50px;

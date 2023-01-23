@@ -4,7 +4,7 @@ export const ButtonTimeClick = styled.button`
     background-color: var(--secondary);
     border: none;
     color: var(--white);
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow);
     border-radius: 4px;
     width: 100%;
     height: 40px;

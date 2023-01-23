@@ -61,8 +61,8 @@ const Section = styled.div`
 
 const Content = styled.div`
     padding: 16px;
-    background: #FFFFFF;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    background: var(--white);
+    box-shadow: var(--shadow);
     border-radius: 16px;
 `;
 

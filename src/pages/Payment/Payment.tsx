@@ -28,7 +28,9 @@ const Payment: React.FC = () => {
         <Gradient>
             {/* <TimeoutCard /> */}
             <Section>
-                <ButtonBack onClick={buttonBackClick}><ArrowBackRoundedIcon /></ButtonBack>
+                <div>
+                    <ButtonBack onClick={buttonBackClick}><ArrowBackRoundedIcon /></ButtonBack>
+                </div>
                 <div className='content-display'>
                     <div className='timeout'>
                         <h4 className='h4'>กรุณาชำระค่าบริการภายใน 5:00</h4>
@@ -104,10 +106,10 @@ const Gradient = styled.div`
 
 const Container = styled.div`
     padding: 16px;
-    background: #FFFFFF;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    background: var(--white);
+    box-shadow: var(--shadow);
     border-radius: 16px;
-    max-width: 800px;
+    max-width: 1024px;
     margin: 16px auto;
 `;
 

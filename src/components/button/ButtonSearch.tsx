@@ -6,12 +6,12 @@ export const ButtonSearch = styled.button`
     width: 100%;
     border-radius: 25px;
     border: none;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow);
     cursor: ${props => props.disabled ? "no-drop": "pointer"};
 
     text-align: left;
     font-family: var(--brand-font);
     font-size: medium;
     font-weight: 500;
-    color: var(--gray-400);
+    color: var(--grey-400);
 `;

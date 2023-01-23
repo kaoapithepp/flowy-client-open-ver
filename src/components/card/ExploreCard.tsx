@@ -119,8 +119,8 @@ const Warp = styled.div`
 
 const Card = styled.button`
     padding: 16px;
-    background: #FFFFFF;
-    border: 1px solid #EEEEEE;
+    background: var(--white);
+    border: 1px solid var(--grey-200);
     border-radius: 16px;
     transition: 1s;
     font-family: var(--brand-font);
@@ -128,7 +128,7 @@ const Card = styled.button`
     /* font-weight: 500; */
     
     :hover {
-        box-shadow: 0px 0px 20px 0px #EEEEEE;
+        box-shadow: 0px 0px 20px 0px var(--grey-200);
     }
     
     img{
@@ -146,7 +146,7 @@ const Card = styled.button`
     }
 
     h4{
-        color: var(--gray-600);
+        color: var(--grey-600);
         font-size: 16px;
     }
 

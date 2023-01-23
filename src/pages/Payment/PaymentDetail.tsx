@@ -37,7 +37,7 @@ const Container = styled.div`
 
 const Detail = styled.div`
     padding-bottom: 8px;
-    border-bottom: 1px solid #E0E0E0;
+    border-bottom: 1px solid var(--grey-300);
     
     h3{
         color: var(--gray-600);

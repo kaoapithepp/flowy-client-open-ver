@@ -72,11 +72,11 @@ const ButtonDecrement = styled.button`
     height: 40px;
     width: 40px;
     border: none;
-    background: #ffffff;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    background: var(--white);
+    box-shadow: var(--shadow);
     border-radius: 4px 0px 0px 4px;
     cursor: pointer;
-    color: #323232;
+    color: var(--grey-800);
 
     font-family: var(--brand-font);
     font-size: 16px;
@@ -91,11 +91,11 @@ const ButtonIncrement = styled.button`
     height: 40px;
     width: 40px;
     border: none;
-    background: #ffffff;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    background: var(--white);
+    box-shadow: var(--shadow);
     border-radius: 0px 4px 4px 0px;
     cursor: pointer;
-    color: #323232;
+    color: var(--grey-800);
 
     font-family: var(--brand-font);
     font-size: 16px;
@@ -110,8 +110,9 @@ const QuantityInput = styled.input`
     width: 3rem;
     height: 1.5rem;
     border: none;
-    background: #FFFFFF;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    background: var(--white);
+    box-shadow: var(--shadow);
+    border-radius: 0px;
     padding: 0.5rem;
     margin: 0 1px;
     text-align: center;

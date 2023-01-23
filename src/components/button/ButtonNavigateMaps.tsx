@@ -7,7 +7,7 @@ export const ButtonNavigateMaps = styled.button`
     width: 100%;
     border-radius: 8px;
     border: none;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow);
     cursor: ${props => props.disabled ? "no-drop": "pointer"};
 
     display: inline-flex;
@@ -16,7 +16,7 @@ export const ButtonNavigateMaps = styled.button`
     font-family: var(--brand-font);
     font-size: medium;
     font-weight: 500;
-    color: #000000;
+    color: var(--black);
 
     transition: .3s;
 

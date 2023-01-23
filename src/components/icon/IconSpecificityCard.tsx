@@ -16,9 +16,9 @@ export const IconSpecificityCard: React.FC<CardData>= (elem: CardData) => {
     function renderSwitchCase(action: CardData){
         switch(action.icon){
             case 'SmokeFreeRoundedIcon':
-                return <SmokeFreeRoundedIcon className="large-icon" />;
+                return <SmokeFreeRoundedIcon />;
             case 'VolumeOffRoundedIcon':
-                return <VolumeOffRoundedIcon className="large-icon" />;
+                return <VolumeOffRoundedIcon />;
             default:
                 return;
         }

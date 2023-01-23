@@ -68,9 +68,9 @@ const Container = styled.div`
         margin: 8px 0px;
         display: inline-block;
         border-radius: 8px;
-        border: 1px solid #E0E0E0;
+        border: 1px solid var(--grey-300);
         box-sizing: border-box;
-        font-family: "IBM Plex Sans Thai";
+        font-family: var(--brand-font);
         font-size: 16px;
     }
 `;
@@ -78,7 +78,7 @@ const Container = styled.div`
 const Header = styled.div`
     width: 100% ;
     padding: 8px 0px;
-    border-bottom: 1px solid #E0E0E0;
+    border-bottom: 1px solid var(--grey-300);
     text-align: center;
     margin-bottom: 16px;
 `;
@@ -92,7 +92,7 @@ const Or = styled.div`
         display: block;
         width: 100%;
         height: 1px;
-        background-color: #E0E0E0;
+        background-color: var(--grey-300);
         margin-right: 16px;
     }
     ::after{
@@ -100,7 +100,7 @@ const Or = styled.div`
         display: block;
         width: 100%;
         height: 1px;
-        background-color: #E0E0E0;
+        background-color: var(--grey-300);
         margin-left: 16px;
     }
 `;

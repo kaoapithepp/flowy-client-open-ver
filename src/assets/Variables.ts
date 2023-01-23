@@ -15,11 +15,13 @@ export default createGlobalStyle`
         --pale-black: #9e9e9e;
         --form-grey: #B6B6B6; // Form placeholder, border
         --error: #FE0044; // Error red
-        --gray-200: #EEEEEE
-        --gray-300: #E0E0E0;
-        --gray-400: #BDBDBD; 
-        --gray-600: #757575;
-        --gray-800: #424242;
+        --grey-200: #EEEEEE;
+        --grey-300: #E0E0E0;
+        --grey-400: #BDBDBD; 
+        --grey-600: #757575;
+        --grey-800: #424242;
+
+        --shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 
         --brand-font: "IBM Plex Sans Thai", sans-serif;
     }

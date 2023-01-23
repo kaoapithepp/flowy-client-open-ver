@@ -114,7 +114,7 @@ const Container = styled.div`
 const Content = styled.div`
     padding: 16px;
     background-color: var(--white);
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow);
     border-radius: 16px;
     max-height: 35vh;
     max-width: 600px;

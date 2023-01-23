@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
 export const ButtonTimeUnavailable = styled.button`
-    background-color: #EEEEEE;
+    background-color: var(--grey-200);
     border: none;
-    color: #BDBDBD;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    color: var(--grey-400);
+    box-shadow: var(--shadow);
     border-radius: 4px;
     width: 100%;
     height: 40px;

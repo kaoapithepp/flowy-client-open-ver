@@ -17,11 +17,11 @@ export const IconCategoryCard: React.FC<CardData>= (elem: CardData) => {
     function renderSwitchCase(action: CardData){
         switch(action.icon){
             case 'HouseRoundedIcon':
-                return <HouseRoundedIcon className="large-icon" />;
+                return <HouseRoundedIcon />;
             case 'HotelRoundedIcon':
-                return <HotelRoundedIcon className="large-icon" />;
+                return <HotelRoundedIcon />;
             case 'LocalCafeRoundedIcon':
-                return <LocalCafeRoundedIcon className="large-icon" />;
+                return <LocalCafeRoundedIcon />;
             default:
                 return;
         }
@@ -47,12 +47,12 @@ const Card = styled.button`
     justify-content: center;
     align-items: center;
     gap: 8px;
-    color: var(--gray-400);
+    color: var(--grey-400);
     cursor: pointer;
     font-family: var(--brand-font);
 
     :hover{
-        color: var(--gray-800);
+        color: var(--grey-800);
     }
 `;
 
@@ -62,10 +62,10 @@ const Icon = styled.div`
    display: flex;
    justify-content: center;
    align-items: center;
-   color: var(--gray-400);
+   color: var(--grey-400);
 
    :hover{
-        color: var(--gray-800);
+        color: var(--grey-800);
    }
    
 `;

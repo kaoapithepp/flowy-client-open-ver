@@ -2,9 +2,9 @@ import styled from 'styled-components';
 
 export const ButtonAccount = styled.button`
     display: flex;
-    background: #FFFFFF;
-    border: 1px solid #EEEEEE;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    background: var(--white);
+    border: 1px solid var(--grey-200);
+    box-shadow: var(--shadow);
     color: var(--black);
     width: 50px;
     height: 50px;

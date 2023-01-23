@@ -21,17 +21,17 @@ export const IconHighlightCard: React.FC<CardData>= (elem: CardData) => {
     function renderSwitchCase(action: CardData){
         switch(action.icon){
             case 'WifiRoundedIcon':
-                return <WifiRoundedIcon className="large-icon" />;
+                return <WifiRoundedIcon />;
             case 'LightRoundedIcon':
-                return <LightRoundedIcon className="large-icon" />;
+                return <LightRoundedIcon />;
             case 'AcUnitRoundedIcon':
-                return <AcUnitRoundedIcon className="large-icon" />;
+                return <AcUnitRoundedIcon />;
             case 'TvRoundedIcon':
-                return <TvRoundedIcon className="large-icon" />;
+                return <TvRoundedIcon />;
             case 'ElectricalServicesIcon':
-                return <ElectricalServicesIcon className="large-icon" />;
+                return <ElectricalServicesIcon />;
             case 'SettingsInputHdmiRoundedIcon':
-                return <SettingsInputHdmiRoundedIcon className="large-icon" />;
+                return <SettingsInputHdmiRoundedIcon />;
             default:
                 return;
         }

@@ -15,7 +15,7 @@ export const ButtonAuth = styled.button`
     font-family: var(--brand-font);
     font-size: medium;
     font-weight: 500;
-    color: #000000;
+    color: var(--black);
 
     transition: .3s;
 

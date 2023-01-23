@@ -21,8 +21,8 @@ export const FilterCard: React.FC = () => {
 const Card = styled.div`
     display: grid;
     padding: 16px;
-    background: #FFFFFF;
-    border: 1px solid #EEEEEE;
+    background: var(--white);
+    border: 1px solid var(--grey-200);
     border-radius: 16px;
     margin-bottom: 16px;
 
