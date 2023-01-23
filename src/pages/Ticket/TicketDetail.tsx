@@ -28,9 +28,9 @@ const TicketDetail: React.FC = () => {
 
 const Container = styled.div`
     padding: 0px;
-    max-width: 450px;
-    min-width: 300px;
+    max-width: 350px;
     margin: 0 auto;
+    
     .column-display{
         display: grid;
         grid-template-columns: 7.5em 1fr;
@@ -39,7 +39,7 @@ const Container = styled.div`
 
     .row-display{
         display: grid;
-        padding-top: 16px;
+        padding: 16px 0px;
     }
 `;
 

@@ -41,7 +41,7 @@ export const AccountCard: React.FC = () => {
                             <h3>สถานะ</h3>
                         </Title>
                         <History>
-                            <Link to="/ticket"><h4>Coworking space</h4></Link>
+                            <Link to="/ticket"><h4>บ้านแม่เถาสเปซ</h4></Link>
                             <h4>02 Jan 2023</h4>
                             <h4>Succeed</h4>
                         </History>

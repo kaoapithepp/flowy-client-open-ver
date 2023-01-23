@@ -11,15 +11,14 @@ const QRcode: React.FC = () => {
 
 const Container = styled.div`
     padding: 0px;
-    max-width: 450px;
-    min-width: 300px;
+    max-width: 350px;
     margin: 0 auto;
     
     img {
         display: block;
         width: 100%;
         margin: 0 auto;
-    }  
+    }
 `;
 
 export default QRcode;
