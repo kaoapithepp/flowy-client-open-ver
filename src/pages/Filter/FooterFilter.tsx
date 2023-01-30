@@ -34,7 +34,7 @@ const Container = styled.div`
     position: sticky;
     bottom: 0;
     z-index: 2;
-    max-width: 600px;
+    max-width: 1024px;
     margin: 0 auto;
     width: 100%;
 `;

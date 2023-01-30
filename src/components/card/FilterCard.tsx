@@ -25,6 +25,7 @@ const Card = styled.div`
     border: 1px solid var(--grey-200);
     border-radius: 16px;
     margin-bottom: 16px;
+    height: fit-content;
 
     h2{
         margin-bottom: 8px;

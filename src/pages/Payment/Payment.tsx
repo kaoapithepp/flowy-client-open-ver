@@ -99,7 +99,7 @@ const Gradient = styled.div`
     position: absolute;
     width: 100%;
     height: 100%;
-    background-image: url('/images/gradient-background.png');
+    background-image: url('/images/gradient-background2.png');
     background-size: 100%;
     background-repeat: no-repeat;
 `;
