@@ -64,7 +64,7 @@ const Container = styled.div`
 
     input{
         width: 100%;
-        padding: 5px 8px ;
+        padding: 8px 8px ;
         margin: 8px 0px;
         display: inline-block;
         border-radius: 8px;

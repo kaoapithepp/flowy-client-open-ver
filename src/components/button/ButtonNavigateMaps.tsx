@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const ButtonNavigateMaps = styled.button`
     background-color: ${props => props.disabled ? "#EEEEEE" : "#FFFFFF"};
-    padding: 5px 0px;
+    padding: 8px 0px;
     margin-top: 16px;
     width: 100%;
     border-radius: 8px;

@@ -5,7 +5,7 @@ export const ButtonClear = styled.button`
     color: var(--black);
     border: 1px solid var(--white);
     border-radius: 8px;
-    padding: 5px 0px;
+    padding: 8px 0px;
     margin: 16px 0px;
     width: 100%;
     cursor: pointer;

@@ -5,7 +5,7 @@ export const ButtonPayment = styled.button`
     color: var(--grey-600);
     border: 1px solid var(--grey-300);
     border-radius: 8px;
-    padding: 5px 16px;
+    padding: 8px 16px;
     margin: 16px 0px;
     width: 100%;
     cursor: pointer;

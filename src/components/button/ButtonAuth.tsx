@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const ButtonAuth = styled.button`
     background-color: ${props => props.disabled ? "#F5F5F5" : "#EEEEE"};
-    padding: 5px 0px;
+    padding: 8px 0px;
     margin: 16px 0px;
     width: 100%;
     border-radius: 8px;

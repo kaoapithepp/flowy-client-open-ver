@@ -5,7 +5,7 @@ export const BorderedButton = styled.button`
     color: var(--primary);
     border: 1px solid var(--primary);
     border-radius: 8px;
-    padding: 5px 0px;
+    padding: 8px 0px;
     margin: 16px 0px;
     width: 100%;
     cursor: pointer;
