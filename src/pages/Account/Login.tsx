@@ -28,8 +28,8 @@ const Login: React.FC = () => {
             <input type="text" placeholder="รหัสผ่าน" name="password" required></input>
             <Button onClick={loginClick}>เข้าสู่ระบบ</Button>
                 <div className='collum-display'>
-                    <Link to="/register">สร้างบัญชีผู้ใช้</Link> 
-                    <a>ลืมรหัสผ่าน?</a>
+                    <Link to="/register">สร้างบัญชีผู้ใช้</Link>
+                    <Link to="/forgotpassword">ลืมรหัสผ่าน?</Link>
                 </div>
             <Or>หรือ</Or>
             <Auth />

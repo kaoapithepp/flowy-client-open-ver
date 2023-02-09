@@ -16,6 +16,7 @@ import Filter from './pages/Filter/Filter';
 import Information from './pages/Information/Information';
 import Payment from './pages/Payment/Payment';
 import Ticket from './pages/Ticket/Ticket';
+import ForgotPassword from './pages/Account/ForgotPassword';
 
 const App: React.FC = () => {
   return (
@@ -33,6 +34,7 @@ const App: React.FC = () => {
         <Route path="/information" element={<Information />} />
         <Route path="/payment" element={<Payment />} />
         <Route path="/ticket" element={<Ticket />} />
+        <Route path="/forgotpassword" element={<ForgotPassword />} />
       </Routes>
     </>
   );
