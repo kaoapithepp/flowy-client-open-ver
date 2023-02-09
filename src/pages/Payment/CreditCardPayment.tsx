@@ -4,9 +4,9 @@ import styled from 'styled-components';
 const CreditCardPayment: React.FC = () => {
     return(
         <Container>
-            <h4>ชื่อผู้ถือบัตร</h4>
+            <label><h4>ชื่อผู้ถือบัตร</h4></label>
             <input type='text' inputMode='text' placeholder='กรอกชื่อ-นามสกุล ที่แสดงบนบัตร' name='card-holder' maxLength={40} id='card-holder' autoComplete='off' required></input>
-            <h4>หมายเลขบัตร</h4>
+            <label><h4>หมายเลขบัตร</h4></label>
             <input type='text' inputMode='decimal' placeholder='0000 0000 0000 0000' name='card-number' maxLength={16} id='card-number' autoComplete='off' required></input>
             <div className='column-display'>
                 <h4>วันหมดอายุ</h4>

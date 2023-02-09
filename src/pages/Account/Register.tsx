@@ -28,15 +28,15 @@ const Register: React.FC = () => {
     return( 
         <Container>
             <Header><h3>สมัครสมาชิก</h3></Header>
-            <h4>ชื่อ</h4>
+            <label><h4>ชื่อ</h4></label>
             <input type="text" placeholder="ชื่อ" name="firstname" required></input>
-            <h4>นามสกุล</h4>
+            <label><h4>นามสกุล</h4></label>
             <input type="text" placeholder="นามสกุล" name="lastname" required></input>
-            <h4>อีเมล</h4>
+            <label><h4>อีเมล</h4></label>
             <input type="text" placeholder="อีเมล" name="email" required></input>
-            <h4>รหัสผ่าน</h4>
+            <label><h4>รหัสผ่าน</h4></label>
             <input type="text" placeholder="รหัสผ่าน" name="password" required></input>
-            <h4>รหัสผ่าน</h4>
+            <label><h4>รหัสผ่าน</h4></label>
             <input type="text" placeholder="รหัสผ่าน" name="confirmpassword" required></input>
             <Button onClick={registerClick}>สมัครสมาชิก</Button>
             <Or>หรือ</Or>

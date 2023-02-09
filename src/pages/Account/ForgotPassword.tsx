@@ -26,7 +26,7 @@ const ForgotPassword: React.FC = () => {
             <p>กรุณากรอกอีเมลในช่องด้านบน เราจะส่งลิงก์ให้ท่านเพื่อดำเนินการในขั้นตอนต่อไป</p>
             <Button onClick={loginClick}>ตั้งรหัสผ่านใหม่</Button>
             <div className='collum-display'>
-                <Link to="/login">กลับสู่หน้าล็อกอินเข้าสู่ระบบ</Link>
+                <Link to="/">กลับสู่หน้าล็อกอินเข้าสู่ระบบ</Link>
             </div>
         </Container>        
     );
