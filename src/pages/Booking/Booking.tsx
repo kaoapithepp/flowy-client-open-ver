@@ -22,7 +22,7 @@ const Booking: React.FC = () => {
     function buttonBackClick(event: React.MouseEvent<HTMLButtonElement>) {
         event.preventDefault();
 
-        navigate("/information", { replace: false });
+        navigate("/seat-select", { replace: false });
     }
 
     return(

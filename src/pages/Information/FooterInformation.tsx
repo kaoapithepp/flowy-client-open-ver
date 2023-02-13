@@ -12,7 +12,7 @@ const FooterInformation: React.FC = () => {
     function buttonInformationClick(event: React.MouseEvent<HTMLButtonElement>) {
         event.preventDefault();
 
-        navigate("/booking", { replace: false });
+        navigate("/seat-select", { replace: false });
     }
 
     return(

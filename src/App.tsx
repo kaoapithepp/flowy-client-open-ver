@@ -17,6 +17,7 @@ import Information from './pages/Information/Information';
 import Payment from './pages/Payment/Payment';
 import Ticket from './pages/Ticket/Ticket';
 import ForgotPassword from './pages/Account/ForgotPassword';
+import SeatSelect from './pages/Booking/Seat/SeatSelect';
 
 const App: React.FC = () => {
   return (
@@ -35,6 +36,7 @@ const App: React.FC = () => {
         <Route path="/payment" element={<Payment />} />
         <Route path="/ticket" element={<Ticket />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
+        <Route path='/seat-select' element={<SeatSelect />} />
       </Routes>
     </>
   );
