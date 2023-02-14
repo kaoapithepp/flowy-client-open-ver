@@ -37,6 +37,7 @@ const Container = styled.div`
     margin: 0 auto;
     max-width: 400px;
     min-width: 300px;
+    border-radius: 16px;
 
     p{
         font-size: 14px;
@@ -65,7 +66,24 @@ const Container = styled.div`
         align-items: center;
     }
 
-    
+    @media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait) {
+        background-color: var(--white);
+        box-shadow: var(--shadow);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+    }
+
+    @media only screen and (min-width: 1024px) {
+        max-width: 488px;
+        background-color: var(--white);
+        box-shadow: var(--shadow);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+    } 
 `;
 
 const Header = styled.div`

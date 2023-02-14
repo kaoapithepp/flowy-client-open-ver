@@ -27,22 +27,45 @@ const Register: React.FC = () => {
 
     return( 
         <Container>
-            <Header><h3>สมัครสมาชิก</h3></Header>
-            <label><h4>ชื่อ</h4></label>
-            <input type="text" placeholder="ชื่อ" name="firstname" required></input>
-            <label><h4>นามสกุล</h4></label>
-            <input type="text" placeholder="นามสกุล" name="lastname" required></input>
-            <label><h4>อีเมล</h4></label>
-            <input type="text" placeholder="อีเมล" name="email" required></input>
-            <label><h4>รหัสผ่าน</h4></label>
-            <input type="text" placeholder="รหัสผ่าน" name="password" required></input>
-            <label><h4>รหัสผ่าน</h4></label>
-            <input type="text" placeholder="รหัสผ่าน" name="confirmpassword" required></input>
-            <Button onClick={registerClick}>สมัครสมาชิก</Button>
-            <Or>หรือ</Or>
-            <Auth />
-            <BorderedButton onClick={loginClick}>มีบัญชีอยู่แล้ว? เข้าสู่ระบบ</BorderedButton>
-            <p>ท่านยอมรับ <span>ข้อกำหนดการใช้งาน</span> และ <span>นโยบายความเป็นส่วนตัว</span> ของ Flowy เมื่อดำเนินการต่อ</p>
+            <div className='grid-display'>
+                <div>
+                    <Header><h3>สมัครสมาชิก</h3></Header>
+                    <div className='column-display'>
+                        <div>
+                            <label><h4>ชื่อ</h4></label>
+                            <input type="text" placeholder="ชื่อ" name="firstname" required></input>
+                        </div>
+                        <div>
+                            <label><h4>นามสกุล</h4></label>
+                            <input type="text" placeholder="นามสกุล" name="lastname" required></input>
+                        </div>
+                    </div>        
+                    <label><h4>อีเมล</h4></label>
+                    <input type="text" placeholder="อีเมล" name="email" required></input>
+                    <label><h4>เบอร์โทร</h4></label>
+                    <input type="text" inputMode='decimal' placeholder="เบอร์โทร" maxLength={10} name="mobilephone" required></input>
+                    <div className='margin'>
+                        <div className='column-display'>
+                            <div>
+                                <label><h4>รหัสผ่าน</h4></label>
+                                <input type="text" placeholder="รหัสผ่าน" name="password" required></input>
+                            </div>
+                            <div>
+                                <label><h4>รหัสผ่าน</h4></label>
+                                <input type="text" placeholder="รหัสผ่าน" name="confirmpassword" required></input>
+                            </div>
+                        </div>
+                    </div>
+                    <Button onClick={registerClick}>สมัครสมาชิก</Button>
+                    <Or>หรือ</Or>
+                    <Auth />
+                    <BorderedButton onClick={loginClick}>มีบัญชีอยู่แล้ว? เข้าสู่ระบบ</BorderedButton>
+                    <p>ท่านยอมรับ <span>ข้อกำหนดการใช้งาน</span> และ <span>นโยบายความเป็นส่วนตัว</span> ของ Flowy เมื่อดำเนินการต่อ</p>
+                </div>
+                <div className='img-size'>
+                    <img  src="https://images.unsplash.com/photo-1612831454918-f65c3ecfc34d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80" alt="" />
+                </div>
+            </div>
         </Container>        
     );
 }
@@ -52,10 +75,12 @@ const Container = styled.div`
     margin: 0 auto;
     max-width: 400px;
     min-width: 300px;
+    border-radius: 16px;
 
     p{
         font-size: 14px;
         text-align: center;
+        margin-top: -8px;
     }
 
     span{
@@ -65,13 +90,66 @@ const Container = styled.div`
     input{
         width: 100%;
         padding: 8px 8px ;
-        margin: 8px 0px;
+        margin-bottom: 8px;
         display: inline-block;
         border-radius: 8px;
         border: 1px solid var(--grey-300);
         box-sizing: border-box;
         font-family: var(--brand-font);
         font-size: 16px;
+    }
+
+    .img-size{
+            display: none;
+    }
+
+    .margin{
+        margin-bottom: -8px;
+    }
+
+    @media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait) {
+        min-width: 400px;
+        background-color: var(--white);
+        box-shadow: var(--shadow);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+    }
+
+    @media only screen and (min-width: 1024px) {
+        min-width: 400px;
+        max-width: 1024px;
+        background-color: var(--white);
+        box-shadow: var(--shadow);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+
+        .column-display{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .grid-display{
+            display: grid;
+            grid-template-columns: 488px 488px;
+            gap: 16px;
+        }
+
+        .img-size{
+            display: flex;
+            align-items: center;
+            
+            img{
+                max-width: 488px;
+                object-fit: cover;
+                border-radius: 8px;
+                height: 100%;
+            }
+        }
     }
 `;
 
@@ -86,6 +164,7 @@ const Header = styled.div`
 const Or = styled.div`
     display: flex;
     align-items: center;
+    margin: -8px 0px;
     
     ::before{
         content: "";
