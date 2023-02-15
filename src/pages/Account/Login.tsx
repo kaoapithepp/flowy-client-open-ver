@@ -31,7 +31,9 @@ const Login: React.FC = () => {
                     <input type="text" placeholder="อีเมล" name="email" required></input>
                     <h4>รหัสผ่าน</h4>
                     <input type="text" placeholder="รหัสผ่าน" name="password" required></input>
-                    <Button onClick={loginClick}>เข้าสู่ระบบ</Button>
+                    <div className='margin'>
+                        <Button onClick={loginClick}>เข้าสู่ระบบ</Button>
+                    </div>
                         <div className='collum-display'>
                             <Link to="/register">สร้างบัญชีผู้ใช้</Link>
                             <Link to="/forgotpassword">ลืมรหัสผ่าน?</Link>
@@ -65,6 +67,7 @@ const Container = styled.div`
     input{
         width: 100%;
         padding: 8px 8px ;
+        margin-bottom: 8px;
         display: inline-block;
         border-radius: 8px;
         border: 1px solid var(--grey-300);
@@ -81,6 +84,10 @@ const Container = styled.div`
 
     .img-size{
             display: none;
+    }
+
+    .margin{
+        margin-top: -8px;
     }
 
     @media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait) {
