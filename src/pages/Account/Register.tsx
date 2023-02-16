@@ -28,7 +28,7 @@ const Register: React.FC = () => {
     return( 
         <Container>
             <div className='grid-display'>
-                <div>
+                <div className='padding-content'>
                     <Header><h3>สมัครสมาชิก</h3></Header>
                     <div className='column-display'>
                         <div>
@@ -115,6 +115,10 @@ const Container = styled.div`
         top: 50%;
         left: 50%;
         transform: translate(-50%,-50%);
+
+        .padding-content{
+            padding: 0px 16px;
+        }
     }
 
     @media only screen and (min-width: 1024px) {
@@ -149,6 +153,10 @@ const Container = styled.div`
                 border-radius: 8px;
                 height: 100%;
             }
+        }
+
+        .padding-content{
+            padding: 0px 16px;
         }
     }
 `;

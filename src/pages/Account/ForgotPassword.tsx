@@ -20,13 +20,15 @@ const ForgotPassword: React.FC = () => {
 
     return( 
         <Container>
-            <Header><h3>ลืมรหัสผ่าน</h3></Header>
-            <label><h4>อีเมล</h4></label>
-            <input type="text" placeholder="อีเมล" name="email" required></input>
-            <p>กรุณากรอกอีเมลในช่องด้านบน เราจะส่งลิงก์ให้ท่านเพื่อดำเนินการในขั้นตอนต่อไป</p>
-            <Button onClick={loginClick}>ตั้งรหัสผ่านใหม่</Button>
-            <div className='collum-display'>
-                <Link to="/">กลับสู่หน้าล็อกอินเข้าสู่ระบบ</Link>
+            <div className='padding-content'>
+                <Header><h3>ลืมรหัสผ่าน</h3></Header>
+                <label><h4>อีเมล</h4></label>
+                <input type="text" placeholder="อีเมล" name="email" required></input>
+                <p>กรุณากรอกอีเมลในช่องด้านบน เราจะส่งลิงก์ให้ท่านเพื่อดำเนินการในขั้นตอนต่อไป</p>
+                <Button onClick={loginClick}>ตั้งรหัสผ่านใหม่</Button>
+                <div className='collum-display'>
+                    <Link to="/">กลับสู่หน้าล็อกอินเข้าสู่ระบบ</Link>
+                </div>
             </div>
         </Container>        
     );
@@ -73,6 +75,10 @@ const Container = styled.div`
         top: 50%;
         left: 50%;
         transform: translate(-50%,-50%);
+        
+        .padding-content{
+            padding: 0px 16px;
+        }
     }
 
     @media only screen and (min-width: 1024px) {
@@ -83,6 +89,10 @@ const Container = styled.div`
         top: 50%;
         left: 50%;
         transform: translate(-50%,-50%);
+
+        .padding-content{
+            padding: 0px 16px;
+        }
     } 
 `;
 

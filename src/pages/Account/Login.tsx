@@ -24,7 +24,7 @@ const Login: React.FC = () => {
                 <div className='img-size'>
                     <img  src="https://images.unsplash.com/photo-1621570168297-bdcdd4457664?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80" alt="" />
                 </div>
-                <div>
+                <div className='padding-content'>
                     <Header><h3>เข้าสู่ระบบ หรือลงทะเบียน</h3></Header>
                     <h3>ยินดีต้อนรับสู่ Flowy</h3>
                     <h4>อีเมล</h4>
@@ -97,6 +97,10 @@ const Container = styled.div`
         top: 50%;
         left: 50%;
         transform: translate(-50%,-50%);
+
+        .padding-content{
+            padding: 0px 16px;
+        }
     }
 
     @media only screen and (min-width: 1024px) {
@@ -125,6 +129,10 @@ const Container = styled.div`
                 border-radius: 8px;
                 height: 100%;
             }
+        }
+
+        .padding-content{
+            padding: 0px 16px;
         }
     }
 `;
