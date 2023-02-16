@@ -80,7 +80,7 @@ const Card = styled.div`
     img{
         border-radius: 4px;
         justify-content: center;
-        aspect-ratio: 1 / 1;
+        aspect-ratio: 3 / 2;
         object-fit: cover;
         height: 100%;
         width: 100%;
