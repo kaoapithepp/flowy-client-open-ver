@@ -11,6 +11,7 @@ export const ButtonDate = styled.button`
     margin: 8px auto;
     padding: 0px 15px;
 
+    display: grid;
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -18,7 +19,10 @@ export const ButtonDate = styled.button`
     font-family: var(--brand-font);
     font-weight: 500;
 
+
     :hover {
         cursor: pointer;
+        background-color: var(--secondary);
+        color: var(--white);
     }
 `;
