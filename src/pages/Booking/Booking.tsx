@@ -22,7 +22,7 @@ const Booking: React.FC = () => {
     function buttonBackClick(event: React.MouseEvent<HTMLButtonElement>) {
         event.preventDefault();
 
-        navigate("/seat-select", { replace: false });
+        navigate("/desk-select", { replace: false });
     }
 
     return(
@@ -30,7 +30,7 @@ const Booking: React.FC = () => {
             <ButtonBack onClick={buttonBackClick}><ArrowBackRoundedIcon /></ButtonBack>
             <div className='content-display'>
                 <Container>
-                    <DateBooking date={''} month={''} year={''} />
+                    <DateBooking />
                 </Container>
                 <Container>
                     <TimeslotBooking id={''} start_time={''} end_time={''} />

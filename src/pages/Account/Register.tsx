@@ -41,18 +41,18 @@ const Register: React.FC = () => {
                         </div>
                     </div>        
                     <label><h4>อีเมล</h4></label>
-                    <input type="text" placeholder="อีเมล" name="email" required></input>
+                    <input type="email" placeholder="อีเมล" name="email" required></input>
                     <label><h4>เบอร์โทร</h4></label>
-                    <input type="text" inputMode='decimal' placeholder="เบอร์โทร" maxLength={10} name="mobilephone" required></input>
+                    <input type="tel" inputMode='decimal' placeholder="เบอร์โทร" maxLength={10} name="mobilephone" required></input>
                     <div className='margin'>
                         <div className='column-display'>
                             <div>
                                 <label><h4>รหัสผ่าน</h4></label>
-                                <input type="text" placeholder="รหัสผ่าน" name="password" required></input>
+                                <input type="password" placeholder="รหัสผ่าน" name="password" required></input>
                             </div>
                             <div>
-                                <label><h4>รหัสผ่าน</h4></label>
-                                <input type="text" placeholder="รหัสผ่าน" name="confirmpassword" required></input>
+                                <label><h4>ยืนยันรหัสผ่าน</h4></label>
+                                <input type="password" placeholder="รหัสผ่าน" name="confirmpassword" required></input>
                             </div>
                         </div>
                     </div>

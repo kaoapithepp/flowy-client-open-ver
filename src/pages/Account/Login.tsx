@@ -28,9 +28,9 @@ const Login: React.FC = () => {
                     <Header><h3>เข้าสู่ระบบ หรือลงทะเบียน</h3></Header>
                     <h3>ยินดีต้อนรับสู่ Flowy</h3>
                     <h4>อีเมล</h4>
-                    <input type="text" placeholder="อีเมล" name="email" required></input>
+                    <input type="email" placeholder="อีเมล" name="email" required></input>
                     <h4>รหัสผ่าน</h4>
-                    <input type="text" placeholder="รหัสผ่าน" name="password" required></input>
+                    <input type="password" placeholder="รหัสผ่าน" name="password" required></input>
                     <div className='margin'>
                         <Button onClick={loginClick}>เข้าสู่ระบบ</Button>
                     </div>

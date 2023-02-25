@@ -23,7 +23,7 @@ const ForgotPassword: React.FC = () => {
             <div className='padding-content'>
                 <Header><h3>ลืมรหัสผ่าน</h3></Header>
                 <label><h4>อีเมล</h4></label>
-                <input type="text" placeholder="อีเมล" name="email" required></input>
+                <input type="email" placeholder="อีเมล" name="email" required></input>
                 <p>กรุณากรอกอีเมลในช่องด้านบน เราจะส่งลิงก์ให้ท่านเพื่อดำเนินการในขั้นตอนต่อไป</p>
                 <Button onClick={loginClick}>ตั้งรหัสผ่านใหม่</Button>
                 <div className='collum-display'>

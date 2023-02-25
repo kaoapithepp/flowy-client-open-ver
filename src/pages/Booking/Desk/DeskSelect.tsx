@@ -11,7 +11,7 @@ import { ButtonBack } from '../../../components/button/ButtonBack';
 //MUIs
 import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
 
-const PlaceCategory: React.FC = () => {
+const DeskSelect: React.FC = () => {
 
     const navigate = useNavigate();
 
@@ -72,4 +72,4 @@ const Container = styled.div`
     max-width: 1024px;
 `;
 
-export default PlaceCategory;
+export default DeskSelect;
