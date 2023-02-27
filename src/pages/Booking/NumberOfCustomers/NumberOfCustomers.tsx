@@ -3,49 +3,47 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
 // Global Components
-import { DeskSelectCard } from '../../../components/card/DeskSelectCard';
 import { ButtonBack } from '../../../components/button/ButtonBack';
 
-// section
+//section
+import FooterNumberOfCustomers from './FooterNumberOfCustomers';
+import QuantityInputCustomer from './QuantityInputCustomer';
 
 //MUIs
 import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
 
-const DeskSelect: React.FC = () => {
+const NumberOfCustomers: React.FC = () => {
 
     const navigate = useNavigate();
 
     function buttonBackClick(event: React.MouseEvent<HTMLButtonElement>) {
         event.preventDefault();
 
-        navigate("/booking-number-of-customers", { replace: false });
+        navigate("/information", { replace: false });
     }
-    
+
     return(
         <Section>
             <ButtonBack onClick={buttonBackClick}><ArrowBackRoundedIcon /></ButtonBack>
-            <div className='position-header'>
-                <h1>ที่นั่งแบบไหนเหมาะสำหรับคุณ?</h1>
+            <div className='content-display'>
+                <Container>
+                    <QuantityInputCustomer initialValue={0} />
+                </Container>
+                <div className='position-footer'>
+                    <FooterNumberOfCustomers />
+                </div>
             </div>
-            <Container>
-                <DeskSelectCard />
-            </Container>
         </Section>
     );
 }
 
 const Section = styled.div`
     padding: 0px;
+    max-height: 120vh;
     max-width: 1024px;
     min-width: 300px;
     margin: 0 auto;
-
-    h1{
-        padding: 16px;
-        margin-left: 66px;
-        text-align: right;
-    }
-
+    
     ::before{
         display: flex;
         content: '';
@@ -65,11 +63,17 @@ const Section = styled.div`
         margin: 0 auto;
     }
 
+    .content-display{
+        padding: 16px;
+        margin-top: 48px;
+    }
 `;
 
 const Container = styled.div`
-    padding: 0px 16px;
+    padding: 16px;
+    border-radius: 16px;
     max-width: 1024px;
+    margin: 16px auto;
 `;
 
-export default DeskSelect;
+export default NumberOfCustomers;

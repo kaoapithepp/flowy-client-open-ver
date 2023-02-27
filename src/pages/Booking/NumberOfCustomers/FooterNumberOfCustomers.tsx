@@ -3,23 +3,23 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
 // Global Components
-import { Button } from '../../components/button/Button';
+import { Button } from '../../../components/button/Button';
 
-const FooterInformation: React.FC = () => {
+const FooterNumberOfCustomers: React.FC = () => {
 
     const navigate = useNavigate();
 
-    function buttonInformationClick(event: React.MouseEvent<HTMLButtonElement>) {
+    function buttonBookingClick(event: React.MouseEvent<HTMLButtonElement>) {
         event.preventDefault();
 
-        navigate("/booking-number-of-customers", { replace: false });
+        navigate("/desk-select", { replace: false });
     }
 
     return(
         <Container>
             <Section>
                 <div className='button-size'>
-                    <Button onClick={buttonInformationClick}>จอง</Button>
+                    <Button onClick={buttonBookingClick}>ถัดไป</Button>
                 </div>
             </Section>
         </Container>
@@ -47,4 +47,4 @@ const Section = styled.div`
     }
 `;
 
-export default FooterInformation;
+export default FooterNumberOfCustomers;

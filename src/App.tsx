@@ -18,6 +18,8 @@ import Payment from './pages/Payment/Payment';
 import Ticket from './pages/Ticket/Ticket';
 import ForgotPassword from './pages/Account/ForgotPassword';
 import DeskSelect from './pages/Booking/Desk/DeskSelect';
+import NumberOfCustomers from './pages/Booking/NumberOfCustomers/NumberOfCustomers';
+import TimeSlot from './pages/Booking/TimeSlot/TimeSlot';
 
 const App: React.FC = () => {
   return (
@@ -37,6 +39,8 @@ const App: React.FC = () => {
         <Route path="/ticket" element={<Ticket />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route path='/desk-select' element={<DeskSelect />} />
+        <Route path='/booking-number-of-customers' element={<NumberOfCustomers />} />
+        <Route path='/booking-time-slot' element={<TimeSlot />} />
       </Routes>
     </>
   );

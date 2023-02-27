@@ -40,7 +40,7 @@ export const IconDeskSelectCard: React.FC<CardData>= (elem: CardData) => {
     function seatSelectClick(event: React.MouseEvent<HTMLButtonElement>) {
         event.preventDefault();
 
-        navigate("/payment", { replace: false });
+        navigate("/booking-time-slot", { replace: false });
     }
     
     return (

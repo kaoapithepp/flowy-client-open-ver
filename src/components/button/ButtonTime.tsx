@@ -7,7 +7,6 @@ export const ButtonTime = styled.button`
     box-shadow: var(--shadow);
     border-radius: 4px;
     width: 100%;
-    max-width: 500px;
     height: 40px;
     margin: 8px auto;
 
