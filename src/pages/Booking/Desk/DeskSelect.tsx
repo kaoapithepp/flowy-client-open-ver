@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
 // Global Components
-import { SeatSelectCard } from '../../../components/card/SeatSelectCard';
+import { DeskSelectCard } from '../../../components/card/DeskSelectCard';
 import { ButtonBack } from '../../../components/button/ButtonBack';
 
 // section
@@ -28,7 +28,7 @@ const DeskSelect: React.FC = () => {
                 <h1>ที่นั่งแบบไหนเหมาะสำหรับคุณ?</h1>
             </div>
             <Container>
-                <SeatSelectCard />
+                <DeskSelectCard />
             </Container>
         </Section>
     );

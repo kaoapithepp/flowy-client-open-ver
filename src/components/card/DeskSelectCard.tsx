@@ -2,16 +2,16 @@ import React from 'react';
 import styled from 'styled-components';
 
 // Global Components
-import { IconPlaceCategoryCard } from '../icon/IconSeatSelectCard';
+import { IconDeskSelectCard } from '../icon/IconDeskSelectCard';
 
 // Data
-import { IconSeatSelectDetail } from '../data/IconSeatSelectDetail';
+import { IconDeskSelectDetail } from '../data/IconDeskSelectDetail';
 
-export const SeatSelectCard: React.FC = () => {
+export const DeskSelectCard: React.FC = () => {
     return(
         <Layout>
-            {IconSeatSelectDetail.map((elem, key) => {
-            return <IconPlaceCategoryCard {...elem} />
+            {IconDeskSelectDetail.map((elem, key) => {
+            return <IconDeskSelectCard {...elem} />
             })}
         </Layout>
     );

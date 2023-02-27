@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '../button/Button';
 
 // MUIs
+import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
 import Groups2RoundedIcon from '@mui/icons-material/Groups2Rounded';
 import PeopleAltRoundedIcon from '@mui/icons-material/PeopleAltRounded';
 import MeetingRoomRoundedIcon from '@mui/icons-material/MeetingRoomRounded';
@@ -17,10 +18,12 @@ interface CardData {
     img: string;
 };
 
-export const IconPlaceCategoryCard: React.FC<CardData>= (elem: CardData) => {
+export const IconDeskSelectCard: React.FC<CardData>= (elem: CardData) => {
 
     function renderSwitchCase(action: CardData){
         switch(action.icon){
+            case 'PersonRoundedIcon':
+                return <PersonRoundedIcon className='large-icon' />;
             case 'PeopleAltRoundedIcon':
                 return <PeopleAltRoundedIcon className='large-icon' />;
             case 'Groups2RoundedIcon':

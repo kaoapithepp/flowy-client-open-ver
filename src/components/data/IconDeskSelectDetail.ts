@@ -1,4 +1,11 @@
-export const IconSeatSelectDetail = [
+export const IconDeskSelectDetail = [
+    {
+        title: `คนเดียวก็เฟี้ยวได้`,
+        detail: `สำหรับที่นั่งแบบนี้เหมาะสำหรับคนที่ต้องการใช้พื้นที่ 1 คน เป็นรูปแบบของ hot desk`,
+        icon: "PersonRoundedIcon",
+        img: "https://images.unsplash.com/photo-1488751045188-3c55bbf9a3fa?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
+
+    },
     {
         title: `คนเดียวหัวหาย สองคนเพื่อนตาย`,
         detail: `สำหรับที่นั่งแบบนี้เหมาะสำหรับคนที่ต้องการใช้พื้นที่ 1-2 คน`,
