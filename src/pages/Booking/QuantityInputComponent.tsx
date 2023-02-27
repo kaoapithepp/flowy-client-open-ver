@@ -45,7 +45,7 @@ const QuantityInputComponent: React.FC<Props> = ({ initialValue, minValue, maxVa
                     <ButtonIncrement onClick={handleIncrement}>+</ButtonIncrement>
                 </div>
             </Quantity>
-            <QuantityAvailable><p>เหลืออยู่ 9 ที่นั่ง</p></QuantityAvailable>
+            {/* <QuantityAvailable><p>เหลืออยู่ 9 ที่นั่ง</p></QuantityAvailable> */}
         </Container>
     );
 };

@@ -37,7 +37,7 @@ export const IconPlaceCategoryCard: React.FC<CardData>= (elem: CardData) => {
     function seatSelectClick(event: React.MouseEvent<HTMLButtonElement>) {
         event.preventDefault();
 
-        navigate("/booking", { replace: false });
+        navigate("/payment", { replace: false });
     }
     
     return (

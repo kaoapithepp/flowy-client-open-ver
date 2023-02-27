@@ -12,7 +12,7 @@ const FooterBooking: React.FC = () => {
     function buttonBookingClick(event: React.MouseEvent<HTMLButtonElement>) {
         event.preventDefault();
 
-        navigate("/payment", { replace: false });
+        navigate("/desk-select", { replace: false });
     }
 
     return(

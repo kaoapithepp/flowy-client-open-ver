@@ -21,7 +21,7 @@ const Payment: React.FC = () => {
     function buttonBackClick(event: React.MouseEvent<HTMLButtonElement>) {
         event.preventDefault();
 
-        navigate("/booking", { replace: false });
+        navigate("/desk-select", { replace: false });
     }
 
     return(

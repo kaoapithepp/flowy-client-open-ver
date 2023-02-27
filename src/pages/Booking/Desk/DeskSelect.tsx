@@ -18,7 +18,7 @@ const DeskSelect: React.FC = () => {
     function buttonBackClick(event: React.MouseEvent<HTMLButtonElement>) {
         event.preventDefault();
 
-        navigate("/information", { replace: false });
+        navigate("/booking", { replace: false });
     }
     
     return(
