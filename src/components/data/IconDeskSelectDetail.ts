@@ -22,7 +22,7 @@ export const IconDeskSelectDetail = [
     {
         title: `สี่คน สี่คน สี่คนอ้ายมาสี่คนบวก ๆ`,
         detail: `สำหรับที่นั่งแบบนี้เหมาะสำหรับคนที่ต้องการใช้พื้นที่ 4 คนขึ้นไป`,
-        icon: "MeetingRoomRoundedIcon",
+        icon: "ReduceCapacityRoundedIcon",
         img: "https://images.unsplash.com/photo-1517502884422-41eaead166d4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1025&q=80"
     },
 ]

@@ -10,6 +10,7 @@ import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
 import Groups2RoundedIcon from '@mui/icons-material/Groups2Rounded';
 import PeopleAltRoundedIcon from '@mui/icons-material/PeopleAltRounded';
 import MeetingRoomRoundedIcon from '@mui/icons-material/MeetingRoomRounded';
+import ReduceCapacityRoundedIcon from '@mui/icons-material/ReduceCapacityRounded';
 
 interface CardData {
     title: string;
@@ -28,8 +29,8 @@ export const IconDeskSelectCard: React.FC<CardData>= (elem: CardData) => {
                 return <PeopleAltRoundedIcon className='large-icon' />;
             case 'Groups2RoundedIcon':
                 return <Groups2RoundedIcon className='large-icon' />;
-            case 'MeetingRoomRoundedIcon':
-                return <MeetingRoomRoundedIcon className='large-icon' />;
+            case 'ReduceCapacityRoundedIcon':
+                return <ReduceCapacityRoundedIcon className='large-icon' />;
             default:
                 return;
         }

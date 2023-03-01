@@ -17,13 +17,15 @@ const QuantityInputCustomer: React.FC<Props> = ({ initialValue, minValue, maxVal
 
     const handleDecrement = () => {
         if (minValue && quantity <= minValue) return;
-        setQuantity(quantity - 1);
+        if (quantity >= 1) {
+          setQuantity(quantity - 1);
+        }
     };
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const value = parseInt(event.target.value);
         if (isNaN(value)) return;
-        if (minValue && value < minValue) return setQuantity(minValue);
+        if (minValue && value <= minValue) return setQuantity(minValue);
         if (maxValue && value > maxValue) return setQuantity(maxValue);
         setQuantity(value);
     };
