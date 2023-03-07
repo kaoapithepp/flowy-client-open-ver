@@ -37,7 +37,7 @@ const Container = styled.div`
 
 const Section = styled.div`
     display: flex;
-    background-color: var(--white);
+    background: linear-gradient(0deg, var(--white) 20%, rgba(247, 25, 136, 0) 100%);
     justify-content: center;
     align-items: center;
     padding: 0px 16px;

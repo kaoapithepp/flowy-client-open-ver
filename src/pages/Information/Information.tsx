@@ -16,7 +16,7 @@ import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
 import { FLOWY_API_ROUTE } from '../../config/api.config';
 import { IconExploreCard } from '../../components/icon/IconExploreCard';
 import { IconHighlightCardDetail } from '../../components/data/IconHighlightCardDetail';
-import { IconHighlightCard } from '../../components/icon/IconHighlightCard';
+import { IconAmenityCard } from '../../components/icon/IconAmenityCard';
 
 
 const Information: React.FC = () => {
@@ -24,6 +24,8 @@ const Information: React.FC = () => {
 
     const navigate = useNavigate();
     const { id } = useParams();
+    const tempArr = ['hasPowerSupply', 'hasWifi', 'hasRestroom', 'hasProjector', 'hasHDMI', 'hasFlowiderCare', 'hasAirCondition', 'hasNapZone', 'hasSnackAndBeverage', 'hasCCTVorSecurity'];
+
 
     useEffect(() => {
         const isThereToken = localStorage.getItem('flowyToken')
@@ -52,10 +54,12 @@ const Information: React.FC = () => {
         navigate("/explore", { replace: false });
     }
 
+    // console.log(placeInfo.image);
+
     return(
         <Section>
             <ButtonBack onClick={buttonBackClick}><ArrowBackRoundedIcon /></ButtonBack>
-            <FigureSection />
+            <FigureSection image={placeInfo.image}/>
             <DetailSection>
                 <h2>{placeInfo.place_name}</h2>
                 <h3>{placeInfo.description}</h3>
@@ -77,10 +81,12 @@ const Information: React.FC = () => {
                 </div>
             </DetailSection>
             <HighlightSection>
-                <h3>สิ่งอำนวยความสะดวกที่มีให้</h3>
+                <h3>สิ่งอำนวยความสะดวก</h3>
                 <div className="amenities">
-                    {IconHighlightCardDetail.map((elem, key) => {
-                        return <IconHighlightCard {...elem} />
+                    {   
+                        tempArr.map((attrib, key) => {
+                        // console.log(attrib);
+                        return <IconAmenityCard attribute={attrib} data={placeInfo.amenity} />
                     })}
                 </div>
             </HighlightSection>
@@ -162,11 +168,14 @@ const HighlightSection = styled.div`
     .amenities{
         color: var(--grey-800);
         margin-top: 12px;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
         align-items: center;
         align-content: center;
         justify-items: start;
+
+        @media screen and (min-width: 1180px){
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
     }
 `;
 
