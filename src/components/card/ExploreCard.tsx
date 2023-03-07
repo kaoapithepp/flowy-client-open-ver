@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
@@ -8,6 +9,7 @@ import { ExploreCardDetail } from '../data/ExploreCardDetail';
 
 // Data
 import { IconExploreCardDetail } from "../data/IconExploreCardDetail";
+import { FLOWY_API_ROUTE } from '../../config/api.config';
 
 interface CardData {
     name_space: string;
@@ -19,32 +21,63 @@ interface CardData {
 };
 
 export const ExploreCard: React.FC = () => {
+    const [exploreCardDetail, setExploreCardDetail] = useState([]);
 
     const navigate = useNavigate();
 
-    function exploreCardClick(event: React.MouseEvent<HTMLButtonElement>) {
+    useEffect(() => {
+        const isThereToken = localStorage.getItem('flowyToken')
+            ? JSON.parse(localStorage.getItem('flowyToken') as string)
+            : null;
+        if (isThereToken) {
+            try {
+                axios.get(`${FLOWY_API_ROUTE}/place/all`, {
+                    headers: {
+                        Authorization: `Bearer ${isThereToken}`
+                    }
+                })
+                .then(res => {
+                    setExploreCardDetail((res as any).data);
+                })
+
+            } catch (err: any) {
+                alert(err.message);
+            }
+        }
+    },[]);
+
+    function exploreCardClick(event: React.MouseEvent<HTMLButtonElement>, placeId: string) {
         event.preventDefault();
 
-        navigate("/information", { replace: false });
+        navigate(`/info/${placeId}`, { replace: false });
     }
 
     return(
         <Warp>
             {
-                ExploreCardDetail.map((elem: CardData) => (
-                    <Card onClick={exploreCardClick}>
-                        <img src={elem.img} alt="" />
-                        <Collum>
-                            <h2>{elem.name_space}</h2>
-                            <h3>{elem.open_time} - {elem.close_time}</h3>
-                        </Collum>
-                        <h4>{elem.location}</h4>
-                        <p>{elem.price} บาท/ชั่วโมง</p>
+                exploreCardDetail.map((elem: any) => (
+                    <Card onClick={e => exploreCardClick(e, elem.place_id)}>
+                        <img src={elem.image[0]} alt="" />
+                        <Column>
+                            <h2>{elem.place_name}</h2>
+                            <h3>{elem.open_hr.substr(0,5)} - {elem.close_hr.substr(0,5)}</h3>
+                        </Column>
+                        <h4>{elem.description}</h4>
+                        <div className="price-and-spec">
+                            <p className="price-tag">{elem.unit_price} บาท / ชั่วโมง</p>
                             <div className="icon-card">
-                                {IconExploreCardDetail.map((elem, key) => {
-                                return <IconExploreCard {...elem} />
-                                })}
+                                { !elem.spec.isSmokable &&
+                                    <IconExploreCard
+                                        icon="SmokeFreeRoundedIcon"
+                                        label="งดสูบบุหรี่" />
+                                }
+                                { elem.spec.isQuiet &&
+                                    <IconExploreCard
+                                        icon="VolumeOffRoundedIcon"
+                                        label="งดใช้เสียงดัง" />
+                                }
                             </div>
+                        </div>
                     </Card>
                 ))
             }
@@ -102,18 +135,32 @@ const Card = styled.button`
     }
 
     p{
-        font-size: 16px;
+        font-size: 12px;
         color: var(--black);
+    }
+
+    .price-and-spec {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .price-tag{
+        margin: 6px 0;
+        background-color: var(--green-notion);
+        padding: 6px;
+        width: fit-content;
+        border-radius: 0.5rem;
+        color: var(--grey-900);
     }
 
     .icon-card {
         display: flex;
-        gap: 2rem;
-        color: var(--black);
+        gap: 1rem;
+        color: var(--grey-800);
     }
 `;
 
-const Collum = styled.div`
+const Column = styled.div`
     display: grid;
     grid-template-columns: 1fr auto;
     align-items: center;

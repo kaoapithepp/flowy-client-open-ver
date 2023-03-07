@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, SetStateAction, Dispatch } from 'react';
+import axios from 'axios';
 import styled from 'styled-components';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -9,28 +10,48 @@ import { ButtonAccount } from '../button/ButtonAccount';
 //MUIs
 import PersonOutlineRoundedIcon from '@mui/icons-material/PersonOutlineRounded';
 
-export const AccountCard: React.FC = () => {
+interface IAccountCard {
+    profile: {
+        profile_imgUrl: string;
+        first_name: string;
+        last_name: string;
+        email: string;
+        tel_no: string;
+    };
+    accCardCallback: Dispatch<SetStateAction<boolean>>;
+}
+
+export const AccountCard: React.FC<IAccountCard> = ({ profile, accCardCallback }) => {
 
     const navigate = useNavigate();
 
-    function logoutClick(event: React.MouseEvent<HTMLButtonElement>) {
-        event.preventDefault();
+    async function logoutClick(event: React.MouseEvent<HTMLButtonElement>) {
+        try {
+            event.preventDefault();
+            localStorage.removeItem('flowyToken');
+            navigate("/", { replace: false });
+        } catch(err: any) {
+            console.log(err.message);
+        }
+    }
 
-        navigate("/", { replace: false });
+    function handleBgDropClick(){
+        // event.preventDefault();
+        accCardCallback(false);
     }
 
     return(
-        <BGdrop>
+        <BGdrop onClick={handleBgDropClick}>
             <div className='position-bottom'>
                 <Container>
                     <Content>
                         <div className='grid-column'>
-                            <ButtonAccount className='button-size'><PersonOutlineRoundedIcon className='icon-size'/></ButtonAccount>
-                            <h2>ชื่อ-นามสกุล</h2>
+                            <ButtonAccount bgImg={profile.profile_imgUrl} className='button-size'/>
+                            <h2>{profile.first_name} {profile.last_name}</h2>
                             <h3>อีเมล: </h3>
-                            <h3>xxxxx@mail.xxx</h3>
+                            <h3>{profile.email}</h3>
                             <h3>เบอร์โทร: </h3>
-                            <h3>0123456789</h3>
+                            <h3>{profile.tel_no}</h3>
                         </div>
                     </Content>
                     <Content>
@@ -56,13 +77,20 @@ export const AccountCard: React.FC = () => {
 }
 
 const BGdrop = styled.div`
-    background-color: rgba(97, 97, 97, 0.3);
+    background-color: rgba(100, 100, 100, 0.5);
     position: fixed;
     top: 0%;
     left: 0%;
     width: 100%;
     height: 100%;
     z-index: 2;
+    animation: fadein .2s linear;
+    /* transition: .3s; */
+
+    @keyframes fadein {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
 
     .position-bottom{
         position: fixed;
@@ -81,6 +109,13 @@ const Container = styled.div`
     background-image: url('/images/gradient-background.png');
     background-size: 100%;
     background-repeat: no-repeat;
+    animation: slideup .2s ease-out;
+    /* transition: .3s; */
+
+    @keyframes slideup {
+        from { transform: translateY(50%); }
+        to { transform: translateY(0%); }
+    }
     
     .button-display{
         margin:-16px auto; 
