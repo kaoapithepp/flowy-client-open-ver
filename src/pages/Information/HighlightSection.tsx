@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 // Global Components
-import { IconHighlightCard } from '../../components/icon/IconHighlightCard';
+import { IconHighlightCard } from '../../components/icon/IconAmenityCard';
 
 // Data
 import { IconHighlightCardDetail } from '../../components/data/IconHighlightCardDetail';

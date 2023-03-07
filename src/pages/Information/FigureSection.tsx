@@ -1,17 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Figure: React.FC = () => {
+interface FigureContext {
+    image: string[];
+}
+
+const Figure: React.FC<FigureContext> = ({ image }) => {
     return(
         <Container>
             <ImgSection1>
-                <img src='https://images.unsplash.com/photo-1562664348-2188b99b5157?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80' alt="" />
+                <img src={image?.[0]} alt="" />
             </ImgSection1>
             <ImgSection2>
-                <img src='https://images.unsplash.com/photo-1562664348-2188b99b5157?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80' alt="" />
-                <img src='https://images.unsplash.com/photo-1562664348-2188b99b5157?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80' alt="" />
-                <img src='https://images.unsplash.com/photo-1562664348-2188b99b5157?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80' alt="" />
-                <img src='https://images.unsplash.com/photo-1562664348-2188b99b5157?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80' alt="" />
+                {
+                    image?.slice(1).map((imgUri) => {
+                        return <img src={imgUri} alt="" />
+                    })
+                }
             </ImgSection2>
         </Container>
     );
