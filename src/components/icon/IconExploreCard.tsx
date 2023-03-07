@@ -6,15 +6,15 @@ import VolumeOffRoundedIcon from '@mui/icons-material/VolumeOffRounded';
 
 import styled from 'styled-components';
 
-interface CardData {
-    detail: string;
+interface ISpec {
     icon: string;
-};
+    label: string;
+}
 
-export const IconExploreCard: React.FC<CardData>= (elem: CardData) => {
+export const IconExploreCard: React.FC<ISpec> = ({ icon, label }) => {
 
-    function renderSwitchCase(action: CardData){
-        switch(action.icon){
+    function renderSwitchCase(action: string){
+        switch(action){
             case 'SmokeFreeRoundedIcon':
                 return <SmokeFreeRoundedIcon />;
             case 'VolumeOffRoundedIcon':
@@ -27,11 +27,9 @@ export const IconExploreCard: React.FC<CardData>= (elem: CardData) => {
     return (
         <Card>
             <Icon>
-                {renderSwitchCase(elem)}
+                { renderSwitchCase(icon) }
             </Icon>
-                <p>
-                    {elem.detail}
-                </p>
+                <p>{label}</p>
         </Card>
     );
 }
@@ -40,7 +38,7 @@ const Card = styled.div`
     display: grid;
     grid-template-columns: auto 1fr;
     align-items: center;
-    gap: 1rem;
+    gap: .5rem;
     font-family: var(--brand-font);
 `;
 

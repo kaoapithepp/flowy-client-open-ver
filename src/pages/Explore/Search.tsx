@@ -1,7 +1,7 @@
-import React from 'react';
-import { useState } from 'react';
-import styled from 'styled-components';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import styled from 'styled-components';
 
 // Global Components
 import { ButtonSearch } from '../../components/button/ButtonSearch';
@@ -12,39 +12,41 @@ import { AccountCard } from '../../components/card/AccountCard';
 
 //MUIs
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
-import PersonOutlineRoundedIcon from '@mui/icons-material/PersonOutlineRounded';
+import { FLOWY_API_ROUTE } from '../../config/api.config';
 
 const Search: React.FC = () => {
+    const [profile, setProfile] = useState<any>({});
+    const [openAccountCard, setAccountCard] = useState(false);
 
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const isThereToken = localStorage.getItem('flowyToken')
+            ? JSON.parse(localStorage.getItem('flowyToken') as string)
+            : null;
+        if (isThereToken) {
+            try {
+                axios.get(`${FLOWY_API_ROUTE}/user/`, {
+                    headers: {
+                        Authorization: `Bearer ${isThereToken}`
+                    }
+                })
+                .then(res => {
+                    // console.log(res.data.profile_imgUrl);
+                    setProfile((res as any).data);
+                })
+
+            } catch (err: any) {
+                alert(err.message);
+            }
+        }
+    },[]);
 
     function buttonFilterClick(event: React.MouseEvent<HTMLButtonElement>) {
         event.preventDefault();
 
         navigate("/filter", { replace: false });
     }
-    
-    // const [openLoginRegCard, setLoginRegCard] = useState<Boolean>(false);
-
-    // const handleLoginRegCard = (state: Boolean) => {
-    //     setLoginRegCard(state);
-    // }
-
-    // let render_LoginRegCard = null
-    // openLoginRegCard? (
-    //     render_LoginRegCard = <LoginRegCard />
-    // ):(render_LoginRegCard = null)
-
-    const [openAccountCard, setAccountCard] = useState<Boolean>(false);
-
-    const handleAccountCard = (state: Boolean) => {
-        setAccountCard(state);
-    }
-
-    let render_AccountCard = null
-    openAccountCard? (
-        render_AccountCard = <AccountCard />
-    ):(render_AccountCard = null)
 
     return(
         <Container>
@@ -57,10 +59,8 @@ const Search: React.FC = () => {
                     <ButtonFilter />
                 </div>
             </ButtonSearch>
-            <ButtonAccount onClick={() => handleAccountCard(!openAccountCard)}>
-                <Icon><PersonOutlineRoundedIcon /></Icon>          
-            </ButtonAccount>
-            {render_AccountCard}
+            <ButtonAccount bgImg={(profile as any).profile_imgUrl} onClick={() => setAccountCard(true)} />
+            { openAccountCard ? <AccountCard profile={profile} accCardCallback={(e) => setAccountCard(e)} /> : null}
         </Container>
     );
 }
@@ -71,6 +71,11 @@ const Container = styled.div`
     gap: 8px;
     max-width: 600px;
     margin: 0 auto;
+    position: sticky;
+    top: 0;
+    left: 0;
+    padding: 16px 8px;
+    background-color: white;
 
     .flex-display{
         display: flex;
@@ -88,6 +93,13 @@ const Icon = styled.div`
    display: flex;
    justify-content: center;
    align-items: center;
+
+   img {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    object-fit: cover;
+   }
 `;
 
 export default Search;

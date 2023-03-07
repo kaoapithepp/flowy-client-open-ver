@@ -1,21 +1,51 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import styled from 'styled-components';
 
 // Global Components
 import { Button } from '../../components/button/Button';
 
 // Sections
 import Auth from './Auth';
+import { FLOWY_API_ROUTE } from '../../config/api.config';
 
 const Login: React.FC = () => {
+    const [email, setEmail] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
 
     const navigate = useNavigate();
 
-    function loginClick(event: React.MouseEvent<HTMLButtonElement>) {
-        event.preventDefault();
+    useEffect(() => {
+        const isThereToken = localStorage.getItem('flowyToken');
+        if (isThereToken) {
+            navigate('/explore', { replace: false});
+        }
+    }, []);
+    
+    async function loginClick(event: React.MouseEvent<HTMLButtonElement>) {
+        try {
+            event.preventDefault();
 
-        navigate("/explore", { replace: false });
+            const { data } = await axios.post(`${FLOWY_API_ROUTE}/user/login`, {
+                email: email,
+                password: password
+            }, {
+                headers : {
+                    "Content-type" : "application/json"
+                }
+            });
+
+            if(data){
+                localStorage.setItem("flowyToken", JSON.stringify(data.token));
+                navigate("/explore", { replace: false });
+            } else {
+                console.log("Something went wrong.");
+            }
+
+        } catch (err: any) {
+            console.log(err.message);
+        }
     }
 
     return( 
@@ -28,9 +58,21 @@ const Login: React.FC = () => {
                     <Header><h3>เข้าสู่ระบบ หรือลงทะเบียน</h3></Header>
                     <h3>ยินดีต้อนรับสู่ Flowy</h3>
                     <h4>อีเมล</h4>
-                    <input type="email" placeholder="อีเมล" name="email" required></input>
+                    <input
+                        type="email"
+                        placeholder="อีเมล"
+                        name="email"
+                        value={email}
+                        onChange={e => setEmail(e.target.value)}
+                        required />
                     <h4>รหัสผ่าน</h4>
-                    <input type="password" placeholder="รหัสผ่าน" name="password" required></input>
+                    <input
+                        type="password"
+                        placeholder="รหัสผ่าน"
+                        name="password"
+                        value={password}
+                        onChange={e => setPassword(e.target.value)}
+                        required />
                     <div className='margin'>
                         <Button onClick={loginClick}>เข้าสู่ระบบ</Button>
                     </div>
