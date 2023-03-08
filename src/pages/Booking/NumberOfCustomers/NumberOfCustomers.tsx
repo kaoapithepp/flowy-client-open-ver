@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 // Global Components
 import { ButtonBack } from '../../../components/button/ButtonBack';
@@ -13,27 +14,32 @@ import QuantityInputCustomer from './QuantityInputCustomer';
 import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
 
 const NumberOfCustomers: React.FC = () => {
-
+    const [customerAmt, setCustomerAmt] = useState(1);
     const navigate = useNavigate();
 
     function buttonBackClick(event: React.MouseEvent<HTMLButtonElement>) {
         event.preventDefault();
 
-        navigate("/information", { replace: false });
+        navigate(-1);
     }
 
     return(
-        <Section>
-            <ButtonBack onClick={buttonBackClick}><ArrowBackRoundedIcon /></ButtonBack>
-            <div className='content-display'>
-                <Container>
-                    <QuantityInputCustomer initialValue={0} />
-                </Container>
-                <div className='position-footer'>
-                    <FooterNumberOfCustomers />
+        <>
+            <Helmet>
+                <title>Fill in Number of People | Flowy Booking (1/4)</title>
+            </Helmet>
+            <Section>
+                <ButtonBack onClick={buttonBackClick}><ArrowBackRoundedIcon /></ButtonBack>
+                <div className='content-display'>
+                    <Container>
+                        <QuantityInputCustomer initialValue={customerAmt} dispatchFunc={setCustomerAmt}/>
+                    </Container>
+                    <div className='position-footer'>
+                        <FooterNumberOfCustomers ctmAmt={customerAmt}/>
+                    </div>
                 </div>
-            </div>
-        </Section>
+            </Section>
+        </>
     );
 }
 

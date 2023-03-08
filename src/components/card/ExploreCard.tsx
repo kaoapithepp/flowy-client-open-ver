@@ -1,59 +1,29 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 
 // Global Components
 import { IconExploreCard } from "../icon/IconExploreCard";
-import { ExploreCardDetail } from '../data/ExploreCardDetail';
 
 // Data
 import { IconExploreCardDetail } from "../data/IconExploreCardDetail";
-import { FLOWY_API_ROUTE } from '../../config/api.config';
+import LoadingScreen from '../ui/LoadingScreen';
 
-interface CardData {
-    name_space: string;
-    open_time: string;
-    close_time: string;
-    location: string;
-    price: string;
-    img: string;
+interface CardContext {
+    exploreCardDetail: any;
 };
 
-export const ExploreCard: React.FC = () => {
-    const [exploreCardDetail, setExploreCardDetail] = useState([]);
-
+export const ExploreCard: React.FC<CardContext> = ({ exploreCardDetail }) => {
     const navigate = useNavigate();
-
-    useEffect(() => {
-        const isThereToken = localStorage.getItem('flowyToken')
-            ? JSON.parse(localStorage.getItem('flowyToken') as string)
-            : null;
-        if (isThereToken) {
-            try {
-                axios.get(`${FLOWY_API_ROUTE}/place/all`, {
-                    headers: {
-                        Authorization: `Bearer ${isThereToken}`
-                    }
-                })
-                .then(res => {
-                    setExploreCardDetail((res as any).data);
-                })
-
-            } catch (err: any) {
-                alert(err.message);
-            }
-        }
-    },[]);
 
     function exploreCardClick(event: React.MouseEvent<HTMLButtonElement>, placeId: string) {
         event.preventDefault();
-
+        window.scrollTo(0,0);
         navigate(`/info/${placeId}`, { replace: false });
     }
 
-    return(
-        <Warp>
+    return (
+        <Container>
             {
                 exploreCardDetail.map((elem: any) => (
                     <Card onClick={e => exploreCardClick(e, elem.place_id)}>
@@ -81,11 +51,12 @@ export const ExploreCard: React.FC = () => {
                     </Card>
                 ))
             }
-        </Warp>
+        </Container>
+
     );
 }
 
-const Warp = styled.div`
+const Container = styled.div`
     display: grid;
     align-items: center;
     justify-content: center;

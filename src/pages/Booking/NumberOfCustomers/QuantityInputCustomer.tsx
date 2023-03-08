@@ -5,30 +5,32 @@ interface Props {
   initialValue: number;
   minValue?: number;
   maxValue?: number;
+  dispatchFunc: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const QuantityInputCustomer: React.FC<Props> = ({ initialValue, minValue, maxValue }) => {
-    const [quantity, setQuantity] = useState(initialValue);
+const QuantityInputCustomer: React.FC<Props> = ({ initialValue, minValue=1, maxValue, dispatchFunc }) => {
+    const [quantity, setQuantity] = useState<number>(initialValue);
 
     const handleIncrement = () => {
         if (maxValue && quantity >= maxValue) return;
         setQuantity(quantity + 1);
+        dispatchFunc(quantity + 1);
     };
 
     const handleDecrement = () => {
-        if (minValue && quantity <= minValue) return;
-        if (quantity >= 1) {
+        if (minValue && quantity <= minValue) return minValue;
+        if (quantity > 1) {
           setQuantity(quantity - 1);
+          dispatchFunc(quantity - 1);
         }
     };
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const value = parseInt(event.target.value);
-        if (isNaN(value)) return;
-        if (minValue && value <= minValue) return setQuantity(minValue);
-        if (maxValue && value > maxValue) return setQuantity(maxValue);
-        setQuantity(value);
-    };
+    // const handleChange = (event: React.ChangeEvent<HTMLInputElement> | number) => {
+    //     if (isNaN(event)) return;
+    //     if (minValue && event <= minValue) return setQuantity(minValue);
+    //     if (maxValue && event > maxValue) return setQuantity(maxValue);
+    //     setQuantity(event);
+    // };
 
     return (
         <Container>
@@ -38,11 +40,12 @@ const QuantityInputCustomer: React.FC<Props> = ({ initialValue, minValue, maxVal
                 <div className='flex-display'>
                     <ButtonDecrement onClick={handleDecrement}>-</ButtonDecrement>
                     <QuantityInput
-                        type="number"
+                        type="text"
                         value={quantity}
-                        onChange={handleChange}
+                        onChange={e => setQuantity(Number(e.target.value))}
                         min={minValue}
                         max={maxValue}
+                        placeholder="จำนวน"
                     />
                     <ButtonIncrement onClick={handleIncrement}>+</ButtonIncrement>
                 </div>

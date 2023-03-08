@@ -42,11 +42,6 @@ const TimeSlot: React.FC = () => {
                 <p>โปรดเลือกช่วงเวลาที่คุณต้องการเข้าใช้สเปซ</p>
                 <Slot>
                     <TimeSlotDataMap />
-                    {/* <ButtonTime>9:00  10:00</ButtonTime>
-                    <ButtonTimeClick>10:00 - 11:00</ButtonTimeClick>
-                    <ButtonTimeClick>11:00 - 12:00</ButtonTimeClick>
-                    <ButtonTimeUnavailable>12:00 - 13:00</ButtonTimeUnavailable>
-                    <ButtonTime>13:00 - 14:00</ButtonTime> */}
                 </Slot>
             </Container>
             <div className='position-footer'>

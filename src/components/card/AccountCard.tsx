@@ -8,7 +8,7 @@ import { BorderedButton } from '../button/BorderedButton';
 import { ButtonAccount } from '../button/ButtonAccount';
 
 //MUIs
-import PersonOutlineRoundedIcon from '@mui/icons-material/PersonOutlineRounded';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 interface IAccountCard {
     profile: {
@@ -47,11 +47,10 @@ export const AccountCard: React.FC<IAccountCard> = ({ profile, accCardCallback }
                     <Content>
                         <div className='grid-column'>
                             <ButtonAccount bgImg={profile.profile_imgUrl} className='button-size'/>
-                            <h2>{profile.first_name} {profile.last_name}</h2>
-                            <h3>อีเมล: </h3>
-                            <h3>{profile.email}</h3>
-                            <h3>เบอร์โทร: </h3>
-                            <h3>{profile.tel_no}</h3>
+                            <div>
+                                <h2>{profile.first_name} {profile.last_name}</h2>
+                                <p><AccountCircleIcon /> {profile.email}</p>
+                            </div>
                         </div>
                     </Content>
                     <Content>
@@ -134,14 +133,20 @@ const Container = styled.div`
 
     .grid-column{
         display: grid;
-        grid-template-columns: 90px 1fr;
+        grid-template-columns: 1fr 3fr;
         margin: 0 auto;
         max-width: 600px;
         align-items: center;
 
-        h3{
+        p {
+            margin: 0;
+            color: var(--grey-600);
+            font-size: 16px;
+            display: flex;
+            align-items: center;
             padding: 4px 0px;
             text-overflow: clip;
+            gap: .2em;
         }
     }
 `;

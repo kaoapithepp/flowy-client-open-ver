@@ -16,6 +16,7 @@ export default createGlobalStyle`
         --purple-notion: #E1D2F8;
         --pink-notion: #FBD3E9;
         --green-notion: #CDE7E2;
+        --yellow-notion: #F9EED7;
         --form-grey: #B6B6B6; // Form placeholder, border
         --error: #FE0044; // Error red
         --grey-200: #EEEEEE;

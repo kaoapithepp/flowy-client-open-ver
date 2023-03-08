@@ -1,18 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 // Global Components
 import { Button } from '../../components/button/Button';
 
 const FooterInformation: React.FC = () => {
-
     const navigate = useNavigate();
+    const { id } = useParams();
 
     function buttonInformationClick(event: React.MouseEvent<HTMLButtonElement>) {
         event.preventDefault();
 
-        navigate("/booking-number-of-customers", { replace: false });
+        navigate(`/book-ctm-amt/${id}`, { replace: false });
     }
 
     return(

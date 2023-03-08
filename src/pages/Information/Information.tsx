@@ -15,7 +15,6 @@ import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
 
 import { FLOWY_API_ROUTE } from '../../config/api.config';
 import { IconExploreCard } from '../../components/icon/IconExploreCard';
-import { IconHighlightCardDetail } from '../../components/data/IconHighlightCardDetail';
 import { IconAmenityCard } from '../../components/icon/IconAmenityCard';
 
 
@@ -50,11 +49,9 @@ const Information: React.FC = () => {
 
     function buttonBackClick(event: React.MouseEvent<HTMLButtonElement>) {
         event.preventDefault();
-
+        
         navigate("/explore", { replace: false });
     }
-
-    // console.log(placeInfo.image);
 
     return(
         <Section>

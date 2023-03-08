@@ -20,6 +20,7 @@ import ForgotPassword from './pages/Account/ForgotPassword';
 import DeskSelect from './pages/Booking/Desk/DeskSelect';
 import NumberOfCustomers from './pages/Booking/NumberOfCustomers/NumberOfCustomers';
 import TimeSlot from './pages/Booking/TimeSlot/TimeSlot';
+import LoadingScreen from './components/ui/LoadingScreen';
 
 const App: React.FC = () => {
   return (
@@ -38,9 +39,10 @@ const App: React.FC = () => {
         <Route path="/payment" element={<Payment />} />
         <Route path="/ticket" element={<Ticket />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
-        <Route path='/desk-select' element={<DeskSelect />} />
-        <Route path='/booking-number-of-customers' element={<NumberOfCustomers />} />
-        <Route path='/booking-time-slot' element={<TimeSlot />} />
+        <Route path='/book-desk/:placeId' element={<DeskSelect />} />
+        <Route path='/book-ctm-amt/:placeId' element={<NumberOfCustomers />} />
+        <Route path='/book-time-slot/:placeId' element={<TimeSlot />} />
+        <Route path='/loading-screen' element={<LoadingScreen />} />
       </Routes>
     </>
   );

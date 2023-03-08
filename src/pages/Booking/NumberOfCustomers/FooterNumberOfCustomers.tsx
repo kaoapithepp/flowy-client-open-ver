@@ -1,18 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 // Global Components
 import { Button } from '../../../components/button/Button';
 
-const FooterNumberOfCustomers: React.FC = () => {
+interface NextStepContext {
+    ctmAmt: number;
+}
 
+const FooterNumberOfCustomers: React.FC<NextStepContext> = ({ ctmAmt }) => {
     const navigate = useNavigate();
+    const { placeId } = useParams();
 
     function buttonBookingClick(event: React.MouseEvent<HTMLButtonElement>) {
         event.preventDefault();
 
-        navigate("/desk-select", { replace: false });
+        navigate(`/book-desk/${placeId}?ctm=${ctmAmt}`, { replace: false });
     }
 
     return(
