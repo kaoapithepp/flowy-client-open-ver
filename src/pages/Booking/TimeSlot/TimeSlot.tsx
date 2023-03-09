@@ -1,47 +1,59 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 // Global Components
-import { ButtonTime } from '../../../components/button/ButtonTime';
-import { ButtonTimeClick } from '../../../components/button/ButtonTimeClick';
-import { ButtonTimeUnavailable } from '../../../components/button/ButtonTimeUnavailable';
 import { ButtonBack } from '../../../components/button/ButtonBack';
 
 //section
 import FooterTimeSlot from './FooterTimeSlot';
 
-//data
-import TimeSlotDataMap from '../mapData/TimeSlotDataMap';
-
 //MUIs
 import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
-
-interface Props {
-    id: string;
-    start_time: string;
-    end_time: string;
-};
-
+import TimeSlotButton from '../mapData/TimeSlotButton';
 
 const TimeSlot: React.FC = () => {
-
+    const [timeslotData, setTimeslotData] = useState([]);
     const navigate = useNavigate();
+    const { deskId } = useParams();
+
+    useEffect(() => {
+        const isThereToken = localStorage.getItem('flowyToken')
+            ? JSON.parse(localStorage.getItem('flowyToken') as string)
+            : null;
+        if (isThereToken) {
+            try {
+                axios.get(`${import.meta.env.VITE_FLOWY_API_ROUTE}/timeslot/${deskId}`, {
+                    headers: {
+                        Authorization: `Bearer ${isThereToken}`
+                    }
+                })
+                .then(res => {
+                    setTimeslotData((res as any).data);
+                });
+            } catch (err: any) {
+                alert(err.message);
+            }
+        }
+    },[]);
 
     function buttonBackClick(event: React.MouseEvent<HTMLButtonElement>) {
         event.preventDefault();
 
-        navigate("/desk-select", { replace: false });
+        navigate(-1);
     }
 
     return(
         <Section>
             <ButtonBack onClick={buttonBackClick}><ArrowBackRoundedIcon /></ButtonBack>
             <Container>
-                <h2>เวลา</h2>
-                <p>โปรดเลือกช่วงเวลาที่คุณต้องการเข้าใช้สเปซ</p>
+                <h2>เลือกช่วงเวลา</h2>
+                <p>โปรดเลือกสล็อทเวลาที่คุณต้องการเข้าใช้สเปซ</p>
                 <Slot>
-                    <TimeSlotDataMap />
+                    {timeslotData.map((props: any)=>(
+                        <TimeSlotButton start_time={props.start_time} end_time={props.end_time} status={props.status} />
+                    ))}
                 </Slot>
             </Container>
             <div className='position-footer'>
@@ -83,7 +95,7 @@ const Container = styled.div`
     position: absolute;
     padding: 16px;
     border-radius: 16px;
-    width: 65vw;
+    width: 300px;
     max-width: 1024px;
     margin: 16px auto;
     top: 45%;
@@ -101,9 +113,12 @@ const Container = styled.div`
 `;
 
 const Slot = styled.div`
+    display: flex;
+    flex-direction: column;
     align-items: center;
     max-height: 60vh;
-    overflow-x: scroll;
+    overflow-y: scroll;
+    padding: 0px 8px;
 `;
 
 export default TimeSlot;

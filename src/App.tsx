@@ -39,9 +39,9 @@ const App: React.FC = () => {
         <Route path="/payment" element={<Payment />} />
         <Route path="/ticket" element={<Ticket />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
-        <Route path='/book-desk/:placeId' element={<DeskSelect />} />
         <Route path='/book-ctm-amt/:placeId' element={<NumberOfCustomers />} />
-        <Route path='/book-time-slot/:placeId' element={<TimeSlot />} />
+        <Route path='/book-desk/:placeId' element={<DeskSelect />} />
+        <Route path='/book-time-slot/:deskId' element={<TimeSlot />} />
         <Route path='/loading-screen' element={<LoadingScreen />} />
       </Routes>
     </>
