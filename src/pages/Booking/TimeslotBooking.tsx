@@ -1,9 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-//section
-import TimeSlotDataMap from './mapData/TimeSlotDataMap';
-
 // Global Components
 import { ButtonTime } from '../../components/button/ButtonTime';
 import { ButtonTimeClick } from '../../components/button/ButtonTimeClick';
@@ -20,7 +17,6 @@ const TimeslotBooking: React.FC<Props>= (props: Props) => {
         <Container>
             <h2>เวลา</h2>
             <TimeSlot>
-                <TimeSlotDataMap />
                 {/* <ButtonTime>9:00  10:00</ButtonTime>
                 <ButtonTimeClick>10:00 - 11:00</ButtonTimeClick>
                 <ButtonTimeClick>11:00 - 12:00</ButtonTimeClick>

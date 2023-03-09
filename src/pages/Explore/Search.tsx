@@ -12,7 +12,6 @@ import { AccountCard } from '../../components/card/AccountCard';
 
 //MUIs
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
-import { FLOWY_API_ROUTE } from '../../config/api.config';
 
 const Search: React.FC = () => {
     const [profile, setProfile] = useState<any>({});
@@ -26,7 +25,7 @@ const Search: React.FC = () => {
             : null;
         if (isThereToken) {
             try {
-                axios.get(`${FLOWY_API_ROUTE}/user/`, {
+                axios.get(`${import.meta.env.VITE_FLOWY_API_ROUTE}/user/`, {
                     headers: {
                         Authorization: `Bearer ${isThereToken}`
                     }
@@ -75,7 +74,7 @@ const Container = styled.div`
     top: 0;
     left: 0;
     padding: 16px 8px;
-    background-color: white;
+    background-color: var(--white);
 
     .flex-display{
         display: flex;

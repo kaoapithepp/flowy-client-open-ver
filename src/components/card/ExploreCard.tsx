@@ -61,7 +61,7 @@ const Container = styled.div`
     align-items: center;
     justify-content: center;
     margin: 0 auto;
-    grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
     gap: 16px;
 `;
 

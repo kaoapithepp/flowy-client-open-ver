@@ -13,7 +13,6 @@ import FooterInformation from './FooterInformation';
 //MUIs
 import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
 
-import { FLOWY_API_ROUTE } from '../../config/api.config';
 import { IconExploreCard } from '../../components/icon/IconExploreCard';
 import { IconAmenityCard } from '../../components/icon/IconAmenityCard';
 
@@ -32,7 +31,7 @@ const Information: React.FC = () => {
             : null;
         if (isThereToken) {
             try {
-                axios.get(`${FLOWY_API_ROUTE}/place/${id}`, {
+                axios.get(`${import.meta.env.VITE_FLOWY_API_ROUTE}/place/${id}`, {
                     headers: {
                         Authorization: `Bearer ${isThereToken}`
                     }

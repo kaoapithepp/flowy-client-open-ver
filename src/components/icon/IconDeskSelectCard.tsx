@@ -5,39 +5,14 @@ import { useNavigate, useParams } from 'react-router-dom';
 // Global Components
 import { Button } from '../button/Button';
 
-// MUIs
-import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
-import Groups2RoundedIcon from '@mui/icons-material/Groups2Rounded';
-import PeopleAltRoundedIcon from '@mui/icons-material/PeopleAltRounded';
-import MeetingRoomRoundedIcon from '@mui/icons-material/MeetingRoomRounded';
-import ReduceCapacityRoundedIcon from '@mui/icons-material/ReduceCapacityRounded';
-
-
-
 export const IconDeskSelectCard: React.FC<any>= (elem) => {
-
-    function renderIconCase(action: number){
-        switch(action){
-            case 1:
-                return <PersonRoundedIcon className='large-icon' />;
-            case 2:
-                return <PeopleAltRoundedIcon className='large-icon' />;
-            case 4:
-                return <Groups2RoundedIcon className='large-icon' />;
-            case 6:
-                return <ReduceCapacityRoundedIcon className='large-icon' />;
-            default:
-                return;
-        }
-    }
-
     const navigate = useNavigate();
-    const { placeId } = useParams();
+    // const { placeId } = useParams();
 
     function seatSelectClick(event: React.MouseEvent<HTMLButtonElement>) {
         event.preventDefault();
 
-        navigate(`/book-time-slot/${placeId}`, { replace: false });
+        navigate(`/book-time-slot/${elem.desk_id}`, { replace: false });
     }
     
     return (
@@ -49,15 +24,12 @@ export const IconDeskSelectCard: React.FC<any>= (elem) => {
                     <div className="tags">
                         <p className={elem.isHotDesk ? 'hotdesk' : 'not-hotdesk'}>
                             {
-                                elem.isHotDesk ? "ที่นั่งอิสระ" : "ที่นั่งเจาะจง"
+                                elem.isHotDesk ? "hot desk" : "reserve"
                             }
                         </p>
                         <p className="seat-suggest">เหมาะสำหรับ {elem.min_seat} - {elem.max_seat} คน</p>
                     </div>
                 </div>
-                {/* <IconBox>
-                    {renderIconCase(elem.min_seat)}
-                </IconBox> */}
             </div>
             <img src={elem.image?.[0]} alt="" />
             <div className='button-size'>
@@ -72,7 +44,7 @@ const Card = styled.div`
     margin-bottom: 8px;
     border: 1px solid var(--grey-200);
     border-radius: 16px;
-    width: fit-content;
+    width: 100%;
     height: 100%;
     color: var(--black);
     background-color: var(--white);
@@ -147,16 +119,5 @@ const Card = styled.div`
 
     .seat-suggest {
         background-color: var(--yellow-notion);
-    }
-`;
-
-const IconBox = styled.div`
-    display: flex;
-    color: var(--black);
-    justify-content: flex-end;
-    align-items: center;
-
-    .large-icon {
-        transform: scale(150%);
     }
 `;

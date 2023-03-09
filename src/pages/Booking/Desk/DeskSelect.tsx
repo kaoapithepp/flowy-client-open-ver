@@ -8,9 +8,6 @@ import axios from 'axios';
 import { ButtonBack } from '../../../components/button/ButtonBack';
 import { IconDeskSelectCard } from '../../../components/icon/IconDeskSelectCard';
 
-// API
-import { FLOWY_API_ROUTE } from '../../../config/api.config';
-
 //MUIs
 import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
 
@@ -33,7 +30,7 @@ const DeskSelect: React.FC = () => {
             : null;
         if (isThereToken) {
             try {
-                axios.get(`${FLOWY_API_ROUTE}/desk/by-place/${placeId}?ctm=${customerAmount}`, {
+                axios.get(`${import.meta.env.VITE_FLOWY_API_ROUTE}/desk/by-place/${placeId}?ctm=${customerAmount}`, {
                     headers: {
                         Authorization: `Bearer ${isThereToken}`
                     }
@@ -108,6 +105,7 @@ const Container = styled.div`
 `;
 
 const DeskTypeCard = styled.div`
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
 
     @media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait) {
         display: grid;

@@ -9,9 +9,6 @@ import { ExploreCardDetail } from '../../components/data/ExploreCardDetail';
 import { LoginRegCard } from '../../components/card/LoginRegCard'
 import { AccountCard } from '../../components/card/AccountCard';
 
-// API
-import { FLOWY_API_ROUTE } from '../../config/api.config';
-
 //section
 import Search from './Search'
 import Category from './category';
@@ -30,7 +27,7 @@ const Explore: React.FC = () => {
             : null;
         if (isThereToken) {
             try {
-                axios.get(`${FLOWY_API_ROUTE}/place/all`, {
+                axios.get(`${import.meta.env.VITE_FLOWY_API_ROUTE}/place/all`, {
                     headers: {
                         Authorization: `Bearer ${isThereToken}`
                     }

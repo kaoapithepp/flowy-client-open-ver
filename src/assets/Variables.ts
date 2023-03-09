@@ -10,7 +10,8 @@ export default createGlobalStyle`
         --disabled: #DE5858; // disabled
         --hover: #A11F1F;
 
-        --white: #FFFFFF;
+        --white: #FFFEFF;
+        /* --white: #FFFFFF; */
         --black: #000000; // Everything which is black
         --pale-black: #9e9e9e;
         --purple-notion: #E1D2F8;
