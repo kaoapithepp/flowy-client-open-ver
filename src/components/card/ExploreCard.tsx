@@ -3,11 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 // Global Components
-import { IconExploreCard } from "../icon/IconExploreCard";
-
-// Data
-import { IconExploreCardDetail } from "../data/IconExploreCardDetail";
-import LoadingScreen from '../ui/LoadingScreen';
+import { SpecsIcon } from "../icon/SpecsIcon";
 
 interface CardContext {
     exploreCardDetail: any;
@@ -37,12 +33,12 @@ export const ExploreCard: React.FC<CardContext> = ({ exploreCardDetail }) => {
                             <p className="price-tag">{elem.unit_price} บาท / ชั่วโมง</p>
                             <div className="icon-card">
                                 { !elem.spec.isSmokable &&
-                                    <IconExploreCard
+                                    <SpecsIcon
                                         icon="SmokeFreeRoundedIcon"
                                         label="งดสูบบุหรี่" />
                                 }
                                 { elem.spec.isQuiet &&
-                                    <IconExploreCard
+                                    <SpecsIcon
                                         icon="VolumeOffRoundedIcon"
                                         label="งดใช้เสียงดัง" />
                                 }
@@ -63,16 +59,17 @@ const Container = styled.div`
     margin: 0 auto;
     grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
     gap: 16px;
-`;
+    `;
 
 const Card = styled.button`
     padding: 16px;
     background: var(--white);
     border: 1px solid var(--grey-200);
     border-radius: 16px;
-    transition: 1s;
+    transition: .2s;
     font-family: var(--brand-font);
     text-align: left;
+    cursor: pointer;
     
     :hover {
         box-shadow: 0px 0px 20px 0px var(--grey-200);

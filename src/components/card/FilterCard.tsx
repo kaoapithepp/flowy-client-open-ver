@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { IconFilterCard } from '../icon/IconFilterCard';
 
 // Data
-import { IconFilterCardDetail } from "..//data/IconFilterCardDetail";
+import { IconFilterCardDetail } from "../../data/IconFilterCardDetail";
 
 export const FilterCard: React.FC = () => {
     return(

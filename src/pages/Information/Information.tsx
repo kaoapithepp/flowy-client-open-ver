@@ -4,27 +4,25 @@ import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 
 // Global Components
-import { ButtonBack } from '../../components/button/ButtonBack';
+import { BackButton } from '../../components/button/BackButton';
 
 //section
-import FigureSection from './FigureSection';
-import FooterInformation from './FooterInformation';
+import FigureSection from './components/FigureSection';
+import { BookingFooter } from '../../components/ui/BookingFooter';
 
-//MUIs
-import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
-
-import { IconExploreCard } from '../../components/icon/IconExploreCard';
+// icons
+import { SpecsIcon } from '../../components/icon/SpecsIcon';
 import { IconAmenityCard } from '../../components/icon/IconAmenityCard';
+
+// data
+import { amenitiesLists } from '../../data/AmenitiesListDetail';
 
 
 const Information: React.FC = () => {
     const [placeInfo, setPlaceInfo] = useState<any>({});
 
-    const navigate = useNavigate();
     const { id } = useParams();
-    const tempArr = ['hasPowerSupply', 'hasWifi', 'hasRestroom', 'hasProjector', 'hasHDMI', 'hasFlowiderCare', 'hasAirCondition', 'hasNapZone', 'hasSnackAndBeverage', 'hasCCTVorSecurity'];
-
-
+    
     useEffect(() => {
         const isThereToken = localStorage.getItem('flowyToken')
             ? JSON.parse(localStorage.getItem('flowyToken') as string)
@@ -46,15 +44,9 @@ const Information: React.FC = () => {
         }
     },[]);
 
-    function buttonBackClick(event: React.MouseEvent<HTMLButtonElement>) {
-        event.preventDefault();
-        
-        navigate("/explore", { replace: false });
-    }
-
     return(
         <Section>
-            <ButtonBack onClick={buttonBackClick}><ArrowBackRoundedIcon /></ButtonBack>
+            <BackButton />
             <FigureSection image={placeInfo.image}/>
             <DetailSection>
                 <h2>{placeInfo.place_name}</h2>
@@ -64,30 +56,29 @@ const Information: React.FC = () => {
                     <p className="price-tag">{placeInfo.unit_price} บาท / ชั่วโมง</p>
                     <div className="icon-card">
                         { !placeInfo.spec?.isSmokable &&
-                            <IconExploreCard
+                            <SpecsIcon
                                 icon="SmokeFreeRoundedIcon"
                                 label="งดสูบบุหรี่" />
                         }
                         { placeInfo.spec?.isQuiet &&
-                            <IconExploreCard
+                            <SpecsIcon
                                 icon="VolumeOffRoundedIcon"
                                 label="งดใช้เสียงดัง" />
                         }
                     </div>
                 </div>
             </DetailSection>
-            <HighlightSection>
+            <AmenitySection>
                 <h3>สิ่งอำนวยความสะดวก</h3>
                 <div className="amenities">
                     {   
-                        tempArr.map((attrib, key) => {
-                        // console.log(attrib);
+                        amenitiesLists.map((attrib, key) => {
                         return <IconAmenityCard attribute={attrib} data={placeInfo.amenity} />
                     })}
                 </div>
-            </HighlightSection>
+            </AmenitySection>
             <div className='position-footer'>
-                <FooterInformation />
+                <BookingFooter nextPath={`/book-ctm-amt/${id}`} buttonText="จอง"/>
             </div>
         </Section>
     );
@@ -158,7 +149,7 @@ const DetailSection = styled.div`
     }
 `;
 
-const HighlightSection = styled.div`
+const AmenitySection = styled.div`
     padding: 16px;
 
     .amenities{

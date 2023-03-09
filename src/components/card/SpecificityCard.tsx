@@ -5,9 +5,9 @@ import styled from 'styled-components';
 import { IconSpecificityCard } from '../icon/IconSpecificityCard';
 
 // Data
-import { IconSpecificityCardDetail } from '../data/IconSpecificityCardDetail';
+import { IconSpecificityCardDetail } from '../../data/IconSpecificityCardDetail';
 
-import { IconFilterCardDetail } from "..//data/IconFilterCardDetail";
+import { IconFilterCardDetail } from "../../data/IconFilterCardDetail";
 
 export const SpecificityCard: React.FC = () => {
     return(

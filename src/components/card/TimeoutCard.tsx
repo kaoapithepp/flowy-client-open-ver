@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 // Global Components
 import { BorderedButton } from '../button/BorderedButton';
 
-
 //MUIs
 import AlarmOffIcon from '@mui/icons-material/AlarmOff';
 
@@ -42,7 +41,7 @@ const BGdrop = styled.div`
     left: 0%;
     width: 100%;
     height: 100%;
-    z-index: 2;
+    z-index: 100;
 `;
 
 const Container = styled.div`
