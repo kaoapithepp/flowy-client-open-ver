@@ -15,7 +15,7 @@ const TimeSlotButton: React.FC<TimeSlotButtonContext> = ({ status, start_time, e
     return (
         <>
             <ButtonTime
-                disabled={status == 'occupied' ? true : false}
+                disabled={status == 'vacant' ? false : true}
                 isSelected={isSelected}
                 onClick={e => setIsSelected(!isSelected)}
                 >

@@ -55,8 +55,8 @@ const DeskSelectPage: React.FC = () => {
                 </div>
                 <Container>
                 <div className="desks-showcase">
-                    {deskInfo.map((elem: any, key) => {
-                        return <DeskSelectCard {...elem} />
+                    {deskInfo.map((elem: any, key: any) => {
+                        return <DeskSelectCard {...elem} {...key}/>
                     })}
                 </div>
                 </Container>

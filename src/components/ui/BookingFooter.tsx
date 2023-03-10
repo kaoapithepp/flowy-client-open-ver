@@ -5,17 +5,25 @@ import { useNavigate, useParams } from 'react-router-dom';
 // Global Components
 import { Button } from '../button/Button';
 
+// Context
+import { useBookEntityValue } from '../../context/BookEntityProvider';
+
 interface BookingFooterContext {
     nextPath?: string;
     buttonText?: string;
+    bookingKey?: string | any;
+    bookingVal?: string | number | string[];
 }
 
-export const BookingFooter: React.FC<BookingFooterContext> = ({ nextPath, buttonText }) => {
+export const BookingFooter: React.FC<BookingFooterContext> = ({ nextPath, buttonText, bookingKey, bookingVal }) => {
+    const { bookingEntity, setBookingEntity } = useBookEntityValue();
     const navigate = useNavigate();
 
     function onFooterButtonClick(event: React.MouseEvent<HTMLButtonElement>) {
         event.preventDefault();
 
+        setBookingEntity({...bookingEntity, [bookingKey]: bookingVal});
+        
         navigate(`${nextPath}`, { replace: false });
     }
 

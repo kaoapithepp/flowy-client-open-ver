@@ -9,6 +9,7 @@ import { BookingFooter } from '../../../components/ui/BookingFooter';
 
 //section
 import TimeSlotButton from './components/TimeSlotButton';
+import { Helmet } from 'react-helmet-async';
 
 const TimeSlotPage: React.FC = () => {
     const [timeslotData, setTimeslotData] = useState([]);
@@ -35,21 +36,31 @@ const TimeSlotPage: React.FC = () => {
     },[]);
 
     return(
-        <Section>
-            <BackButton />
-            <Container>
-                <h2>เลือกช่วงเวลา</h2>
-                <p>โปรดเลือกสล็อทเวลา<br />ที่คุณต้องการเข้าใช้สเปซในวันนี้</p>
-                <div className="slots-showcase">
-                    {timeslotData.map((props: any)=>(
-                        <TimeSlotButton start_time={props.start_time} end_time={props.end_time} status={props.status} />
-                    ))}
+        <>
+            <Helmet>
+                <title>Select Your Timeslot | Flowy Booking (3/4)</title>
+            </Helmet>
+            <Section>
+                <BackButton />
+                <Container>
+                    <h2>เลือกช่วงเวลา</h2>
+                    <p>โปรดเลือกสล็อทเวลา<br />ที่คุณต้องการเข้าใช้สเปซในวันนี้</p>
+                    <div className="slots-showcase">
+                        {timeslotData.map((props: any)=>(
+                            <TimeSlotButton start_time={props.start_time} end_time={props.end_time} status={props.status} />
+                            ))}
+                    </div>
+                </Container>
+                <div className='position-footer'>
+                    <BookingFooter
+                        nextPath={`/payment`}
+                        buttonText="จองเลย!"
+                        bookingKey="selectedTimeSlots"
+                        bookingVal={['temp']}
+                        />
                 </div>
-            </Container>
-            <div className='position-footer'>
-                <BookingFooter nextPath={`/payment`} buttonText="จองเลย!"/>
-            </div>
-        </Section>
+            </Section>
+        </>
     );
 }
 

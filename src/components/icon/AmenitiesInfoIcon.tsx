@@ -23,12 +23,12 @@ import VideocamIcon from '@mui/icons-material/Videocam';
 import VideocamOffIcon from '@mui/icons-material/VideocamOff';
 
 
-interface IconAmenityCardContext {
+interface AmenitiesInfoIconContext {
     attribute: string;
     data: any;
 }[]
 
-export const IconAmenityCard: React.FC<IconAmenityCardContext> = ({ attribute, data }) => {
+export const AmenitiesInfoIcon: React.FC<AmenitiesInfoIconContext> = ({ attribute, data }) => {
 
     function renderIconFromAttrib(action: string){
         switch(action){

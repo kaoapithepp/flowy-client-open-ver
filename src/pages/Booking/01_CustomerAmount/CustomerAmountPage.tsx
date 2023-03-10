@@ -33,7 +33,12 @@ const CustomerAmountPage: React.FC = () => {
                         <QuantityInputCustomer initialValue={customerAmt} dispatchFunc={setCustomerAmt}/>
                     </Wrapper>
                     <div className='position-footer'>
-                        <BookingFooter nextPath={`/book-desk/${placeId}?ctm=${customerAmt}`} buttonText="ถัดไป" />
+                        <BookingFooter 
+                            nextPath={`/book-desk/${placeId}?ctm=${customerAmt}`}
+                            buttonText="ถัดไป"
+                            bookingKey="total_bk_seat"
+                            bookingVal={customerAmt}
+                        />
                     </div>
                 </div>
             </Container>

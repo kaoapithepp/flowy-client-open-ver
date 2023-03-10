@@ -21,8 +21,8 @@ export const ExploreCard: React.FC<CardContext> = ({ exploreCardDetail }) => {
     return (
         <Container>
             {
-                exploreCardDetail.map((elem: any) => (
-                    <Card onClick={e => exploreCardClick(e, elem.place_id)}>
+                exploreCardDetail.map((elem: any, key: number) => (
+                    <Card onClick={e => exploreCardClick(e, elem.place_id)} key={key}>
                         <img src={elem.image[0]} alt="" />
                         <Column>
                             <h2>{elem.place_name}</h2>

@@ -12,13 +12,13 @@ import { BookingFooter } from '../../components/ui/BookingFooter';
 
 // icons
 import { SpecsIcon } from '../../components/icon/SpecsIcon';
-import { IconAmenityCard } from '../../components/icon/IconAmenityCard';
+import { AmenitiesInfoIcon } from '../../components/icon/AmenitiesInfoIcon';
 
 // data
 import { amenitiesLists } from '../../data/AmenitiesListDetail';
 
 
-const Information: React.FC = () => {
+const InformationPage: React.FC = () => {
     const [placeInfo, setPlaceInfo] = useState<any>({});
 
     const { id } = useParams();
@@ -73,12 +73,17 @@ const Information: React.FC = () => {
                 <div className="amenities">
                     {   
                         amenitiesLists.map((attrib, key) => {
-                        return <IconAmenityCard attribute={attrib} data={placeInfo.amenity} />
+                        return <AmenitiesInfoIcon attribute={attrib} data={placeInfo.amenity} key={key} />
                     })}
                 </div>
             </AmenitySection>
             <div className='position-footer'>
-                <BookingFooter nextPath={`/book-ctm-amt/${id}`} buttonText="จอง"/>
+                <BookingFooter
+                    nextPath={`/book-ctm-amt/${id}`}
+                    buttonText="จอง"
+                    bookingKey="place_id"
+                    bookingVal={`${id}`}
+                />
             </div>
         </Section>
     );
@@ -166,5 +171,5 @@ const AmenitySection = styled.div`
     }
 `;
 
-export default Information;
+export default InformationPage;
 

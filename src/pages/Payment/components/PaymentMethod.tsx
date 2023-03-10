@@ -1,106 +1,64 @@
-import React from 'react';
-import styled from 'styled-components';
-import { useState } from 'react';
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
 
-// Global Components
-import { ButtonPayment } from '../../../components/button/ButtonPayment';
-
-// Components
-import CreditCardPayment from './CreditCardPaymentCard';
-import QRcodePayment from './QRcodePaymentCard';
-
-//MUIs
-import CreditCardRoundedIcon from '@mui/icons-material/CreditCardRounded';
-import QrCode2RoundedIcon from '@mui/icons-material/QrCode2Rounded';
-import CheckBoxOutlineBlankRoundedIcon from '@mui/icons-material/CheckBoxOutlineBlankRounded';
+// Stripe
+import { 
+	useStripe,
+	useElements,
+	PaymentElement
+} from "@stripe/react-stripe-js";
+import { Button } from "../../../components/button/Button";
 
 const PaymentMethod: React.FC = () => {
+    const [isProcessing, setIsProcessing] = useState(false);
+    const stripe = useStripe();
+    const elements = useElements();
 
-    const [openCreditCardPayment, setCreditCardPayment] = useState<Boolean>(false);
-    const [openQRcodePayment, setQRcodePayment] = useState<Boolean>(false);
+    async function handleSubmit(e: any) {
+        e.preventDefault();
 
-    const handleCreditCardPayment = (state: Boolean) => {
-        setCreditCardPayment(state);
+        if(!stripe || !elements){
+            return;
+        }
+
+        setIsProcessing(true);
+
+        const { error } = await stripe.confirmPayment({
+            elements,
+            confirmParams: {
+                return_url: `${window.location.origin}/ticket`
+            }
+        });
+
+        if(error.type === "card_error" || error.type === "validation_error"){
+            alert(error.message);
+        } else {
+            alert("An unexpected error occured.");
+        }
+
+        setIsProcessing(false);
     }
-    const handleQRcodePayment = (state: Boolean) => {
-        setQRcodePayment(state);
-    }
-
-    let render_CreditCardPayment = null
-    openCreditCardPayment? (
-        render_CreditCardPayment = <CreditCardPayment />
-    ):(render_CreditCardPayment = null)
-
-    let render_QRcodePayment = null
-    openQRcodePayment? (
-        render_QRcodePayment = <QRcodePayment />
-    ):(render_QRcodePayment = null)
     
-    return(
-        <Container>
-            <Section>
-                <h2>จ่ายด้วย</h2>
-                <Wrapper>
-                    <ButtonPayment onClick={() => handleCreditCardPayment(!openCreditCardPayment)}>
-                        <Icon>
-                            <CreditCardRoundedIcon />
-                        </Icon>
-                        บัตรเครดิต หรือบัตรเดบิต
-                        <Icon>
-                            <CheckBoxOutlineBlankRoundedIcon />
-                        </Icon>
-                    </ButtonPayment>
-                    {render_CreditCardPayment}
-                    {/* <CreditCardPayment /> */}
-                </Wrapper>
-                <Wrapper>
-                    <ButtonPayment onClick={() => handleQRcodePayment(!openQRcodePayment)}>
-                        <Icon>
-                            <QrCode2RoundedIcon />
-                        </Icon>
-                        QR Code
-                        <Icon>
-                            <CheckBoxOutlineBlankRoundedIcon />
-                        </Icon>
-                    </ButtonPayment>
-                    {render_QRcodePayment}
-                    {/* <QRcodePayment /> */}
-                </Wrapper>
-            </Section>
-        </Container>
+    return (
+        <PaymentForm onSubmit={handleSubmit}>
+            <PaymentElement />
+            <Button
+                disabled={isProcessing || !stripe || !elements}
+            >
+                {isProcessing ? "กำลังประมวลผล..." : "ชำระเงิน"}
+            </Button>
+        </PaymentForm>
     );
 }
 
-const Container = styled.div`
+const PaymentForm = styled.form`
     padding: 16px;
     background-color: var(--white);
     box-shadow: var(--shadow);
     border-radius: 16px;
     max-width: 600px;
-    margin: 16px auto;
-`;
-
-const Section = styled.div`
-    padding: 0px;
-    max-width: 500px;
     margin: 0 auto;
-`;
-
-const Wrapper = styled.div`
-    padding: 0px;
-    max-width: 500px;
-    margin: 0 auto;
-    align-items: center;
-    justify-content: center;
-    justify-items: center;
-`;
-
-const Icon = styled.div`
-   width: 16px;
-   height: 16px;
-   display: flex;
-   justify-content: center;
-   align-items: center;
+    /* margin: 16px auto; */
 `;
 
 export default PaymentMethod;

@@ -12,7 +12,7 @@ export const FilterButton: React.FC = () => {
     );
 }
 
-const Wrapper = styled.button`
+const Wrapper = styled.div`
     display: flex;
     background: var(--white);
     border: 1px solid var(--grey-200);

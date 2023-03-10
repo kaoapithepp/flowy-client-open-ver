@@ -10,8 +10,8 @@ import { CategoryIconDetail } from "../../../../data/CategoryIconDetail";
 const Category: React.FC = () => {
     return(
         <Container>
-            {CategoryIconDetail.map((elem, key) => {
-                return <CategoryIcon {...elem} />
+            {CategoryIconDetail.map((elem, key: any) => {
+                return <CategoryIcon {...elem} {...key} />
             })}
         </Container>
     );

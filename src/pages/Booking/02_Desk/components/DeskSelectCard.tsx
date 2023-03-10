@@ -4,18 +4,22 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 // Global Components
 import { Button } from '../../../../components/button/Button';
+import { useBookEntityValue } from '../../../../context/BookEntityProvider';
 
-export const DeskSelectCard: React.FC<any>= (elem) => {
+export const DeskSelectCard: React.FC<any>= (elem, key) => {
+    const { bookingEntity, setBookingEntity } = useBookEntityValue();
     const navigate = useNavigate();
 
     function seatSelectClick(event: React.MouseEvent<HTMLButtonElement>) {
         event.preventDefault();
 
+        setBookingEntity({...bookingEntity, ['desk_id']: elem.desk_id});
+        
         navigate(`/book-time-slot/${elem.desk_id}`, { replace: false });
     }
     
     return (
-        <Card>
+        <Card key={key}>
             <div className='detail'>
                 <div className="desk-info">
                     <h3>{elem.desk_name}</h3>

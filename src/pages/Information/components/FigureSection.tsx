@@ -13,8 +13,8 @@ const Figure: React.FC<FigureContext> = ({ image }) => {
             </ImgSection1>
             <ImgSection2>
                 {
-                    image?.slice(1).map((imgUri) => {
-                        return <img src={imgUri} alt="" />
+                    image?.slice(1).map((imgUri, key) => {
+                        return <img src={imgUri} alt="" key={key} />
                     })
                 }
             </ImgSection2>

@@ -1,26 +1,38 @@
 import React from 'react';
 import styled from 'styled-components';
 
+// contexts
+import { useBookEntityValue } from '../../../context/BookEntityProvider';
+
+// utils
+import { priceCalculation } from '../../../utils/priceCalculation';
+
 const PaymentDetail: React.FC = () => {
+    const { bookingEntity, setBookingEntity }= useBookEntityValue();
+
+    const unitPrice = 60;
+    const ctmAmt = 10;
+    const totalBkTime = 10;
+
     return(
         <Container>
             <Wrapper>
                 <h2>รายละเอียดค่าใช้บริการ</h2>
                 <div className="detail">
                     <div className='column-display'>
-                        <h3>ค่าใช้บริการสเปซ</h3>
-                        <h3>฿60.00</h3>
+                        <h3>ค่าใช้บริการต่อชั่วโมง</h3>
+                        <h3>฿{unitPrice}</h3>
                     </div>
                     <div className='column-sub-display'>
                         <p>จำนวนผู้ใช้บริการสเปซ</p>
-                        <p>x3</p>
+                        <p className="amt-right">x{ctmAmt}</p>
                         <p>จำนวนชั่วโมงในการใช้บริการสเปซ</p>
-                        <p>x2</p>
+                        <p className="amt-right">x{totalBkTime}</p>
                     </div>
                 </div>
                 <div className="total-price">
                     <h3>รวม (THB)</h3>
-                    <h3>฿360.00</h3>
+                    <h3>฿{`${priceCalculation(unitPrice, ctmAmt, totalBkTime)}`}</h3>
                 </div>
             </Wrapper>
         </Container>
@@ -71,6 +83,10 @@ const Wrapper = styled.div`
             grid-template-columns: 1fr auto;
             align-items: center;
             padding-left: 16px; 
+        }
+
+        .amt-right {
+            text-align: right;
         }
     }
 `;
