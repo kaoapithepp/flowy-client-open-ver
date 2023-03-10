@@ -8,7 +8,7 @@ import {
 } from "react";
 
 // interface
-import { IBookingEntity } from "../interfaces/booking.interface";
+import { IBookingRequestEntity } from "../interfaces/booking.interface";
   
 interface Props {
     children?: ReactNode;
@@ -46,7 +46,7 @@ function passBookEntityValuesForProvider(){
     // In this case, we want this value variable and it's setter function to be available globally.
 
     /* CUSTOMIZE HERE BY CHANGING val & setVal's name, initial state*/
-    const [bookingEntity, setBookingEntity] = useState<IBookingEntity>({});
+    const [bookingEntity, setBookingEntity] = useState<IBookingRequestEntity>({});
 
     //The state should be memoized to maintain the referential equality/ same location in memory. If not
     // every time this context is called a new location in memory will be created for the values.

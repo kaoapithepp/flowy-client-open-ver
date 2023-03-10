@@ -63,14 +63,12 @@ const PaymentPage: React.FC = () => {
                         setBookingEntity({...bookingEntity,
                             selectedTimeSlots: [],
                             desk_id: '',
-                            user_id: '',
                             place_id: '',
                             total_bk_hr: 0,
                             total_bk_seat: 0,
                             total_bk_price: 0,
                             pymt_method: '',
                             status: '',
-                            paidAt: ''
                         });
                         localStorage.removeItem("deadlineTicket");
                     }

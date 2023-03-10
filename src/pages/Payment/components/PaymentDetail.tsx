@@ -4,9 +4,6 @@ import styled from 'styled-components';
 // contexts
 import { useBookEntityValue } from '../../../context/BookEntityProvider';
 
-// utils
-import { priceCalculation } from '../../../utils/priceCalculation';
-
 const PaymentDetail: React.FC = () => {
     const { bookingEntity, setBookingEntity }= useBookEntityValue();
 
@@ -32,7 +29,7 @@ const PaymentDetail: React.FC = () => {
                 </div>
                 <div className="total-price">
                     <h3>รวม (THB)</h3>
-                    <h3>฿{`${priceCalculation(unitPrice, ctmAmt, totalBkTime)}`}</h3>
+                    <h3>฿{``}</h3>
                 </div>
             </Wrapper>
         </Container>
