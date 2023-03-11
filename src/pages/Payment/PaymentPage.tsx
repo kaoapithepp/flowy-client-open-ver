@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import axios from 'axios';
 import styled from 'styled-components';
 
@@ -16,33 +18,62 @@ import { BackButton } from '../../components/button/BackButton';
 // Components
 import PaymentDetail from './components/PaymentDetail';
 import PaymentMethod from './components/PaymentMethod';
-import { BookingFooter } from '../../components/ui/BookingFooter';
 
 // Context
 import { useBookEntityValue } from '../../context/BookEntityProvider';
 
 // Utils
-import { timerCalculation } from '../../utils/timerCalculation';
+import { timerCalculationFromDeadlineTicket } from '../../utils/timerCalculation';
+import FooterPayment from './components/CancelPaymentButton';
 
 const PaymentPage: React.FC = () => {
+    // Remote booking order
+    const [bookingOrder, setBookingOrder] = useState<any>({});
+
+    // timer
     const [isTimeout, setIsTimeout] = useState(false);
     const [minute, setMinute] = useState(5);
     const [second, setSecond] = useState(0);
 
+    // Stripe
     const [stripePromise, setStripePromise] = useState<any>(null);
     const [clientSecret, setClientSecret] = useState("");
 
+    // Local booking entity context
     const { bookingEntity, setBookingEntity } = useBookEntityValue();
 
+    // Params
+    const { bookId } = useParams();
+
+
     useEffect(() => {
-        setStripePromise(loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY));
+        const isThereToken = localStorage.getItem('flowyToken')
+            ? JSON.parse(localStorage.getItem('flowyToken') as string)
+            : null;
+
         
-        axios.post(`${import.meta.env.VITE_FLOWY_API_ROUTE}/stripe-test`,{})
-        .then(async res => {
-            const { clientSecret } = res.data;
-            setClientSecret(clientSecret);
-        })
+        if (isThereToken) {
+            try {
+                axios.post(`${import.meta.env.VITE_FLOWY_API_ROUTE}/booking/${bookId}`, {}, {
+                    headers: {
+                        Authorization: `Bearer ${isThereToken}`
+                    }
+                })
+                .then(res => {
+                    // console.log(res.data)
+                    setBookingOrder((res as any).data.booking_order);
+                    setClientSecret((res as any).data.purchase_order.clientSecret);
+                })
+            } catch (err: any) {
+                alert(err.message);
+            }
+        }
+
+        /* Stripe acts */
+        setStripePromise(loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY));
+
     },[]);
+
 
     useEffect(() => {
         try {
@@ -52,11 +83,11 @@ const PaymentPage: React.FC = () => {
                 localStorage.setItem("deadlineTicket", String(targetDate));
 
                 const ticketTimer = setInterval(() => {
-                    const { minutes, seconds } = timerCalculation();
-
+                    const { minutes, seconds } = timerCalculationFromDeadlineTicket();
+            
                     setMinute(minutes);
                     setSecond(seconds);
-
+            
                     if(minutes <= 0 && seconds <= 0) {
                         clearInterval(ticketTimer);
                         setIsTimeout(!isTimeout);
@@ -73,6 +104,7 @@ const PaymentPage: React.FC = () => {
                         localStorage.removeItem("deadlineTicket");
                     }
                 }, 1000)
+                
             }
         } catch(err: any) {
             console.log(err.message);
@@ -80,28 +112,37 @@ const PaymentPage: React.FC = () => {
     },[]);
 
     return(
-        <Gradient>
-            { isTimeout ? <TimeoutCard /> : null }
-            <Section>
-                <BackButton />
-                <div className="content-display">
-                    <h4>
-                        กรุณาชำระค่าบริการภายใน {minute}:{String(second).length == 1 ? `0${second}` : second} นาที
-                    </h4>
-                    <PaymentDetail />
-                    {stripePromise && clientSecret && (
-                        <Elements stripe={stripePromise} options={{ clientSecret }}>
-                            <PaymentMethod />
-                        </Elements>
-                    )}
-                </div>
-            </Section>
-        </Gradient>
+        <>
+            <Helmet>
+                <title>Confirm Your Purchase | Flowy Booking (4/4)</title>
+            </Helmet>
+            <Gradient>
+                { isTimeout ? <TimeoutCard /> : null }
+                <Section>
+                    {/* <BackButton /> */}
+                    <div className="content-display">
+                        <h4>
+                            กรุณาชำระค่าบริการภายใน {minute}:{String(second).length == 1 ? `0${second}` : second} นาที
+                        </h4>
+                        <PaymentDetail bookingOrder={bookingOrder}/>
+                        {stripePromise && clientSecret && (
+                            <Elements stripe={stripePromise} options={{ clientSecret }}>
+                                <PaymentMethod />
+                            </Elements>
+                        )}
+                    </div>
+                    <FooterPayment />
+                </Section>
+            </Gradient>
+        </>
     );
 }
 
+
+
+
 const Section = styled.div`
-    padding: 0px;
+    padding-bottom: 1em;
     max-height: 120vh;
     max-width: 1024px;
     min-width: 300px;
@@ -110,7 +151,7 @@ const Section = styled.div`
     h4{
         text-align: center;
         margin-bottom: 1em;
-        margin-top: 3rem;
+        margin-top: 2rem;
     }
 
     .position-footer{

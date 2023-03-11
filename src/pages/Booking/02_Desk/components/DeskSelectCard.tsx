@@ -27,10 +27,15 @@ export const DeskSelectCard: React.FC<any>= (elem, key) => {
                     <div className="tags">
                         <p className={elem.isHotDesk ? 'hotdesk' : 'not-hotdesk'}>
                             {
-                                elem.isHotDesk ? "hot desk" : "reserve"
+                                elem.isHotDesk ? "hot desk 🔥" : "reserve 🎟️"
                             }
                         </p>
-                        <p className="seat-suggest">เหมาะสำหรับ {elem.min_seat} - {elem.max_seat} คน</p>
+                        <p className="seat-suggest">
+                            {elem.isHotDesk ? 
+                                `จำนวน ${elem.max_seat} ที่นั่ง`:
+                                `เหมาะสำหรับ ${elem.min_seat} - ${elem.max_seat} คน`
+                            }
+                        </p>
                     </div>
                 </div>
             </div>

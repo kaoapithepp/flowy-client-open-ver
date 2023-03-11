@@ -1,24 +1,36 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import axios from 'axios';
 import styled from 'styled-components';
-import { useParams } from 'react-router-dom';
+
+// Context
+import { useBookEntityValue } from '../../../context/BookEntityProvider';
 
 // Global Components
+import { Button } from '../../../components/button/Button';
 import { BackButton } from '../../../components/button/BackButton';
 import { BookingFooter } from '../../../components/ui/BookingFooter';
 
-//section
-import TimeSlotButton from './components/TimeSlotButton';
-import { Helmet } from 'react-helmet-async';
+// Local Components
+import { TimeSlotTags } from './components/TimeSlotTags';
+import ChosenTimeSlotTags from './components/ChosenTimeSlotTags';
 
 const TimeSlotPage: React.FC = () => {
     const [timeslotData, setTimeslotData] = useState([]);
+    const [chosenTimeslotData, setChosenTimeslotData] = useState([]);
+
+    const { bookingEntity, setBookingEntity } = useBookEntityValue();
+    
+    const navigate = useNavigate();
     const { deskId } = useParams();
 
+    // check token
+    const isThereToken = localStorage.getItem('flowyToken')
+        ? JSON.parse(localStorage.getItem('flowyToken') as string)
+        : null;
+
     useEffect(() => {
-        const isThereToken = localStorage.getItem('flowyToken')
-            ? JSON.parse(localStorage.getItem('flowyToken') as string)
-            : null;
         if (isThereToken) {
             try {
                 axios.get(`${import.meta.env.VITE_FLOWY_API_ROUTE}/timeslot/${deskId}`, {
@@ -35,36 +47,78 @@ const TimeSlotPage: React.FC = () => {
         }
     },[]);
 
+
+    async function onFooterButtonClick(event: React.MouseEvent<HTMLButtonElement>) {
+        event.preventDefault();
+
+        setBookingEntity({...bookingEntity, ['selectedTimeSlots']: (chosenTimeslotData as [])});
+
+        axios.post(`${import.meta.env.VITE_FLOWY_API_ROUTE}/booking/`, bookingEntity,{
+            headers: {
+                Authorization: `Bearer ${isThereToken}`
+            }
+        })
+        .then(res => {
+            const { booking_id } = res.data;
+            navigate(`/payment/${booking_id}`, { replace: false });
+        })
+        .catch(err => console.log(err.message));
+    }
+    
+
     return(
         <>
             <Helmet>
                 <title>Select Your Timeslot | Flowy Booking (3/4)</title>
             </Helmet>
-            <Section>
+            <Container>
                 <BackButton />
-                <Container>
+                <Section>
                     <h2>เลือกช่วงเวลา</h2>
                     <p>โปรดเลือกสล็อทเวลา<br />ที่คุณต้องการเข้าใช้สเปซในวันนี้</p>
-                    <div className="slots-showcase">
-                        {timeslotData.map((props: any)=>(
-                            <TimeSlotButton start_time={props.start_time} end_time={props.end_time} status={props.status} />
-                            ))}
+                    <div className="selected-slots">
+                        {chosenTimeslotData.length == 0 ?
+                            <p>สล็อทเวลาที่คุณเลือกจะปรากฎตรงนี้</p>:
+                            chosenTimeslotData
+                            .sort((fst:any, snd: any) => fst.orderNo - snd.orderNo)
+                            .map((elem: any, key: any) => {
+                                return <ChosenTimeSlotTags
+                                    elem={elem}
+                                    key={key}
+                                    targetFunc={setTimeslotData}
+                                    targetArr={timeslotData}
+                                    srcFunc={setChosenTimeslotData}
+                                    srcArr={chosenTimeslotData}
+                                />
+                            })
+                        }
                     </div>
-                </Container>
-                <div className='position-footer'>
-                    <BookingFooter
-                        nextPath={`/payment`}
-                        buttonText="จองเลย!"
-                        bookingKey="selectedTimeSlots"
-                        bookingVal={['temp']}
-                        />
+                    <div className="slots-showcase">
+                        {timeslotData
+                        .sort((fst:any, snd: any) => fst.orderNo - snd.orderNo)
+                        .map((elem: any, key: any)=>(
+                            <TimeSlotTags
+                                elem={elem}
+                                key={key}
+                                targetFunc={setChosenTimeslotData}
+                                targetArr={chosenTimeslotData}
+                                srcFunc={setTimeslotData}
+                                srcArr={timeslotData}
+                            />
+                        ))}
+                    </div>
+                </Section>
+                <div className="position-footer">
+                    <div className="button-align">
+                        <Button onClick={onFooterButtonClick}>จองเลยตอนนี้</Button>
+                    </div>
                 </div>
-            </Section>
+            </Container>
         </>
     );
 }
 
-const Section = styled.div`
+const Container = styled.div`
     padding: 0px;
     max-height: 120vh;
     max-width: 1024px;
@@ -88,15 +142,27 @@ const Section = styled.div`
         left: 0;
         bottom: 0;
         margin: 0 auto;
+
+        .button-align {
+            display: flex;
+            background: linear-gradient(0deg, var(--white) 20%, rgba(247, 25, 136, 0) 100%);
+            justify-content: center;
+            align-items: center;
+            padding: 0px 16px;
+        }
+
+        button {
+            width: 10em;
+        }
     }
 
 `;
 
-const Container = styled.div`
+const Section = styled.div`
     position: absolute;
     padding: 16px;
     border-radius: 16px;
-    width: 300px;
+    width: 70%;
     max-width: 1024px;
     margin: 16px auto;
     top: 45%;
@@ -112,13 +178,32 @@ const Container = styled.div`
         margin-bottom: 16px;
     }
 
+    .selected-slots,
     .slots-showcase {
         display: flex;
-        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
         align-items: center;
-        max-height: 60vh;
-        overflow-y: scroll;
-        padding: 0px 8px;
+    }
+
+    .selected-slots {
+        padding: 12px;
+        border: 1px solid var(--grey-400);
+        border-radius: 1em;
+        margin: 18px 0;
+        gap: .5em;
+
+        p {
+            margin: 0;
+            color: var(--grey-400);
+        }
+    }
+
+    .slots-showcase {
+        gap: .5em;
+        overflow: auto;
+        max-height: 50vh;
+        overflow: auto;
     }
 `;
 

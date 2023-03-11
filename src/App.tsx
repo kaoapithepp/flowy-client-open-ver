@@ -53,7 +53,7 @@ const App: React.FC = () => {
         <Route path='/book-ctm-amt/:placeId' element={<CustomerAmountPage />} />
         <Route path='/book-desk/:placeId' element={<DeskSelectPage />} />
         <Route path='/book-time-slot/:deskId' element={<TimeSlotPage />} />
-        <Route path="/payment" element={<PaymentPage />} />
+        <Route path="/payment/:bookId" element={<PaymentPage />} />
 
         {/* Loading screen */}
         <Route path='/loading-screen' element={<LoadingScreen />} />

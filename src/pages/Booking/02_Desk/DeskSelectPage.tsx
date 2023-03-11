@@ -17,11 +17,6 @@ const DeskSelectPage: React.FC = () => {
     const { placeId } = useParams();
     const [searchParams, setSearchParams] = useSearchParams();
     const customerAmount = searchParams.get('ctm');
-    
-    function buttonBackClick(event: React.MouseEvent<HTMLButtonElement>) {
-        event.preventDefault();
-        navigate(-1);
-    }
 
     useEffect(() => {
         const isThereToken = localStorage.getItem('flowyToken')

@@ -1,15 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 
-// contexts
-import { useBookEntityValue } from '../../../context/BookEntityProvider';
+interface PaymentDetailContext {
+    bookingOrder: any;
+}
 
-const PaymentDetail: React.FC = () => {
-    const { bookingEntity, setBookingEntity }= useBookEntityValue();
-
-    const unitPrice = 60;
-    const ctmAmt = 10;
-    const totalBkTime = 10;
+const PaymentDetail: React.FC<PaymentDetailContext> = ({ bookingOrder }) => {
+    const {
+        total_bk_hr,
+        total_bk_seat,
+        total_bk_price,
+        unit_price
+    } = bookingOrder;
 
     return(
         <Container>
@@ -18,18 +20,18 @@ const PaymentDetail: React.FC = () => {
                 <div className="detail">
                     <div className='column-display'>
                         <h3>ค่าใช้บริการต่อชั่วโมง</h3>
-                        <h3>฿{unitPrice}</h3>
+                        <h3>฿{unit_price}</h3>
                     </div>
                     <div className='column-sub-display'>
                         <p>จำนวนผู้ใช้บริการสเปซ</p>
-                        <p className="amt-right">x{ctmAmt}</p>
+                        <p className="amt-right">x{total_bk_seat}</p>
                         <p>จำนวนชั่วโมงในการใช้บริการสเปซ</p>
-                        <p className="amt-right">x{totalBkTime}</p>
+                        <p className="amt-right">x{total_bk_hr}</p>
                     </div>
                 </div>
                 <div className="total-price">
                     <h3>รวม (THB)</h3>
-                    <h3>฿{``}</h3>
+                    <h3>฿{total_bk_price}</h3>
                 </div>
             </Wrapper>
         </Container>
