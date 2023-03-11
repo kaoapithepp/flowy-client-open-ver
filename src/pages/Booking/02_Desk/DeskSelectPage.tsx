@@ -50,9 +50,13 @@ const DeskSelectPage: React.FC = () => {
                 </div>
                 <Container>
                 <div className="desks-showcase">
-                    {deskInfo.map((elem: any, key: any) => {
+                    {deskInfo.length < 1 ? 
+                        <p className="no-result">ไม่พบผลการค้นหา น่าจะต้องเลือกใหม่นะ :(</p>
+                        :
+                        deskInfo.map((elem: any, key: any) => {
                         return <DeskSelectCard {...elem} {...key}/>
-                    })}
+                        })
+                    }
                 </div>
                 </Container>
             </Section>
@@ -110,6 +114,17 @@ const Section = styled.div`
             grid-template-columns: 1fr 1fr;
             gap: 8px 16px;        
         }
+    }
+
+    .no-result {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+
+        color: var(--grey-400);
+        text-align: center;
     }
 `;
 

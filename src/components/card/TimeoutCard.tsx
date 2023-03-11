@@ -8,14 +8,18 @@ import { BorderedButton } from '../button/BorderedButton';
 //MUIs
 import AlarmOffIcon from '@mui/icons-material/AlarmOff';
 
-export const TimeoutCard: React.FC = () => {
+interface TimeoutCardContext {
+    cancelFunc?: any
+}
+
+export const TimeoutCard: React.FC<TimeoutCardContext> = ({ cancelFunc }) => {
 
     const navigate = useNavigate();
 
     function buttonAcceptClick(event: React.MouseEvent<HTMLButtonElement>) {
         event.preventDefault();
-
-        navigate("/explore", { replace: false });
+        cancelFunc();
+        // navigate("/explore", { replace: false });
     }
 
     return(

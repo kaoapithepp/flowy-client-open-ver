@@ -15,13 +15,20 @@ import { BookingFooter } from '../../../components/ui/BookingFooter';
 // Local Components
 import { TimeSlotTags } from './components/TimeSlotTags';
 import ChosenTimeSlotTags from './components/ChosenTimeSlotTags';
+import LoadingScreen from '../../../components/ui/LoadingScreen';
 
 const TimeSlotPage: React.FC = () => {
+    // set loading
+    const [isLoading, setIsLoading] = useState(true);
+
+    // timeslot state management
     const [timeslotData, setTimeslotData] = useState([]);
     const [chosenTimeslotData, setChosenTimeslotData] = useState([]);
 
+    // context
     const { bookingEntity, setBookingEntity } = useBookEntityValue();
     
+    // params
     const navigate = useNavigate();
     const { deskId } = useParams();
 
@@ -31,6 +38,7 @@ const TimeSlotPage: React.FC = () => {
         : null;
 
     useEffect(() => {
+        setIsLoading(true);
         if (isThereToken) {
             try {
                 axios.get(`${import.meta.env.VITE_FLOWY_API_ROUTE}/timeslot/${deskId}`, {
@@ -40,6 +48,7 @@ const TimeSlotPage: React.FC = () => {
                 })
                 .then(res => {
                     setTimeslotData((res as any).data);
+                    setIsLoading(false);
                 });
             } catch (err: any) {
                 alert(err.message);
@@ -47,20 +56,21 @@ const TimeSlotPage: React.FC = () => {
         }
     },[]);
 
+    useEffect(() => {
+        setBookingEntity({...bookingEntity, ['selectedTimeSlots']: (chosenTimeslotData as [])});
+    },[chosenTimeslotData]);
+
 
     async function onFooterButtonClick(event: React.MouseEvent<HTMLButtonElement>) {
         event.preventDefault();
 
-        setBookingEntity({...bookingEntity, ['selectedTimeSlots']: (chosenTimeslotData as [])});
-
-        axios.post(`${import.meta.env.VITE_FLOWY_API_ROUTE}/booking/`, bookingEntity,{
+        await axios.post(`${import.meta.env.VITE_FLOWY_API_ROUTE}/booking/`, bookingEntity,{
             headers: {
                 Authorization: `Bearer ${isThereToken}`
             }
         })
-        .then(res => {
-            const { booking_id } = res.data;
-            navigate(`/payment/${booking_id}`, { replace: false });
+        .then(async res => {
+            navigate(`/payment/${res.data.booking_id}`, { replace: false });
         })
         .catch(err => console.log(err.message));
     }
@@ -68,52 +78,55 @@ const TimeSlotPage: React.FC = () => {
 
     return(
         <>
-            <Helmet>
-                <title>Select Your Timeslot | Flowy Booking (3/4)</title>
-            </Helmet>
-            <Container>
-                <BackButton />
-                <Section>
-                    <h2>เลือกช่วงเวลา</h2>
-                    <p>โปรดเลือกสล็อทเวลา<br />ที่คุณต้องการเข้าใช้สเปซในวันนี้</p>
-                    <div className="selected-slots">
-                        {chosenTimeslotData.length == 0 ?
-                            <p>สล็อทเวลาที่คุณเลือกจะปรากฎตรงนี้</p>:
-                            chosenTimeslotData
-                            .sort((fst:any, snd: any) => fst.orderNo - snd.orderNo)
-                            .map((elem: any, key: any) => {
-                                return <ChosenTimeSlotTags
+            {isLoading ? <LoadingScreen /> :
+            <>
+                <Helmet>
+                    <title>Select Your Timeslot | Flowy Booking (3/4)</title>
+                </Helmet>
+                <Container>
+                    <BackButton />
+                    <Section>
+                        <h2>เลือกช่วงเวลา</h2>
+                        <p>โปรดเลือกสล็อทเวลา<br />ที่คุณต้องการเข้าใช้สเปซในวันนี้</p>
+                        <div className="selected-slots">
+                            {chosenTimeslotData.length == 0 ?
+                                <p>สล็อทเวลาที่คุณเลือกจะปรากฎตรงนี้</p>:
+                                chosenTimeslotData
+                                .sort((fst:any, snd: any) => fst.orderNo - snd.orderNo)
+                                .map((elem: any, key: any) => {
+                                    return <ChosenTimeSlotTags
                                     elem={elem}
                                     key={key}
                                     targetFunc={setTimeslotData}
                                     targetArr={timeslotData}
                                     srcFunc={setChosenTimeslotData}
                                     srcArr={chosenTimeslotData}
-                                />
-                            })
-                        }
-                    </div>
-                    <div className="slots-showcase">
-                        {timeslotData
-                        .sort((fst:any, snd: any) => fst.orderNo - snd.orderNo)
-                        .map((elem: any, key: any)=>(
-                            <TimeSlotTags
+                                    />
+                                })
+                            }
+                        </div>
+                        <div className="slots-showcase">
+                            {timeslotData
+                            .sort((fst:any, snd: any) => fst.orderNo - snd.orderNo)
+                            .map((elem: any, key: any)=>(
+                                <TimeSlotTags
                                 elem={elem}
                                 key={key}
                                 targetFunc={setChosenTimeslotData}
                                 targetArr={chosenTimeslotData}
                                 srcFunc={setTimeslotData}
                                 srcArr={timeslotData}
-                            />
-                        ))}
+                                />
+                                ))}
+                        </div>
+                    </Section>
+                    <div className="position-footer">
+                        <div className="button-align">
+                            <Button onClick={onFooterButtonClick}>จองเลยตอนนี้</Button>
+                        </div>
                     </div>
-                </Section>
-                <div className="position-footer">
-                    <div className="button-align">
-                        <Button onClick={onFooterButtonClick}>จองเลยตอนนี้</Button>
-                    </div>
-                </div>
-            </Container>
+                </Container>
+            </>}
         </>
     );
 }
