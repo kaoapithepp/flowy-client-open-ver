@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import styled from 'styled-components';
 import axios from 'axios';
 
 // Global Components
 import { ExploreCard } from '../../components/card/ExploreCard';
+import LoadingScreen from '../../components/ui/LoadingScreen';
 
-//section
+// Componentes
 import Search from './components/Search/Search'
 import Category from './components/Category/Category';
-import LoadingScreen from '../../components/ui/LoadingScreen';
 
 const ExplorePage: React.FC = () => {
     const [isLoading, setIsLoading] = useState(true);
@@ -42,11 +43,16 @@ const ExplorePage: React.FC = () => {
         <>
             {
                 false ? <LoadingScreen /> :
-                <Section>
-                    <Search />
-                    <Category />
-                    <ExploreCard exploreCardDetail={exploreCardDetail}/>
-                </Section>
+                <>
+                    <Helmet>
+                        <title>Explore | Flowy</title>
+                    </Helmet>
+                    <Section>
+                        <Search />
+                        <Category />
+                        <ExploreCard exploreCardDetail={exploreCardDetail}/>
+                    </Section>
+                </>
             }
         </>
     );
