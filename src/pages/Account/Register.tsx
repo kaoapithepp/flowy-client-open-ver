@@ -1,25 +1,85 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import styled from 'styled-components';
 
 // Global Components
 import { Button } from '../../components/button/Button';
 import { BorderedButton } from '../../components/button/BorderedButton';
+import { InputField } from '../../components/input/InputField';
 
-// Sections
+// Components
 import Auth from './Auth';
 
+interface UserEntityContext {
+    first_name: string;
+    last_name: string;
+    email: string;
+    tel_no: string;
+    password: string;
+    confirm_pw: string;
+}
+
 const Register: React.FC = () => {
-    
+    const [userEntity, setUserEntity] = useState<UserEntityContext>({
+        first_name: '',
+        last_name: '',
+        email: '',
+        tel_no: '',
+        password: '',
+        confirm_pw: ''
+    });
+
     const navigate = useNavigate();
 
-    function loginClick(event: React.MouseEvent<HTMLButtonElement>) {
-        event.preventDefault();
-
-        navigate("/", { replace: false });
+    // Reg-ex to validate the form an email
+    async function isValidEmail(email: string) {
+        return /\S+@\S+\.\S+/.test(email);
     }
 
-    function registerClick(event: React.MouseEvent<HTMLButtonElement>) {
+    // Check email after clicked register whether valid or not
+    async function handleCheckEmailThenNavigate() {
+        // If not valid, then return nothing
+        if(!isValidEmail(userEntity.email)){
+            alert("Email is invalid format!");
+            return;
+        }
+        
+        if (userEntity.password !== userEntity.confirm_pw) {
+            alert("Password and confirm is not matched!");
+            return;
+        }
+
+        try {
+            axios.post(`${import.meta.env.VITE_FLOWY_API_ROUTE}/user`, {
+                first_name: userEntity.first_name,
+                last_name: userEntity.last_name,
+                email: userEntity.email,
+                tel_no: userEntity.tel_no,
+                password: userEntity.password
+            })
+            .then(res => {
+                alert("Sign up successful!");
+                navigate("/", { replace: false });
+            }, (unres) => {
+                alert(unres.response.data);
+            })
+            .catch(err => {
+                alert(err.message);
+            });
+
+        } catch(err: any) {
+            alert(err.message);
+        }
+        
+    }
+
+    async function registerClick(event: React.MouseEvent<HTMLButtonElement>) {
+        event.preventDefault();
+        await handleCheckEmailThenNavigate();
+    }
+
+    function loginClick(event: React.MouseEvent<HTMLButtonElement>) {
         event.preventDefault();
 
         navigate("/", { replace: false });
@@ -32,34 +92,59 @@ const Register: React.FC = () => {
                     <Header><h3>สมัครสมาชิก</h3></Header>
                     <div className='column-display'>
                         <div>
-                            <label><h4>ชื่อ</h4></label>
-                            <input type="text" placeholder="ชื่อ" name="firstname" required></input>
+                            <InputField
+                                callbackVal={(e: string) => setUserEntity({...userEntity, first_name: e})}
+                                type="text"
+                                placeholder="ชื่อ"
+                                label="ชื่อ"
+                                required={true} />
                         </div>
                         <div>
-                            <label><h4>นามสกุล</h4></label>
-                            <input type="text" placeholder="นามสกุล" name="lastname" required></input>
+                            <InputField
+                                callbackVal={(e: string) => setUserEntity({...userEntity, last_name: e})}
+                                type="text"
+                                placeholder="นามสกุล"
+                                label="นามสกุล"
+                                required={true} />
                         </div>
                     </div>        
-                    <label><h4>อีเมล</h4></label>
-                    <input type="email" placeholder="อีเมล" name="email" required></input>
-                    <label><h4>เบอร์โทร</h4></label>
-                    <input type="tel" inputMode='decimal' placeholder="เบอร์โทร" maxLength={10} name="mobilephone" required></input>
+                    <InputField
+                        callbackVal={(e: string) => setUserEntity({...userEntity, email: e})}
+                        type="text"
+                        placeholder="อีเมล"
+                        label="อีเมล"
+                        required={true} />
+                    <InputField
+                        callbackVal={(e: string) => setUserEntity({...userEntity, tel_no: e})}
+                        type="text"
+                        placeholder="เบอร์โทร"
+                        label="เบอร์โทร"
+                        maxChar={10}
+                        required={true} />
                     <div className='margin'>
                         <div className='column-display'>
                             <div>
-                                <label><h4>รหัสผ่าน</h4></label>
-                                <input type="password" placeholder="รหัสผ่าน" name="password" required></input>
+                            <InputField
+                                callbackVal={(e: string) => setUserEntity({...userEntity, password: e})}
+                                type="password"
+                                placeholder="รหัสผ่าน"
+                                label="รหัสผ่าน"
+                                required={true} />
                             </div>
                             <div>
-                                <label><h4>ยืนยันรหัสผ่าน</h4></label>
-                                <input type="password" placeholder="รหัสผ่าน" name="confirmpassword" required></input>
+                            <InputField
+                                callbackVal={(e: string) => setUserEntity({...userEntity, confirm_pw: e})}
+                                type="password"
+                                placeholder="ยืนยันรหัสผ่าน"
+                                label="ยืนยันรหัสผ่าน"
+                                required={true} />
                             </div>
                         </div>
                     </div>
-                    <Button onClick={registerClick}>สมัครสมาชิก</Button>
-                    <Or>หรือ</Or>
-                    <Auth />
+                    <Button onClick={registerClick} disabled={!userEntity.confirm_pw}>สมัครสมาชิก</Button>
+                    <PageDivider>หรือ</PageDivider>
                     <BorderedButton onClick={loginClick}>มีบัญชีอยู่แล้ว? เข้าสู่ระบบ</BorderedButton>
+                    <Auth />
                     <p>ท่านยอมรับ <span>ข้อกำหนดการใช้งาน</span> และ <span>นโยบายความเป็นส่วนตัว</span> ของ Flowy เมื่อดำเนินการต่อ</p>
                 </div>
                 <div className='img-size'>
@@ -85,18 +170,6 @@ const Container = styled.div`
 
     span{
         text-decoration: underline;
-    }
-
-    input{
-        width: 100%;
-        padding: 8px 8px ;
-        margin-bottom: 8px;
-        display: inline-block;
-        border-radius: 8px;
-        border: 1px solid var(--grey-300);
-        box-sizing: border-box;
-        font-family: var(--brand-font);
-        font-size: 16px;
     }
 
     .img-size{
@@ -169,7 +242,7 @@ const Header = styled.div`
     margin-bottom: 16px;
 `;
 
-const Or = styled.div`
+const PageDivider = styled.div`
     display: flex;
     align-items: center;
     margin: -8px 0px;

@@ -2,17 +2,16 @@ import React from "react";
 import styled from "styled-components";
 
 interface LoadingScreenContext{
-    stillLoad?: boolean;
-    transitionEnd?: React.Dispatch<React.SetStateAction<boolean>>;
+    customMessage?: string;
 }
 
-const LoadingScreen: React.FC<LoadingScreenContext> = () => {
+const LoadingScreen: React.FC<LoadingScreenContext> = ({ customMessage }) => {
     return (
         <Wrapper
             // className={`${!stillLoad ? 'alert-show' : 'alert-hidden'}`}
             // onTransitionEnd={() => transitionEnd(false)}
         >
-            <p>เรากำลังเตรียมสถานที่อันน่าสนใจ... <img src="../../icons/icons8-sent.gif" /></p>
+            <p>{customMessage ? `${customMessage}...`: "เรากำลังเตรียมสถานที่อันน่าสนใจ..."} <img src="../../icons/icons8-sent.gif" /></p>
         </Wrapper>
     );
 }

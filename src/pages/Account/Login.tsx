@@ -5,13 +5,23 @@ import styled from 'styled-components';
 
 // Global Components
 import { Button } from '../../components/button/Button';
+import { InputField } from '../../components/input/InputField';
 
-// Sections
+// Components
 import Auth from './Auth';
+import LoadingScreen from '../../components/ui/LoadingScreen';
+
+interface UserLoginEntityContext {
+    email: string;
+    password: string;
+}
 
 const Login: React.FC = () => {
-    const [email, setEmail] = useState<string>("");
-    const [password, setPassword] = useState<string>("");
+    const [isLoading, setIsLoading] = useState(false);
+    const [userEntity, setUserEntity] = useState<UserLoginEntityContext>({
+        email: '',
+        password: '',
+    });
 
     const navigate = useNavigate();
 
@@ -25,66 +35,67 @@ const Login: React.FC = () => {
     async function loginClick(event: React.MouseEvent<HTMLButtonElement>) {
         try {
             event.preventDefault();
-
-            const { data } = await axios.post(`${import.meta.env.VITE_FLOWY_API_ROUTE}/user/login`, {
-                email: email,
-                password: password
+            setIsLoading(true);
+            axios.post(`${import.meta.env.VITE_FLOWY_API_ROUTE}/user/login`, {
+                email: userEntity.email,
+                password: userEntity.password
             }, {
                 headers : {
                     "Content-type" : "application/json"
                 }
-            });
-
-            if(data){
+            })
+            .then(({ data }) => {
                 localStorage.setItem("flowyToken", JSON.stringify(data.token));
+                setIsLoading(false);
                 navigate("/explore", { replace: false });
-            } else {
-                console.log("Something went wrong.");
-            }
+            }, (unres) => {
+                setIsLoading(false);
+                alert(unres.response.data);
+            });
 
         } catch (err: any) {
             console.log(err.message);
         }
     }
 
-    return( 
-        <Container>
-            <div className='grid-display'>
-                <div className='img-size'>
-                    <img  src="https://images.unsplash.com/photo-1621570168297-bdcdd4457664?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80" alt="" />
-                </div>
-                <div className='padding-content'>
-                    <Header><h3>เข้าสู่ระบบ หรือลงทะเบียน</h3></Header>
-                    <h3>ยินดีต้อนรับสู่ Flowy</h3>
-                    <h4>อีเมล</h4>
-                    <input
-                        type="email"
-                        placeholder="อีเมล"
-                        name="email"
-                        value={email}
-                        onChange={e => setEmail(e.target.value)}
-                        required />
-                    <h4>รหัสผ่าน</h4>
-                    <input
-                        type="password"
-                        placeholder="รหัสผ่าน"
-                        name="password"
-                        value={password}
-                        onChange={e => setPassword(e.target.value)}
-                        required />
-                    <div className='margin'>
-                        <Button onClick={loginClick}>เข้าสู่ระบบ</Button>
+    return(
+        <>
+            {isLoading ? <LoadingScreen customMessage="โปรดรอสักครู่" /> :
+            <Container>
+                <div className='grid-display'>
+                    <div className='img-size'>
+                        <img  src="https://images.unsplash.com/photo-1621570168297-bdcdd4457664?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80" alt="" />
                     </div>
-                        <div className='collum-display'>
-                            <Link to="/register">สร้างบัญชีผู้ใช้</Link>
-                            <Link to="/forgotpassword">ลืมรหัสผ่าน?</Link>
+                    <div className='padding-content'>
+                        <Header><h3>เข้าสู่ระบบ หรือลงทะเบียน</h3></Header>
+                        <h3>ยินดีต้อนรับสู่ Flowy</h3>
+                        <h4>อีเมล</h4>
+                        <InputField
+                            callbackVal={(e: string) => setUserEntity(({...userEntity, email: e}))}
+                            type="email"
+                            placeholder="อีเมล"
+                            required={true} />
+                        <h4>รหัสผ่าน</h4>
+                        <InputField
+                            type="password"
+                            placeholder="รหัสผ่าน"
+                            callbackVal={(e: string) => setUserEntity(({...userEntity, password: e}))}
+                            required={true} />
+                        <div className='margin'>
+                            <Button onClick={loginClick}>เข้าสู่ระบบ</Button>
                         </div>
-                    <Or>หรือ</Or>
-                    <Auth />
-                    <p>ท่านยอมรับ <span>ข้อกำหนดการใช้งาน</span> และ <span>นโยบายความเป็นส่วนตัว</span> ของ Flowy เมื่อดำเนินการต่อ</p>
+                            <div className='collum-display'>
+                                <Link to="/register">สร้างบัญชีผู้ใช้</Link>
+                                <Link to="/forgotpassword">ลืมรหัสผ่าน?</Link>
+                            </div>
+                        <Or>หรือ</Or>
+                        <Auth />
+                        <p>ท่านยอมรับ <span>ข้อกำหนดการใช้งาน</span> และ <span>นโยบายความเป็นส่วนตัว</span> ของ Flowy เมื่อดำเนินการต่อ</p>
+                    </div>
                 </div>
-            </div>
-        </Container>        
+            </Container>
+            }
+        </> 
     );
 }
 
@@ -103,18 +114,6 @@ const Container = styled.div`
 
     span{
         text-decoration: underline;
-    }
-
-    input{
-        width: 100%;
-        padding: 8px 8px ;
-        margin-bottom: 8px;
-        display: inline-block;
-        border-radius: 8px;
-        border: 1px solid var(--grey-300);
-        box-sizing: border-box;
-        font-family: var(--brand-font);
-        font-size: 16px;
     }
 
     .collum-display{
