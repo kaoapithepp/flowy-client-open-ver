@@ -5,18 +5,21 @@ import { useNavigate } from 'react-router-dom';
 // Global Components
 import { BorderedButton } from '../button/BorderedButton';
 
-
 //MUIs
 import AlarmOffIcon from '@mui/icons-material/AlarmOff';
 
-export const TimeoutCard: React.FC = () => {
+interface TimeoutCardContext {
+    cancelFunc?: any
+}
+
+export const TimeoutCard: React.FC<TimeoutCardContext> = ({ cancelFunc }) => {
 
     const navigate = useNavigate();
 
     function buttonAcceptClick(event: React.MouseEvent<HTMLButtonElement>) {
         event.preventDefault();
-
-        navigate("/explore", { replace: false });
+        cancelFunc();
+        // navigate("/explore", { replace: false });
     }
 
     return(
@@ -42,7 +45,7 @@ const BGdrop = styled.div`
     left: 0%;
     width: 100%;
     height: 100%;
-    z-index: 2;
+    z-index: 100;
 `;
 
 const Container = styled.div`

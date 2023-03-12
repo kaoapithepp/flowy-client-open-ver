@@ -8,7 +8,6 @@ import { Button } from '../../components/button/Button';
 
 // Sections
 import Auth from './Auth';
-import { FLOWY_API_ROUTE } from '../../config/api.config';
 
 const Login: React.FC = () => {
     const [email, setEmail] = useState<string>("");
@@ -27,7 +26,7 @@ const Login: React.FC = () => {
         try {
             event.preventDefault();
 
-            const { data } = await axios.post(`${FLOWY_API_ROUTE}/user/login`, {
+            const { data } = await axios.post(`${import.meta.env.VITE_FLOWY_API_ROUTE}/user/login`, {
                 email: email,
                 password: password
             }, {

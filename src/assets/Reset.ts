@@ -3,16 +3,16 @@ import { createGlobalStyle } from 'styled-components';
 export default createGlobalStyle`
     body {
         color: var(--black);
-        background-color: var(--background-color);
+        background-color: var(--white);
         
         display: flex;
         flex-direction: column;
-
-        /* display: block; */
         
         margin: 0;
         padding: 0;
         min-height: 100vh;
+
+        box-sizing: border-box;
         
         font-family: 'IBM Plex Sans Thai', sans-serif;
         -webkit-font-smoothing: antialiased;

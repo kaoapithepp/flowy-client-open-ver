@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 // Assets
@@ -7,40 +7,56 @@ import Reset from './assets/Reset';
 import Variables from './assets/Variables';
 
 // Pages
-import Expore from './pages/Explore/Explore';
 import Login from './pages/Account/Login';
 import Register from './pages/Account/Register';
-import Booking from './pages/Booking/Booking';
-import Explore from './pages/Explore/Explore';
+import ExplorePage from './pages/Explore/ExplorePage';
 import Filter from './pages/Filter/Filter';
-import Information from './pages/Information/Information';
-import Payment from './pages/Payment/Payment';
+import InformationPage from './pages/Information/InformationPage';
+import PaymentPage from './pages/Payment/PaymentPage';
 import Ticket from './pages/Ticket/Ticket';
 import ForgotPassword from './pages/Account/ForgotPassword';
-import DeskSelect from './pages/Booking/Desk/DeskSelect';
-import NumberOfCustomers from './pages/Booking/NumberOfCustomers/NumberOfCustomers';
-import TimeSlot from './pages/Booking/TimeSlot/TimeSlot';
+import DeskSelectPage from './pages/Booking/02_Desk/DeskSelectPage';
+import CustomerAmountPage from './pages/Booking/01_CustomerAmount/CustomerAmountPage';
+import TimeSlotPage from './pages/Booking/03_TimeSlot/TimeSlotPage';
+import LoadingScreen from './components/ui/LoadingScreen';
+
+// Contexts
+import { useBookEntityValue } from './context/BookEntityProvider';
+
+export const IS_PRODUCTION_MODE = false;
 
 const App: React.FC = () => {
+  const { bookingEntity, setBookingEntity } = useBookEntityValue();
+
+  useEffect(() => {
+    if(!IS_PRODUCTION_MODE) console.log(bookingEntity);
+  },[bookingEntity]);
+
   return (
     <>
       <Reset />
       <Fonts />
       <Variables />
       <Routes>
+        {/* Auth */}
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/expore" element={<Expore />} />
-        <Route path="/booking" element={<Booking />} />
-        <Route path="/explore" element={<Explore />} />
-        <Route path="/filter" element={<Filter />} />
-        <Route path="/info/:id" element={<Information />} />
-        <Route path="/payment" element={<Payment />} />
-        <Route path="/ticket" element={<Ticket />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
-        <Route path='/desk-select' element={<DeskSelect />} />
-        <Route path='/booking-number-of-customers' element={<NumberOfCustomers />} />
-        <Route path='/booking-time-slot' element={<TimeSlot />} />
+
+        {/* Catalog */}
+        <Route path="/explore" element={<ExplorePage />} />
+        <Route path="/filter" element={<Filter />} />
+        <Route path="/ticket" element={<Ticket />} />
+
+        {/* Booking Process */}
+        <Route path="/info/:id" element={<InformationPage />} />
+        <Route path='/book-ctm-amt/:placeId' element={<CustomerAmountPage />} />
+        <Route path='/book-desk/:placeId' element={<DeskSelectPage />} />
+        <Route path='/book-time-slot/:deskId' element={<TimeSlotPage />} />
+        <Route path="/payment/:bookId" element={<PaymentPage />} />
+
+        {/* Loading screen */}
+        <Route path='/loading-screen' element={<LoadingScreen />} />
       </Routes>
     </>
   );

@@ -1,0 +1,1 @@
+export const amenitiesLists = ['hasPowerSupply', 'hasWifi', 'hasRestroom', 'hasProjector', 'hasHDMI', 'hasFlowiderCare', 'hasAirCondition', 'hasNapZone', 'hasSnackAndBeverage', 'hasCCTVorSecurity'];
