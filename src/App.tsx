@@ -9,6 +9,7 @@ import Variables from './assets/Variables';
 // Pages
 import Login from './pages/Account/Login';
 import Register from './pages/Account/Register';
+import SuccessReg from './pages/Account/SuccessReg';
 import ExplorePage from './pages/Explore/ExplorePage';
 import Filter from './pages/Filter/Filter';
 import InformationPage from './pages/Information/InformationPage';
@@ -42,6 +43,7 @@ const App: React.FC = () => {
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
+        <Route path='/successreg' element={<SuccessReg />} />
 
         {/* Catalog */}
         <Route path="/explore" element={<ExplorePage />} />
