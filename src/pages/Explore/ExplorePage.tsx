@@ -56,7 +56,7 @@ const ExplorePage: React.FC = () => {
                     </Helmet>
                     <Section>
                         <Search />
-                        <Category />
+                        {/* <Category /> */}
                         <ExploreCard exploreCardDetail={exploreCardDetail}/>
                     </Section>
                 </>

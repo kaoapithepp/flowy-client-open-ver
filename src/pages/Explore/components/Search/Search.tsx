@@ -41,7 +41,7 @@ const Search: React.FC = () => {
 
     return(
         <Container>
-            <SearchForm>
+            {/* <SearchForm>
                 <div className='flex-display'>
                     <div className='flex-display'>
                         <SearchRoundedIcon />
@@ -49,7 +49,11 @@ const Search: React.FC = () => {
                     </div>
                     <FilterButton />
                 </div>
-            </SearchForm>
+            </SearchForm> */}
+            <div className="greeting">
+                <h4>Good Morning <img src="/icons/waving-hand.png" /></h4>
+                <h2>Choi Jimin</h2>
+            </div>
             <ProfileAvatar bgImg={(profile as any).profile_imgUrl} onClick={() => setAccountCard(true)} />
             { openAccountCard ? <AccountCard profile={profile} accCardCallback={(e) => setAccountCard(e)} /> : null}
         </Container>
@@ -65,10 +69,14 @@ const Container = styled.div`
     position: sticky;
     top: 0;
     left: 0;
-    padding: 16px 8px;
+    padding: 8px;
     background-color: var(--white);
 
-    .flex-display{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    /* .flex-display{
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -86,6 +94,24 @@ const Container = styled.div`
             ::placeholder {
                 color: var(--grey-400);
             }
+        }
+    } */
+    
+    .greeting {
+        h2, h4 {
+            margin: 0;
+        }
+
+        h4 {
+            color: var(--grey-600);
+        }
+
+        h2 {
+            color: var(--grey-900);
+        }
+
+        img {
+            width: 16px;
         }
     }
 `;
