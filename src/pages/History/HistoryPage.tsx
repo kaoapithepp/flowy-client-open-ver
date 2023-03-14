@@ -15,7 +15,6 @@ import { dateReformat } from "../../utils/dateReformat";
 import TableRestaurantRoundedIcon from '@mui/icons-material/TableRestaurantRounded';
 import AccessibilityRoundedIcon from '@mui/icons-material/AccessibilityRounded';
 import ScheduleOutlinedIcon from '@mui/icons-material/ScheduleOutlined';
-import { BorderedGreyButton } from "../../components/button/BorderedGreyButton";
 
 const HistoryPage: React.FC = () => {
     const [bookingHistory, setBookingHistory] = useState<any>([]);
@@ -61,7 +60,7 @@ const HistoryPage: React.FC = () => {
                 </Header>
                 {bookingHistory.map((elem: any, key: any) => {
                     return (
-                        <InfoSection>
+                        <InfoSection onClick={e => handleShowTicket(elem.booking_id)}>
                             <div className="grid-display">
                                 <div>
                                     <p>{dateReformat(elem.createdAt)}</p>
@@ -94,11 +93,13 @@ const HistoryPage: React.FC = () => {
                                             viewBox={`0 0 256 256`}
                                             value={String(elem.booking_id)}
                                             />
-                                        
+                                    </div>
+                                    <div className="show-full-ticket">
+                                        <span>Show full ticket</span>
                                     </div>
                                 </div>
                             </div>
-                            <BorderedGreyButton onClick={e => handleShowTicket(elem.booking_id)}>Show more detail</BorderedGreyButton>
+                            
                         </InfoSection>
                     );
                 })}
@@ -136,14 +137,17 @@ const Header = styled.div`
 `;
 
 const InfoSection = styled.div`
-    padding: 1em 1em 0 1em;
+    padding: 1em;
 
     border-bottom: 1px solid var(--grey-400);
     border-bottom-style: dashed;
 
+    cursor: pointer;
+
     h2 {
-        color: var(--blue-notion);
-        font-size: 2.5em;
+        color: var(--primary);
+        /* font-size: 2em; */
+        font-weight: 600;
         overflow: hidden;
         text-overflow: ellipsis;
         width: 256px;
@@ -162,18 +166,17 @@ const InfoSection = styled.div`
 
         align-items: center;
         gap: 1em;
-    }
 
-
-    .icon-detail {
-        display: flex;
-        gap: .2em;
-        color: var(--grey-600);
-    }
-    
-    .small-detail {
-        display: flex;
-        gap: 1em;
+        .icon-detail {
+            display: flex;
+            gap: .2em;
+            color: var(--grey-600);
+        }
+        
+        .small-detail {
+            display: flex;
+            gap: 1em;
+        }
     }
 
     .qr-wrapper {
@@ -198,16 +201,20 @@ const InfoSection = styled.div`
         height: 52px;
     }
 
-    .stat-tag {
-        margin: 6px 0;
-        background-color: var(--green-notion);
-        padding: 6px;
-        width: fit-content;
-        border-radius: 0.5rem;
-        color: var(--grey-900);
-        font-size: 0.7em;
-        /* margin-bottom: 0; */
-    }
+    .show-full-ticket {
+        display: flex;
+        justify-content: right;
+        align-items: center;
+
+        span {
+            display: flex;
+            align-items: center;
+            margin: .5em;
+
+            font-size: .7em;
+            text-align: center;
+        }
+    } 
 `;
 
 export default HistoryPage;

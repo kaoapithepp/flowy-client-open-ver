@@ -16,9 +16,14 @@ import { AmenitiesInfoIcon } from '../../components/icon/AmenitiesInfoIcon';
 
 // data
 import { amenitiesLists } from '../../data/AmenitiesListDetail';
+import LoadingScreen from '../../components/ui/LoadingScreen';
+
+// utils
+import { cacheImages } from '../../utils/cacheImages';
 
 
 const InformationPage: React.FC = () => {
+    const [isLoading, setIsLoading] = useState(true);
     const [placeInfo, setPlaceInfo] = useState<any>({});
 
     const { id } = useParams();
@@ -36,8 +41,10 @@ const InformationPage: React.FC = () => {
                 })
                 .then(res => {
                     setPlaceInfo((res as any).data);
-                })
-
+                    cacheImages(res.data.image);
+                    setIsLoading(false);
+                });
+                
             } catch (err: any) {
                 alert(err.message);
             }
@@ -45,47 +52,52 @@ const InformationPage: React.FC = () => {
     },[]);
 
     return(
-        <Section>
-            <BackButton />
-            <FigureSection image={placeInfo.image}/>
-            <DetailSection>
-                <h2>{placeInfo.place_name}</h2>
-                <h3>{placeInfo.description}</h3>
-                <h4>{placeInfo.open_hr?.substring(0,5)} - {placeInfo.close_hr?.substring(0,5)}</h4>
-                <div className="price-and-spec">
-                    <p className="price-tag">{placeInfo.unit_price} บาท / ชั่วโมง</p>
-                    <div className="icon-card">
-                        { !placeInfo.spec?.isSmokable &&
-                            <SpecsIcon
-                                icon="SmokeFreeRoundedIcon"
-                                label="งดสูบบุหรี่" />
-                        }
-                        { placeInfo.spec?.isQuiet &&
-                            <SpecsIcon
-                                icon="VolumeOffRoundedIcon"
-                                label="งดใช้เสียงดัง" />
-                        }
+        <>
+            {
+                isLoading ? <LoadingScreen /> :
+                <Section>
+                    <BackButton />
+                    <FigureSection image={placeInfo.image}/>
+                    <DetailSection>
+                        <h2>{placeInfo.place_name}</h2>
+                        <h3>{placeInfo.description}</h3>
+                        <h4>{placeInfo.open_hr?.substring(0,5)} - {placeInfo.close_hr?.substring(0,5)}</h4>
+                        <div className="price-and-spec">
+                            <p className="price-tag">{placeInfo.unit_price} บาท / ชั่วโมง</p>
+                            <div className="icon-card">
+                                { !placeInfo.spec?.isSmokable &&
+                                    <SpecsIcon
+                                        icon="SmokeFreeRoundedIcon"
+                                        label="งดสูบบุหรี่" />
+                                }
+                                { placeInfo.spec?.isQuiet &&
+                                    <SpecsIcon
+                                        icon="VolumeOffRoundedIcon"
+                                        label="งดใช้เสียงดัง" />
+                                }
+                            </div>
+                        </div>
+                    </DetailSection>
+                    <AmenitySection>
+                        <h3>สิ่งอำนวยความสะดวก</h3>
+                        <div className="amenities">
+                            {   
+                                amenitiesLists.map((attrib, key) => {
+                                return <AmenitiesInfoIcon attribute={attrib} data={placeInfo.amenity} key={key} />
+                            })}
+                        </div>
+                    </AmenitySection>
+                    <div className='position-footer'>
+                        <BookingFooter
+                            nextPath={`/book-ctm-amt/${id}`}
+                            buttonText="จอง"
+                            bookingKey="place_id"
+                            bookingVal={`${id}`}
+                        />
                     </div>
-                </div>
-            </DetailSection>
-            <AmenitySection>
-                <h3>สิ่งอำนวยความสะดวก</h3>
-                <div className="amenities">
-                    {   
-                        amenitiesLists.map((attrib, key) => {
-                        return <AmenitiesInfoIcon attribute={attrib} data={placeInfo.amenity} key={key} />
-                    })}
-                </div>
-            </AmenitySection>
-            <div className='position-footer'>
-                <BookingFooter
-                    nextPath={`/book-ctm-amt/${id}`}
-                    buttonText="จอง"
-                    bookingKey="place_id"
-                    bookingVal={`${id}`}
-                />
-            </div>
-        </Section>
+                </Section>
+            }
+        </>
     );
 }
 

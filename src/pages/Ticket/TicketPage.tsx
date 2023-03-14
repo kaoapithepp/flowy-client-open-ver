@@ -3,11 +3,13 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
 import QRCode from "react-qr-code";
+import { Helmet } from 'react-helmet-async';
 
 // Global Components
 import { Button } from '../../components/button/Button';
 import { ButtonNavigateMaps } from '../../components/button/ButtonNavigateMaps';
 import { BorderedButton } from '../../components/button/BorderedButton';
+import LoadingScreen from '../../components/ui/LoadingScreen';
 
 // utils
 import { dateReformat } from '../../utils/dateReformat';
@@ -21,6 +23,7 @@ import NearMeIcon from '@mui/icons-material/NearMe';
 import AccessibilityRoundedIcon from '@mui/icons-material/AccessibilityRounded';
 
 const Ticket: React.FC = () => {
+    const [isLoading, setIsLoading] = useState(true);
     const [bookingOrder, setBookingOrder] = useState<any>({});
 
     const navigate = useNavigate();
@@ -40,6 +43,7 @@ const Ticket: React.FC = () => {
                 })
                 .then(res => {
                     setBookingOrder(res.data[0]);
+                    setIsLoading(false);
                 }, (unres) => {
                     alert(unres.response.data);
                 })
@@ -56,74 +60,82 @@ const Ticket: React.FC = () => {
     }
 
     return (
-        <Container>
-            <Header>
-                <h1>{bookingOrder.place_name}</h1>
-                <div className="address">
-                    <FmdGoodOutlinedIcon />
-                    <p>{bookingOrder.description}</p>
-                </div>
-            </Header>
-            <InfoSection>
-                <div className="data-info">
-                    <p>Booking Date</p>
-                    <h3>{dateReformat(bookingOrder.createdAt)}</h3>
-                </div>
-                <div className="calendar-icon">
-                    <CalendarMonthOutlinedIcon />
-                </div>
-            </InfoSection>
-            <InfoSection>
-                <div className="data-info">
-                    <p>Desk Name</p>
-                    <h3>{bookingOrder.desk_name}</h3>
-                </div>
-                <div className="calendar-icon">
-                    <TableRestaurantRoundedIcon />
-                </div>
-            </InfoSection>
-            <InfoSection>
-                <div className="duration-info">
-                    <p>Total Booking Time</p>
-                    <h2>{bookingOrder.total_bk_hr} {bookingOrder.total_bk_hr > 1 ? "hrs" : "hr"}</h2>
-                </div>
-                <div className="calendar-icon">
-                    <ScheduleOutlinedIcon />
-                </div>
-            </InfoSection>
-            <BookCredential>
-                <h3>Booking Credentials</h3>
-                <div className="circular-detail">
-                    <div className="price-tag">
-                        <div>
-                            <p>Price Amount</p>
-                            <h2>฿ {bookingOrder.total_bk_price}</h2>
+        <>
+            <Helmet>
+                <title>Your Ticket | Flowy</title>
+            </Helmet>
+            {
+                isLoading ? <LoadingScreen /> :
+                <Container>
+                    <Header>
+                        <h1>{bookingOrder.place_name}</h1>
+                        <div className="address">
+                            <FmdGoodOutlinedIcon />
+                            <p>{bookingOrder.description}</p>
                         </div>
-                        <div>
-                            <p>Seats</p>
-                            <h2>{bookingOrder.total_bk_seat}</h2>
+                    </Header>
+                    <InfoSection>
+                        <div className="data-info">
+                            <p>Booking Date</p>
+                            <h3>{dateReformat(bookingOrder.createdAt)}</h3>
                         </div>
-                    </div>
-                    <div className="qr-code">
-                        <QRCode
-                            fgColor="var(--grey-800)"
-                            bgColor="var(--grey-200)"
-                            size={256}
-                            style={{ height: "140px", maxWidth: "100%", width: "100%" }}
-                            viewBox={`0 0 256 256`}
-                            value={String(bookingOrder.booking_id)}
-                        />
-                        <p>{bookingOrder.booking_id}</p>
-                    </div>
-                </div>
-                <ButtonNavigateMaps>
-                    <a href={`https://maps.google.com/?q=${bookingOrder.lat_geo},${bookingOrder.long_geo}`} target="_blank">
-                        <NearMeIcon />นำทางด้วย Google Maps
-                    </a>
-                </ButtonNavigateMaps>
-                <Button onClick={handleToExplore}>กลับสู่หน้าหลัก</Button>
-            </BookCredential>
-        </Container>
+                        <div className="calendar-icon">
+                            <CalendarMonthOutlinedIcon />
+                        </div>
+                    </InfoSection>
+                    <InfoSection>
+                        <div className="data-info">
+                            <p>Desk Name</p>
+                            <h3>{bookingOrder.desk_name}</h3>
+                        </div>
+                        <div className="calendar-icon">
+                            <TableRestaurantRoundedIcon />
+                        </div>
+                    </InfoSection>
+                    <InfoSection>
+                        <div className="duration-info">
+                            <p>Total Booking Time</p>
+                            <h2>{bookingOrder.total_bk_hr} {bookingOrder.total_bk_hr > 1 ? "hrs" : "hr"}</h2>
+                        </div>
+                        <div className="calendar-icon">
+                            <ScheduleOutlinedIcon />
+                        </div>
+                    </InfoSection>
+                    <BookCredential>
+                        <h3>Booking Credentials</h3>
+                        <div className="circular-detail">
+                            <div className="price-tag">
+                                <div>
+                                    <p>Price Amount</p>
+                                    <h2>฿ {bookingOrder.total_bk_price}</h2>
+                                </div>
+                                <div>
+                                    <p>Seats</p>
+                                    <h2>{bookingOrder.total_bk_seat}</h2>
+                                </div>
+                            </div>
+                            <div className="qr-code">
+                                <QRCode
+                                    fgColor="var(--grey-800)"
+                                    bgColor="var(--grey-200)"
+                                    size={256}
+                                    style={{ height: "140px", maxWidth: "100%", width: "100%" }}
+                                    viewBox={`0 0 256 256`}
+                                    value={String(bookingOrder.booking_id)}
+                                    />
+                                <p>{bookingOrder.booking_id}</p>
+                            </div>
+                        </div>
+                        <ButtonNavigateMaps>
+                            <a href={`https://maps.google.com/?q=${bookingOrder.lat_geo},${bookingOrder.long_geo}`} target="_blank">
+                                <NearMeIcon />นำทางด้วย Google Maps
+                            </a>
+                        </ButtonNavigateMaps>
+                        <Button onClick={handleToExplore}>กลับสู่หน้าหลัก</Button>
+                    </BookCredential>
+                </Container>
+            }
+        </>
     );
 }
 
@@ -261,7 +273,7 @@ const BookCredential = styled.div`
         gap: 2em;
 
         h2, p {
-            color: var(--dark-red);
+            color: var(--primary);
         }
 
         h2 {

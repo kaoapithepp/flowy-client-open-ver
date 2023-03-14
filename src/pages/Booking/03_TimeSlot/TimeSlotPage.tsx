@@ -77,11 +77,11 @@ const TimeSlotPage: React.FC = () => {
 
     return(
         <>
-            {isLoading ? <LoadingScreen /> :
-            <>
-                <Helmet>
-                    <title>Select Your Timeslot | Flowy Booking (3/4)</title>
-                </Helmet>
+            <Helmet>
+                <title>Select Your Timeslot | Flowy Booking (3/4)</title>
+            </Helmet>
+            {
+                isLoading ? <LoadingScreen /> :
                 <Container>
                     <BackButton />
                     <Section>
@@ -108,7 +108,7 @@ const TimeSlotPage: React.FC = () => {
                         </div>
                     </div>
                 </Container>
-            </>}
+            }
         </>
     );
 }
@@ -181,9 +181,8 @@ const Section = styled.div`
         gap: .5em;
 
         padding: .5em;
-        
-        overflow: auto;
         max-height: 50vh;
+        
         overflow: auto;
     }
 `;

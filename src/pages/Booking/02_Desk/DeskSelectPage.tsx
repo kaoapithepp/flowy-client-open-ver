@@ -9,12 +9,16 @@ import { BackButton } from '../../../components/button/BackButton';
 
 // Components
 import { DeskSelectCard } from './components/DeskSelectCard';
+import LoadingScreen from '../../../components/ui/LoadingScreen';
+import { cacheImages } from '../../../utils/cacheImages';
 
 const DeskSelectPage: React.FC = () => {
+    const [isLoading, setIsLoading] = useState(true);
     const [deskInfo, setDeskInfo] = useState([]);
     
     const navigate = useNavigate();
     const { placeId } = useParams();
+
     const [searchParams, setSearchParams] = useSearchParams();
     const customerAmount = searchParams.get('ctm');
 
@@ -32,6 +36,13 @@ const DeskSelectPage: React.FC = () => {
                 .then(res => {
                     setDeskInfo((res as any).data);
                 })
+                .then(result => {
+                    deskInfo.map(async (elem: any, key: number) => {
+                        return await cacheImages(elem.image);
+                    });
+
+                    setIsLoading(false);
+                })
             } catch (err: any) {
                 alert(err.message);
             }
@@ -43,23 +54,26 @@ const DeskSelectPage: React.FC = () => {
             <Helmet>
                 <title>Select Your Desk | Flowy Booking (2/4)</title>
             </Helmet>
-            <Section>
-                <BackButton />
-                <div className="position-header">
-                    <h1>ที่นั่งแบบไหน<br />เหมาะสำหรับคุณ?</h1>
-                </div>
-                <Container>
-                <div className="desks-showcase">
-                    {deskInfo.length < 1 ? 
-                        <p className="no-result">ไม่พบผลการค้นหา น่าจะต้องเลือกใหม่นะ :(</p>
-                        :
-                        deskInfo.map((elem: any, key: any) => {
-                        return <DeskSelectCard {...elem} {...key}/>
-                        })
-                    }
-                </div>
-                </Container>
-            </Section>
+            {
+                isLoading ? <LoadingScreen /> :
+                <Section>
+                    <BackButton />
+                    <div className="position-header">
+                        <h1>ที่นั่งแบบไหน<br />เหมาะสำหรับคุณ?</h1>
+                    </div>
+                    <Container>
+                    <div className="desks-showcase">
+                        {deskInfo.length < 1 ? 
+                            <p className="no-result">ไม่พบผลการค้นหา น่าจะต้องเลือกใหม่นะ :(</p>
+                            :
+                            deskInfo.map((elem: any, key: any) => {
+                                return <DeskSelectCard {...elem} {...key}/>
+                            })
+                        }
+                    </div>
+                    </Container>
+                </Section>
+            }
         </>
     );
 }

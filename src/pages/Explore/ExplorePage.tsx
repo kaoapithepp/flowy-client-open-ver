@@ -11,6 +11,9 @@ import LoadingScreen from '../../components/ui/LoadingScreen';
 import Search from './components/Search/Search'
 import Category from './components/Category/Category';
 
+// Utils
+import { cacheImages } from '../../utils/cacheImages';
+
 const ExplorePage: React.FC = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [exploreCardDetail, setExploreCardDetail] = useState([]);
@@ -29,10 +32,14 @@ const ExplorePage: React.FC = () => {
                 })
                 .then(res => {
                     setExploreCardDetail((res as any).data);
-                    setTimeout(() => {
-                        setIsLoading(false);
-                    }, 3000);
+                })
+                .then(result => {
+                    exploreCardDetail.map(async (elem: any, key: number) => {
+                        return await cacheImages(elem.image)
+                    })
+                    setIsLoading(false);
                 });
+
             } catch (err: any) {
                 alert(err.message);
             }
@@ -42,7 +49,7 @@ const ExplorePage: React.FC = () => {
     return(
         <>
             {
-                false ? <LoadingScreen /> :
+                isLoading ? <LoadingScreen /> :
                 <>
                     <Helmet>
                         <title>Explore | Flowy</title>
