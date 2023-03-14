@@ -59,7 +59,7 @@ const PaymentPage: React.FC = () => {
         
         if (isThereToken) {
             try {
-                axios.post(`${import.meta.env.VITE_FLOWY_API_ROUTE}/booking/${bookId}`, {}, {
+                axios.post(`${import.meta.env.VITE_FLOWY_API_ROUTE}/booking/init/${bookId}`, {}, {
                     headers: {
                         Authorization: `Bearer ${isThereToken}`
                     }
@@ -110,7 +110,7 @@ const PaymentPage: React.FC = () => {
     async function cancelPurchase() {
         setIsLoading(true);
         if(isThereToken) {
-            axios.put(`${import.meta.env.VITE_FLOWY_API_ROUTE}/booking/${bookId}`,
+            axios.put(`${import.meta.env.VITE_FLOWY_API_ROUTE}/booking/cancel/${bookId}`,
             {
                 paymentIntentId: paymentIntent.id
             },

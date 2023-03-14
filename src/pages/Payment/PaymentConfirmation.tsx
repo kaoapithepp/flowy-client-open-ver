@@ -15,7 +15,7 @@ const PaymentConfirmation = () => {
         ? JSON.parse(localStorage.getItem('flowyToken') as string)
         : null;
 
-        axios.put(`${import.meta.env.VITE_FLOWY_API_ROUTE}/booking/${bookId}`, {},{
+        axios.put(`${import.meta.env.VITE_FLOWY_API_ROUTE}/booking/confirm/${bookId}`, {},{
             headers: {
                 Authorization: `Bearer ${isThereToken}`
             }

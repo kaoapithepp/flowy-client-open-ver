@@ -14,7 +14,6 @@ import { BookingFooter } from '../../../components/ui/BookingFooter';
 
 // Local Components
 import { TimeSlotTags } from './components/TimeSlotTags';
-import ChosenTimeSlotTags from './components/ChosenTimeSlotTags';
 import LoadingScreen from '../../../components/ui/LoadingScreen';
 
 const TimeSlotPage: React.FC = () => {
@@ -88,34 +87,17 @@ const TimeSlotPage: React.FC = () => {
                     <Section>
                         <h2>เลือกช่วงเวลา</h2>
                         <p>โปรดเลือกสล็อทเวลา<br />ที่คุณต้องการเข้าใช้สเปซในวันนี้</p>
-                        <div className="selected-slots">
-                            {chosenTimeslotData.length == 0 ?
-                                <p>สล็อทเวลาที่คุณเลือกจะปรากฎตรงนี้</p>:
-                                chosenTimeslotData
-                                .sort((fst:any, snd: any) => fst.orderNo - snd.orderNo)
-                                .map((elem: any, key: any) => {
-                                    return <ChosenTimeSlotTags
-                                    elem={elem}
-                                    key={key}
-                                    targetFunc={setTimeslotData}
-                                    targetArr={timeslotData}
-                                    srcFunc={setChosenTimeslotData}
-                                    srcArr={chosenTimeslotData}
-                                    />
-                                })
-                            }
-                        </div>
                         <div className="slots-showcase">
                             {timeslotData
                             .sort((fst:any, snd: any) => fst.orderNo - snd.orderNo)
                             .map((elem: any, key: any)=>(
                                 <TimeSlotTags
-                                elem={elem}
-                                key={key}
-                                targetFunc={setChosenTimeslotData}
-                                targetArr={chosenTimeslotData}
-                                srcFunc={setTimeslotData}
-                                srcArr={timeslotData}
+                                    elem={elem}
+                                    key={key}
+                                    targetFunc={setChosenTimeslotData}
+                                    targetArr={chosenTimeslotData}
+                                    srcFunc={setTimeslotData}
+                                    srcArr={timeslotData}
                                 />
                                 ))}
                         </div>
@@ -191,29 +173,15 @@ const Section = styled.div`
         margin-bottom: 16px;
     }
 
-    .selected-slots,
     .slots-showcase {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
         align-items: center;
-    }
-
-    .selected-slots {
-        padding: 12px;
-        border: 1px solid var(--grey-400);
-        border-radius: 1em;
-        margin: 18px 0;
         gap: .5em;
 
-        p {
-            margin: 0;
-            color: var(--grey-400);
-        }
-    }
-
-    .slots-showcase {
-        gap: .5em;
+        padding: .5em;
+        
         overflow: auto;
         max-height: 50vh;
         overflow: auto;
