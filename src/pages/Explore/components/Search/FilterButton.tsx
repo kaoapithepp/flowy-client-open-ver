@@ -27,6 +27,6 @@ const Wrapper = styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
-        color: var(--black);
+        color: var(--grey--200);
     }
 `;

@@ -12,7 +12,7 @@ import { Elements } from '@stripe/react-stripe-js';
 import { IS_PRODUCTION_MODE } from '../../App';
 
 // Global Components
-import { TimeoutCard } from '../../components/card/TimeoutCard';
+import { TimeoutCard } from './components/TimeoutCard';
 import LoadingScreen from '../../components/ui/LoadingScreen';
 import { BorderedButton } from '../../components/button/BorderedButton';
 
@@ -34,7 +34,7 @@ const PaymentPage: React.FC = () => {
 
     // timer
     const [isTimeout, setIsTimeout] = useState(false);
-    const [minute, setMinute] = useState(1);
+    const [minute, setMinute] = useState(5);
     const [second, setSecond] = useState(0);
 
     // Stripe
@@ -84,7 +84,7 @@ const PaymentPage: React.FC = () => {
 
     useEffect(() => {
         try {
-            if(!IS_PRODUCTION_MODE){
+            if(IS_PRODUCTION_MODE){
                 const currentDate = new Date();
                 const targetDate = new Date(currentDate.getTime() + (minute*60*1000));
                 localStorage.setItem("deadlineTicket", String(targetDate));

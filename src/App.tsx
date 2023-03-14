@@ -13,12 +13,14 @@ import ExplorePage from './pages/Explore/ExplorePage';
 import Filter from './pages/Filter/Filter';
 import InformationPage from './pages/Information/InformationPage';
 import PaymentPage from './pages/Payment/PaymentPage';
-import Ticket from './pages/Ticket/Ticket';
+import Ticket from './pages/Ticket/TicketPage';
 import ForgotPassword from './pages/Account/ForgotPassword';
 import DeskSelectPage from './pages/Booking/02_Desk/DeskSelectPage';
 import CustomerAmountPage from './pages/Booking/01_CustomerAmount/CustomerAmountPage';
 import TimeSlotPage from './pages/Booking/03_TimeSlot/TimeSlotPage';
 import LoadingScreen from './components/ui/LoadingScreen';
+import HistoryPage from './pages/History/HistoryPage';
+import PaymentConfirmation from './pages/Payment/PaymentConfirmation';
 
 // Contexts
 import { useBookEntityValue } from './context/BookEntityProvider';
@@ -46,7 +48,6 @@ const App: React.FC = () => {
         {/* Catalog */}
         <Route path="/explore" element={<ExplorePage />} />
         <Route path="/filter" element={<Filter />} />
-        <Route path="/ticket" element={<Ticket />} />
 
         {/* Booking Process */}
         <Route path="/info/:id" element={<InformationPage />} />
@@ -54,6 +55,13 @@ const App: React.FC = () => {
         <Route path='/book-desk/:placeId' element={<DeskSelectPage />} />
         <Route path='/book-time-slot/:deskId' element={<TimeSlotPage />} />
         <Route path="/payment/:bookId" element={<PaymentPage />} />
+
+        {/* Ticket Payout */}
+        <Route path="/ticket/confirmation/:bookId" element={<PaymentConfirmation />} />
+        <Route path="/ticket/:bookId" element={<Ticket />} />
+
+        {/* Booking History */}
+        <Route path="/history" element={<HistoryPage />} />
 
         {/* Loading screen */}
         <Route path='/loading-screen' element={<LoadingScreen />} />

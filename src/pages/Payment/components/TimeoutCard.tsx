@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
 // Global Components
-import { BorderedButton } from '../button/BorderedButton';
+import { BorderedButton } from '../../../components/button/BorderedButton';
 
 //MUIs
 import AlarmOffIcon from '@mui/icons-material/AlarmOff';

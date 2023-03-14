@@ -4,7 +4,6 @@ import axios from 'axios';
 import styled from 'styled-components';
 
 // Components
-import { SearchForm } from './SearchForm';
 import { FilterButton } from './FilterButton';
 import { ProfileAvatar } from './ProfileAvatar';
 import { AccountCard } from '../AccountInfo/AccountCard';
@@ -40,19 +39,13 @@ const Search: React.FC = () => {
         }
     },[]);
 
-    function buttonFilterClick(event: React.MouseEvent<HTMLButtonElement>) {
-        event.preventDefault();
-
-        navigate("/filter", { replace: false });
-    }
-
     return(
         <Container>
-            <SearchForm onClick={buttonFilterClick}>
+            <SearchForm>
                 <div className='flex-display'>
                     <div className='flex-display'>
-                        <Icon><SearchRoundedIcon /></Icon>
-                        สเปซไหนดี?
+                        <SearchRoundedIcon />
+                        <input placeholder="น้อนยังเสิร์ชไม่ได้นะคับ :("/>
                     </div>
                     <FilterButton />
                 </div>
@@ -82,22 +75,34 @@ const Container = styled.div`
         margin-left: 8px;
         margin-right: 8px;
         gap: 8px;
+
+        input {
+            outline: none;
+            border: none;
+            font-family: var(--brand-font);
+            font-size: 1em;
+            color: var(--grey-900);
+
+            ::placeholder {
+                color: var(--grey-400);
+            }
+        }
     }
 `;
 
-const Icon = styled.div`
-   width: 24px;
-   height: 24px;
-   display: flex;
-   justify-content: center;
-   align-items: center;
+export const SearchForm = styled.div`
+    background-color: var(--white);
+    padding: 5px 0px;
+    width: 100%;
+    border-radius: 25px;
+    border: none;
+    box-shadow: var(--shadow);
 
-   img {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    object-fit: cover;
-   }
+    text-align: left;
+    font-family: var(--brand-font);
+    font-size: medium;
+    font-weight: 500;
+    color: var(--grey-400);
 `;
 
 export default Search;

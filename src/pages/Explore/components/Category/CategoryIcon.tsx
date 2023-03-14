@@ -29,43 +29,30 @@ export const CategoryIcon: React.FC<CardData>= (elem: CardData) => {
     
     return (
         <Card>
-            <Icon>
+            {/* <p> */}
                 {renderSwitchCase(elem)}
-            </Icon>
-                <p>
-                    {elem.detail}
-                </p>
+                {elem.detail}
+            {/* </p> */}
         </Card>
     );
 }
 
-const Card = styled.button`
+const Card = styled.div`
     background-color: var(--white);
     color: var(--black);
     border: 1px solid var(--white);
+    transition: .2s;
+    cursor: pointer;
+
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 8px;
+    gap: .5em;
+
     color: var(--grey-400);
-    cursor: pointer;
     font-family: var(--brand-font);
 
     :hover{
         color: var(--grey-800);
     }
-`;
-
-const Icon = styled.div`
-   width: 16px;
-   height: 16px;
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   color: var(--grey-400);
-
-   :hover{
-        color: var(--grey-800);
-   }
-   
 `;

@@ -9,6 +9,8 @@ import { ProfileAvatar } from '../Search/ProfileAvatar';
 
 //MUIs
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import RestoreRoundedIcon from '@mui/icons-material/RestoreRounded';
+import DriveFileRenameOutlineRoundedIcon from '@mui/icons-material/DriveFileRenameOutlineRounded';
 
 interface IAccountCard {
     profile: {
@@ -36,14 +38,17 @@ export const AccountCard: React.FC<IAccountCard> = ({ profile, accCardCallback }
     }
 
     function handleBgDropClick(){
-        // event.preventDefault();
         accCardCallback(false);
     }
 
+    function navigateToBookingHistory(){
+        navigate("/history", { replace: false });
+    }
+
     return(
-        <Wrapper>
+        <Container>
             <div className='position-bottom'>
-                <Container>
+                <Wrapper>
                     <Content>
                         <div className='grid-column'>
                             <ProfileAvatar bgImg={profile.profile_imgUrl} className='button-size'/>
@@ -53,30 +58,31 @@ export const AccountCard: React.FC<IAccountCard> = ({ profile, accCardCallback }
                             </div>
                         </div>
                     </Content>
-                    <Content>
-                        <h2>ประวัติการใช้สเปซ</h2>
-                        <Title>
-                            <h3>ชื่อสเปซ</h3>
-                            <h3>วันที่จอง</h3>
-                            <h3>สถานะ</h3>
-                        </Title>
-                        <History>
-                            <Link to="/ticket"><h4>บ้านแม่เถาสเปซ</h4></Link>
-                            <h4>02 Jan 2023</h4>
-                            <h4>Succeed</h4>
-                        </History>
-                    </Content>
+                    <SubContent>
+                        <div className="menu" onClick={navigateToBookingHistory}>
+                            <RestoreRoundedIcon />
+                            <p>ประวัติการจอง</p>
+                        </div>
+                        {/* <div className="menu">
+                            <RestoreRoundedIcon />
+                            <p>ประวัติการจอง</p>
+                        </div> */}
+                        <div className="menu disabled">
+                            <DriveFileRenameOutlineRoundedIcon />
+                            <p>แก้ไขข้อมูลส่วนตัว</p>
+                        </div>
+                    </SubContent>
                     <div className='button-display'>
                         <BorderedButton onClick={logoutClick}>ออกจากระบบ</BorderedButton>
                     </div>
-                </Container>
+                </Wrapper>
             </div>
             <BackgroundExit onClick={handleBgDropClick}/>
-        </Wrapper>
+        </Container>
     );
 }
 
-const Wrapper = styled.div`
+const Container = styled.div`
     position: fixed;
     top: 0%;
     left: 0%;
@@ -107,7 +113,7 @@ const BackgroundExit = styled.div`
     cursor: pointer;
 `
 
-const Container = styled.div`
+const Wrapper = styled.div`
     padding: 1px 16px 16px 16px;
     background-color: var(--white);
     border-radius: 16px 16px 0px 0px;
@@ -137,6 +143,18 @@ const Container = styled.div`
         transform: scale(150%);
     }
 
+    
+`;
+
+const Content = styled.div`
+    padding: 1em;
+    background-color: var(--white);
+    box-shadow: var(--shadow);
+    border-radius: 1em;
+    max-height: 35vh;
+    max-width: 600px;
+    margin: 1em auto;
+
     .grid-column{
         display: grid;
         grid-template-columns: 1fr 3fr;
@@ -157,29 +175,37 @@ const Container = styled.div`
     }
 `;
 
-const Content = styled.div`
-    padding: 16px;
-    background-color: var(--white);
-    box-shadow: var(--shadow);
-    border-radius: 16px;
-    max-height: 35vh;
+const SubContent = styled.div`
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1em;
+    margin: 1em auto;
     max-width: 600px;
-    margin: 16px auto;
-    overflow-x: hidden;
-`;
+    
+    .menu {
+        padding: 1em;
+        background-color: var(--white);
+        box-shadow: var(--shadow);
+        border-radius: 1em;
 
-const Title = styled.div`
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    text-align: center;
-    margin: 8px 0px;
-`;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: var(--grey-900);
 
-const History = styled.div`
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    max-height: 25vh;
-    overflow-y: auto;
-    align-items: center;
-    text-align: center;
+        cursor: pointer;
+
+        p {
+            text-align: center;
+            font-size: .8em;
+        }
+    }
+
+    .disabled {
+        border: none;
+        background-color: var(--grey-200);
+        color: var(--grey-400);
+        cursor: not-allowed;
+    }
 `;

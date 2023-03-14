@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import axios from "axios";
 
 // Stripe
 import { 
@@ -11,6 +13,9 @@ import { Button } from "../../../components/button/Button";
 
 const PaymentMethod: React.FC = () => {
     const [isProcessing, setIsProcessing] = useState(false);
+
+    const { bookId } = useParams();
+    
     const stripe = useStripe();
     const elements = useElements();
 
@@ -26,7 +31,7 @@ const PaymentMethod: React.FC = () => {
         const { error } = await stripe.confirmPayment({
             elements,
             confirmParams: {
-                return_url: `${window.location.origin}/ticket`
+                return_url: `${window.location.origin}/ticket/confirmation/${bookId}`
             }
         });
 
