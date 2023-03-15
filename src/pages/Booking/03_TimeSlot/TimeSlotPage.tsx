@@ -32,8 +32,8 @@ const TimeSlotPage: React.FC = () => {
     const { deskId } = useParams();
 
     // check token
-    const isThereToken = localStorage.getItem('flowyToken')
-        ? JSON.parse(localStorage.getItem('flowyToken') as string)
+    const isThereToken = localStorage.getItem('flowyClient')
+        ? JSON.parse(localStorage.getItem('flowyClient') as string)
         : null;
 
     useEffect(() => {

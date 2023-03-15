@@ -23,8 +23,8 @@ const DeskSelectPage: React.FC = () => {
     const customerAmount = searchParams.get('ctm');
 
     useEffect(() => {
-        const isThereToken = localStorage.getItem('flowyToken')
-            ? JSON.parse(localStorage.getItem('flowyToken') as string)
+        const isThereToken = localStorage.getItem('flowyClient')
+            ? JSON.parse(localStorage.getItem('flowyClient') as string)
             : null;
         if (isThereToken) {
             try {

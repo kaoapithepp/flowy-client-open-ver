@@ -30,7 +30,7 @@ export const AccountCard: React.FC<IAccountCard> = ({ profile, accCardCallback }
     async function logoutClick(event: React.MouseEvent<HTMLButtonElement>) {
         try {
             event.preventDefault();
-            localStorage.removeItem('flowyToken');
+            localStorage.removeItem('flowyClient');
             navigate("/", { replace: false });
         } catch(err: any) {
             console.log(err.message);

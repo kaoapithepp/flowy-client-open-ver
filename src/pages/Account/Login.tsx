@@ -26,7 +26,7 @@ const Login: React.FC = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const isThereToken = localStorage.getItem('flowyToken');
+        const isThereToken = localStorage.getItem('flowyClient');
         if (isThereToken) {
             navigate('/explore', { replace: false});
         }
@@ -45,7 +45,7 @@ const Login: React.FC = () => {
                 }
             })
             .then(({ data }) => {
-                localStorage.setItem("flowyToken", JSON.stringify(data.token));
+                localStorage.setItem("flowyClient", JSON.stringify(data.token));
                 setIsLoading(false);
                 navigate("/explore", { replace: false });
             }, (unres) => {
