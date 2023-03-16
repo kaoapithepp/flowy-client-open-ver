@@ -63,24 +63,9 @@ export default defineConfig({
         description: 'Flowy is an Airbnb for reading & co-working space, provide you a hourly rental for your task manaing day.',
         icons: [
           {
-            src: './logos/flowy-red-on-white.png',
-            sizes: '512x512',
+            src: './logos/flowy-white-on-red.png',
+            sizes: '192x192',
             type: 'image/png',
-          },
-          {
-            src: './logos/flowy-red-on-white.svg',
-            sizes: '512x512',
-            type: 'image/svg+xml',
-          },
-          {
-            src: './logos/flowy-red-on-white-circle.png',
-            sizes: '512x512',
-            type: 'image/png',
-          },
-          {
-            src: './logos/flowy-red-on-white-circle.svg',
-            sizes: '512x512',
-            type: 'image/svg+xml',
           },
           {
             src: './logos/flowy-white-on-red.png',
@@ -88,29 +73,26 @@ export default defineConfig({
             type: 'image/png',
           },
           {
+            src: './logos/flowy-white-on-red.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'any maskable'
+          },
+          {
+            src: './logos/flowy-white-on-red.svg',
+            sizes: '192x192',
+            type: 'image/svg+xml',
+          },
+          {
             src: './logos/flowy-white-on-red.svg',
             sizes: '512x512',
             type: 'image/svg+xml',
           },
           {
-            src: './logos/flowy-white-on-red-circle.png',
-            sizes: '512x512',
-            type: 'image/png',
-          },
-          {
-            src: './logos/flowy-white-on-red-circle.svg',
+            src: './logos/flowy-white-on-red.svg',
             sizes: '512x512',
             type: 'image/svg+xml',
-          },
-          {
-            src: './logos/flowy-logo.png',
-            sizes: '512x512',
-            type: 'image/png',
-          },
-          {
-            src: './logos/flowy-logo.svg',
-            sizes: '512x512',
-            type: 'image/svg+xml',
+            purpose: 'any maskable'
           },
         ]
       }
