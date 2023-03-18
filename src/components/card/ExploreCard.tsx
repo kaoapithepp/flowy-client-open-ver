@@ -32,10 +32,13 @@ export const ExploreCard: React.FC<CardContext> = ({ exploreCardDetail }) => {
                         <div className="price-and-spec">
                             <p className="price-tag">{elem.unit_price} บาท / ชั่วโมง</p>
                             <div className="icon-card">
-                                { !elem.spec.isSmokable &&
+                                { !elem.spec.isSmokable ?
                                     <SpecsIcon
                                         icon="SmokeFreeRoundedIcon"
-                                        label="งดสูบบุหรี่" />
+                                        label="งดสูบบุหรี่" /> :
+                                    <SpecsIcon
+                                        icon="SmokingRoomsIcon"
+                                        label="มีพื้นที่สูบบุหรี่" />
                                 }
                                 { elem.spec.isQuiet &&
                                     <SpecsIcon

@@ -65,15 +65,27 @@ const InformationPage: React.FC = () => {
                         <div className="price-and-spec">
                             <p className="price-tag">{placeInfo.unit_price} บาท / ชั่วโมง</p>
                             <div className="icon-card">
-                                { !placeInfo.spec?.isSmokable &&
+                                { !placeInfo.spec?.isSmokable ?
                                     <SpecsIcon
                                         icon="SmokeFreeRoundedIcon"
-                                        label="งดสูบบุหรี่" />
+                                        // label="งดสูบบุหรี่"
+                                    /> :
+                                    <SpecsIcon
+                                        icon="SmokingRoomsIcon"
+                                        // label="มีพื้นที่สูบบุหรี่" 
+                                    />
                                 }
                                 { placeInfo.spec?.isQuiet &&
                                     <SpecsIcon
                                         icon="VolumeOffRoundedIcon"
-                                        label="งดใช้เสียงดัง" />
+                                        // label="งดใช้เสียงดัง" 
+                                    />
+                                }
+                                { placeInfo.spec?.isAtmospheric &&
+                                    <SpecsIcon
+                                        icon="LandscapeIcon"
+                                        // label="วิวสวย" 
+                                    />
                                 }
                             </div>
                         </div>
