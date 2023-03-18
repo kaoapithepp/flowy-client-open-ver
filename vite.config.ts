@@ -53,14 +53,14 @@ export default defineConfig({
       ],
       
       manifest: {
-        name: 'Flowy-Airbnb of reading & co-working',
-        short_name: 'Flowy-Airbnb',
+        name: 'Flowy for reading & co-working',
+        short_name: 'Flowy',
         scope: '/',
         start_url: '/',
         theme_color: "#FFFEFF",
         background_color: "#FFFEFF",
         display: 'standalone',
-        description: 'Flowy is an Airbnb for reading & co-working space, provide you a hourly rental for your task manaing day.',
+        description: 'Flowy for reading & co-working space, provide you a hourly rental for your task manaing day.',
         icons: [
           {
             src: './logos/flowy-white-on-red.png',
