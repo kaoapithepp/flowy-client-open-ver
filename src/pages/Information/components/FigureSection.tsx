@@ -102,7 +102,7 @@ const ImgSection2 = styled.div`
 
         img{
             border-radius: 8px;
-            height: fit-content;
+            /* height: fit-content; */
             aspect-ratio: 1 / 1;
         }
     }
