@@ -144,7 +144,7 @@ const Register: React.FC = () => {
                     <Button onClick={registerClick} disabled={!userEntity.confirm_pw}>สมัครสมาชิก</Button>
                     <PageDivider>หรือ</PageDivider>
                     <BorderedButton onClick={loginClick}>มีบัญชีอยู่แล้ว? เข้าสู่ระบบ</BorderedButton>
-                    <Auth />
+                    {/* <Auth /> */}
                     <p>ท่านยอมรับ <span>ข้อกำหนดการใช้งาน</span> และ <span>นโยบายความเป็นส่วนตัว</span> ของ Flowy เมื่อดำเนินการต่อ</p>
                 </div>
                 <div className='img-size'>

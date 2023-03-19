@@ -88,8 +88,8 @@ const Login: React.FC = () => {
                                 <Link to="/register">สร้างบัญชีผู้ใช้</Link>
                                 <Link to="/forgotpassword">ลืมรหัสผ่าน?</Link>
                             </div>
-                        <Or>หรือ</Or>
-                        <Auth />
+                        {/* <Or>หรือ</Or>
+                        <Auth /> */}
                         <p>ท่านยอมรับ <span>ข้อกำหนดการใช้งาน</span> และ <span>นโยบายความเป็นส่วนตัว</span> ของ Flowy เมื่อดำเนินการต่อ</p>
                     </div>
                 </div>
