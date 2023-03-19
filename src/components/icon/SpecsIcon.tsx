@@ -3,12 +3,15 @@ import React from 'react';
 // MUIs
 import SmokeFreeRoundedIcon from '@mui/icons-material/SmokeFreeRounded';
 import VolumeOffRoundedIcon from '@mui/icons-material/VolumeOffRounded';
+import SmokingRoomsIcon from '@mui/icons-material/SmokingRooms';
+import VolumeUpIcon from '@mui/icons-material/VolumeUp';
+import LandscapeIcon from '@mui/icons-material/Landscape';
 
 import styled from 'styled-components';
 
 interface ISpec {
     icon: string;
-    label: string;
+    label?: string;
 }
 
 export const SpecsIcon: React.FC<ISpec> = ({ icon, label }) => {
@@ -19,6 +22,12 @@ export const SpecsIcon: React.FC<ISpec> = ({ icon, label }) => {
                 return <SmokeFreeRoundedIcon />;
             case 'VolumeOffRoundedIcon':
                 return <VolumeOffRoundedIcon />;
+            case 'SmokingRoomsIcon':
+                return <SmokingRoomsIcon />
+            case 'VolumeUpIcon':
+                return <VolumeUpIcon />
+            case 'LandscapeIcon':
+                return <LandscapeIcon />
             default:
                 return;
         }
@@ -29,7 +38,7 @@ export const SpecsIcon: React.FC<ISpec> = ({ icon, label }) => {
             <Icon>
                 { renderSwitchCase(icon) }
             </Icon>
-                <p>{label}</p>
+                <p>{label ? label : null}</p>
         </Card>
     );
 }

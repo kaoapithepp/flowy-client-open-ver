@@ -26,7 +26,7 @@ import PaymentConfirmation from './pages/Payment/PaymentConfirmation';
 // Contexts
 import { useBookEntityValue } from './context/BookEntityProvider';
 
-export const IS_PRODUCTION_MODE = false;
+export const IS_PRODUCTION_MODE = true;
 
 const App: React.FC = () => {
   const { bookingEntity, setBookingEntity } = useBookEntityValue();

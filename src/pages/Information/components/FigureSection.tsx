@@ -48,6 +48,7 @@ const ImgSection1 = styled.div`
         object-fit: cover;
         height: 100%;
         width: 100%;
+        max-height: 500px;
     }
 
     @media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape) {
@@ -94,6 +95,7 @@ const ImgSection2 = styled.div`
         object-fit: cover;
         height: 100%;
         width: 100%;
+        /* max-height: 300px; */
     }
 
     @media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape) {
